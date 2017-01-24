@@ -1,0 +1,133 @@
+\begin{figure}
+    \centering
+    \begin{tabular}{cc}
+    \subfigure[Experiment $1$: Threshold Bandit with Arithmetic Progression]
+    {
+    		\pgfplotsset{
+		tick label style={font=\Large},
+		label style={font=\Large},
+		%legend style={font=\footnotesize}
+		}
+        \begin{tikzpicture}[scale=0.4]
+      	\begin{axis}[
+		xlabel={timestep},
+		ylabel={Error Percentage},
+		grid=major,
+        %clip mode=individual,grid,grid style={gray!30},
+        clip=true,
+        %clip mode=individual,
+  		legend style={at={(0.5,-0.2)},anchor=north, legend columns=3} ]
+      	% UCB
+		\addplot table{results/budgetTestAP/APT1.txt};
+		\addplot table{results/budgetTestAP/AugUCB1.txt};
+		\addplot table{results/budgetTestAP/UCBE_1_41.txt};
+		\addplot table{results/budgetTestAP/UCBE_11.txt};
+		\addplot table{results/budgetTestAP/UCBE_2561.txt};
+		\addplot table{results/budgetTestAP/UA1.txt};
+      	\legend{APT,AugUCBE,UCBE($0.25$),UCBE(1),UCBE(256),Unif Alloc}
+      	\end{axis}
+      	\end{tikzpicture}
+  		\label{Fig:budgetExpt1}
+    }
+    %\\
+    &
+    \subfigure[Experiment $2$: Threshold Bandit with Geometric Progression ]
+    {
+    		\pgfplotsset{
+		tick label style={font=\Large},
+		label style={font=\Large},
+		%legend style={font=\footnotesize}
+		}
+        \begin{tikzpicture}[scale=0.4]
+        \begin{axis}[
+		xlabel={timestep},
+		ylabel={Error Percentage},
+        %clip mode=individual,grid,grid style={gray!30},
+       	grid=major,
+       	clip=true,
+  		legend style={at={(0.5,-0.2)},anchor=north, legend columns=3} ]
+      	% UCB
+		\addplot table{results/budgetTestGP/APT1.txt};
+		\addplot table{results/budgetTestGP/AugUCB1.txt};
+		\addplot table{results/budgetTestGP/UCBE_1_41.txt};
+		\addplot table{results/budgetTestGP/UCBE_11.txt};
+		\addplot table{results/budgetTestGP/UCBE_2561.txt};
+		\addplot table{results/budgetTestGP/UA1.txt};
+        \legend{APT,AugUCBE,UCBE($0.25$),UCBE(1),UCBE(256),Unif Alloc}
+      	\end{axis}
+      	\end{tikzpicture}
+   		\label{Fig:budgetExpt2} 
+    }
+%    &
+%    \subfigure[Experiment $3$: Threshold Bandit with $3$ Group Setting ]
+%    {
+%    		\pgfplotsset{
+%		tick label style={font=\Large},
+%		label style={font=\Large},
+%		%legend style={font=\footnotesize}
+%		}
+%        \begin{tikzpicture}[scale=0.5]
+%        \begin{axis}[
+%		xlabel={timestep},
+%		ylabel={Error Percentage},
+%        %clip mode=individual,grid,grid style={gray!30},
+%		grid=major,
+%		clip=true,
+%  		legend style={at={(0.5,-0.2)},anchor=north, legend columns=3} ]
+%        % UCB
+%		\addplot table{results/budgetTestGR/APT1.txt};
+%		\addplot table{results/budgetTestGR/AugUCB1.txt};
+%		\addplot table{results/budgetTestGR/UCBE_1_41.txt};
+%		\addplot table{results/budgetTestGR/UCBE_11.txt};
+%		\addplot table{results/budgetTestGR/UCBE_2561.txt};
+%		\addplot table{results/budgetTestGR/UA1.txt};
+%        \legend{APT,AugUCBE,UCBE($0.25$),UCBE(1),UCBE(256),Unif Alloc}
+%      	\end{axis}
+%      	\label{Fig:budgetExpt3}
+%        \end{tikzpicture}
+%    }
+    \end{tabular}
+    \caption{Experiments with thresholding bandit}
+    \label{fig:budgetExpt}
+\end{figure}
+
+
+	In this section we compare the empirical performance of AugUCB against APT, Unifirm Allocation and UCBE algorithm. The threshold $\tau$ is set at $0.5$ for all experiments. Each algorithm is run independently a $1000$ times for $500$ timesteps and the output set of arms suggested by the algorithms at every timestep is recorded. The output is considered erroneous if the correct set of arms is not $i=\lbrace 6,7,8,9,10 \rbrace$ (true for all the experiments). The error percentage over $1000$ runs is plotted against $500$ timesteps. For the uniform allocation algorithm, for each $t=1,2,..,T$ the arms are sampled uniformly. For UCBE algorithm  (\cite{audibert2009exploration}) which was built for single best arm identification, we modify it according to \cite{locatelli2016optimal} to suit the goal of finding arms above the threshold $\tau$. So the exploration parameter $a$ in UCBE is set to $a_{i}=4^{i}\frac{T-K}{H}$ for $i\in \lbrace -1,0,4 \rbrace$ and $H=\sum_{i=1}^{K}\frac{1}{\Delta_{i}^{2}}$ is defined as the problem complexity. Then for each timestep $t=1,2,..,T$ we pull the arm that maximizes $\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a_{i}}{n_{i}}} \rbrace$, where $n_{i}$ is the number of times the arm $i$ is pulled till $t-1$ timestep. Also, APT is run with $\epsilon=0$, which denotes the precision with which the algorithm suggests the best set of arms. So when $\epsilon$ is  set to $0$ APT has to suggest the exact set of arms above the threshold. For AugUCB we take $\psi=K^{2}T$ and we initialize $\rho=\dfrac{1}{2^{m}}$ for $m=0,1,2,...,\gamma$. The high value of $\psi$ helps in improved exploration whereas we decrease $\rho$ sufficiently after every round to facilitate arm elimination.
+	
+	The first experiment is conducted on a testbed of $10$ arms involving Bernoulli reward distribution with expected rewards of the arms $r_{1:4}=0.2+(0:3)*0.05$, $r_{5}=0.45$, $r_{6}=0.55$ and $r_{7:10}=0.65+(0:3)*0.05$. The means are set as arithmetic progression. In this experiment we see that AugUCB performs better than all the other algorithms mentioned. Only UCBE($1$) catches up with AugUCB and that is because it has access to the exact problem complexity. The result is shown in Figure \ref{Fig:budgetExpt1}.
+	
+	The second experiment is conducted on a testbed of $10$ arms with the means set as Geometric Progression. The testbed involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:4}=0.4-(0.2)^{1:4}$, $r_{5}=0.45$, $r_{6}=0.55$ and $r_{7:10}=0.6+(0.2)^{5-(1:4)}$. AugUCB, APT, Uniform Allocation and UCBE with the same settings  as experiment $1$ are run on this testbed. The result is shown in Figure \ref{Fig:budgetExpt2}. Here, we see that AugUCB beats APT with only UCBE($1$) performing at par with AugUCB. 
+
+%\begin{figure}
+%\centering
+  %\begin{tabular}{c}
+  %&
+  %%%%%%Expt4
+  %\begin{subfigure}{0.45\textwidth}
+ %\tabl{c}{\scalebox{0.7}{
+% \begin{tikzpicture}
+%      \begin{axis}[
+%	xlabel={timestep},
+%	ylabel={Error Percentage},
+%       clip mode=individual,grid,grid style={gray!30},
+%  legend style={at={(0.5,-0.2)},anchor=north, legend columns=4} ]
+%      % UCB
+%\addplot table[x index=0,y index=1,col sep=tab,each nth point={10}] {results/budgetTestGR/APT.txt};
+%\addplot table[x index=0,y index=1,col sep=tab,each nth point={10}] {results/budgetTestGR/AugUCB.txt};
+%\addplot table[x index=0,y index=1,col sep=tab,each nth point={10}] {results/budgetTestGR/UA.txt};
+%\addplot table[x index=0,y index=1,col sep=tab,each nth point={10}] {results/budgetTestGR/UCBE_1.txt};
+%\addplot table[x index=0,y index=1,col sep=tab,each nth point={10}] {results/budgetTestGR/UCBE_256.txt};
+%\addplot table[x index=0,y index=1,col sep=tab,each nth point={10}] {results/budgetTestGR/UCBE_1_4.txt};
+%      \legend{APT,AugUCBE,Unif Alloc,UCBE(1),UCBE(256),UCBE($\frac{1}{4}$)}
+%      %\legend{ClusUCB (NC, p=1),ClusUCB (C, p=4),ClusUCB(C, p=10) ,MOSS, ClusUCB(C, p=5, NAE), ClusUCB(C, p=10, NAE)}
+%      %\legend{ClusUCB(1,A),ClusUCB(4,B),ClusUCB(10,B), MOSS,ClusUCB(5,S), ClusUCB(10,A)}
+%      \end{axis}
+%      \end{tikzpicture}
+%      %}\\}
+%			\caption{Experiment $3$: Threshold Bandit with $3$ Group Setting }
+%  \label{Fig:budgetExpt3}
+  %\end{subfigure}
+  %\end{tabular}
+%\end{figure}
+
+%	The third experiment is conducted on a testbed of $10$ arms with the means divided into $3$ groups. Again the testbed involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:3}=0.1$, $r_{4:7}=\lbrace 0.35,0.45,0.55,0.65\rbrace$ and $r_{8:10}=0.9$. AugUCB, APT, Uniform Allocation and UCBE with the same settings as experiment $1$ are run on this testbed. The result is shown in Figure \ref{Fig:budgetExpt3}. Here, also we see that AugUCB beats APT.  
