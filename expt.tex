@@ -1,12 +1,12 @@
 \begin{figure}
     \centering
     \begin{tabular}{cc}
-    \subfigure[Experiment $1$: Threshold Bandit with Arithmetic Progression]
+    \subfigure[0.32\textwidth][Experiment $1$: Experiment with Arithmetic Progression]
     {
     		\pgfplotsset{
-		tick label style={font=\Large},
-		label style={font=\Large},
-		%legend style={font=\footnotesize}
+		tick label style={font=\Huge},
+		label style={font=\Huge},
+		legend style={font=\Large},
 		}
         \begin{tikzpicture}[scale=0.4]
       	\begin{axis}[
@@ -15,8 +15,8 @@
 		grid=major,
         %clip mode=individual,grid,grid style={gray!30},
         clip=true,
-        %clip mode=individual,
-  		legend style={at={(0.5,-0.2)},anchor=north, legend columns=3} ]
+        %clip mode=individual,grid,grid style={gray!30},
+  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
       	% UCB
 		\addplot table{results/budgetTestAP/APT1.txt};
 		\addplot table{results/budgetTestAP/AugUCB1.txt};
@@ -31,12 +31,12 @@
     }
     %\\
     &
-    \subfigure[Experiment $2$: Threshold Bandit with Geometric Progression ]
+    \subfigure[0.32\textwidth][Experiment $2$: Experiment with $4$ Group Setting ]
     {
     		\pgfplotsset{
-		tick label style={font=\Large},
-		label style={font=\Large},
-		%legend style={font=\footnotesize}
+		tick label style={font=\Huge},
+		label style={font=\Huge},
+		legend style={font=\Large},
 		}
         \begin{tikzpicture}[scale=0.4]
         \begin{axis}[
@@ -45,7 +45,7 @@
         %clip mode=individual,grid,grid style={gray!30},
        	grid=major,
        	clip=true,
-  		legend style={at={(0.5,-0.2)},anchor=north, legend columns=3} ]
+  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
       	% UCB
 		\addplot table{results/budgetTestGP/APT1.txt};
 		\addplot table{results/budgetTestGP/AugUCB1.txt};
@@ -92,11 +92,13 @@
 \end{figure}
 
 
-	In this section we compare the empirical performance of AugUCB against APT, Unifirm Allocation and UCBE algorithm. The threshold $\tau$ is set at $0.5$ for all experiments. Each algorithm is run independently a $1000$ times for $500$ timesteps and the output set of arms suggested by the algorithms at every timestep is recorded. The output is considered erroneous if the correct set of arms is not $i=\lbrace 6,7,8,9,10 \rbrace$ (true for all the experiments). The error percentage over $1000$ runs is plotted against $500$ timesteps. For the uniform allocation algorithm, for each $t=1,2,..,T$ the arms are sampled uniformly. For UCBE algorithm  (\cite{audibert2009exploration}) which was built for single best arm identification, we modify it according to \cite{locatelli2016optimal} to suit the goal of finding arms above the threshold $\tau$. So the exploration parameter $a$ in UCBE is set to $a_{i}=4^{i}\frac{T-K}{H}$ for $i\in \lbrace -1,0,4 \rbrace$ and $H=\sum_{i=1}^{K}\frac{1}{\Delta_{i}^{2}}$ is defined as the problem complexity. Then for each timestep $t=1,2,..,T$ we pull the arm that maximizes $\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a_{i}}{n_{i}}} \rbrace$, where $n_{i}$ is the number of times the arm $i$ is pulled till $t-1$ timestep. Also, APT is run with $\epsilon=0$, which denotes the precision with which the algorithm suggests the best set of arms. So when $\epsilon$ is  set to $0$ APT has to suggest the exact set of arms above the threshold. For AugUCB we take $\psi=K^{2}T$ and we initialize $\rho=\dfrac{1}{2^{m}}$ for $m=0,1,2,...,\gamma$. The high value of $\psi$ helps in improved exploration whereas we decrease $\rho$ sufficiently after every round to facilitate arm elimination.
+	In this section we compare the empirical performance of AugUCB against APT, Uniform Allocation, UCBE and UCBEV algorithm. The threshold $\tau$ is set at $0.5$ for all experiments. Each algorithm is run independently $500$ times for $15000$ timesteps and the output set of arms suggested by the algorithms at every timestep is recorded. The output is considered erroneous if the correct set of arms is not $i=\lbrace 6,7,8,9,10 \rbrace$ (true for all the experiments). The error percentage over $500$ runs is plotted against $15000$ timesteps. For the uniform allocation algorithm, for each $t=1,2,..,T$ the arms are sampled uniformly. For UCBE algorithm  (\cite{audibert2009exploration}) which was built for single best arm identification, we modify it according to \cite{locatelli2016optimal} to suit the goal of finding arms above the threshold $\tau$. So the exploration parameter $a$ in UCBE is set to $a_{i}=\frac{T-K}{H_1}$. Then for each timestep $t=1,2,..,T$ we pull the arm that maximizes $\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a_{i}}{n_{i}}} \rbrace$, where $n_{i}$ is the number of times the arm $i$ is pulled till $t-1$ timestep. Also, APT is run with $\epsilon=0$, which denotes the precision with which the algorithm suggests the best set of arms. So when $\epsilon$ is  set to $0$ APT has to suggest the exact set of arms above the threshold. For AugUCB we take $\psi=\frac{T}{\log K}$, $\rho=\frac{1}{8}$ and $\rho_v=\frac{2}{3}$ as in Corollary \ref{Result:Corollary:1}.
 	
-	The first experiment is conducted on a testbed of $10$ arms involving Bernoulli reward distribution with expected rewards of the arms $r_{1:4}=0.2+(0:3)*0.05$, $r_{5}=0.45$, $r_{6}=0.55$ and $r_{7:10}=0.65+(0:3)*0.05$. The means are set as arithmetic progression. In this experiment we see that AugUCB performs better than all the other algorithms mentioned. Only UCBE($1$) catches up with AugUCB and that is because it has access to the exact problem complexity. The result is shown in Figure \ref{Fig:budgetExpt1}.
+	The first experiment is conducted on a testbed of $100$ arms involving Gaussian reward distribution with expected rewards of the arms $r_{1:4}=0.2+(0:3)*0.05$, $r_{5}=0.45$, $r_{6}=0.55$, $r_{7:10}=0.65+(0:3)*0.05$ and $r_{11:100}$=0.4. The means of first $10$ arms are set as arithmetic progression. Variance is set as $\sigma_{i=1:7 \text{ and } 11:100}^{2}=0.5$ and $\sigma_{i=8:10}=0.6$. The means in the testbed are chosen in such a way that any algorithm has to spend a significant amount of budget to explore all the arms and variance is chosen in such a way that the arms above $\tau$ have high variance. In this experiment we see that AugUCB performs better than all the other algorithms mentioned. Only UCBE($1$) and UCBEV($1$) catches up with AugUCB and that is because it has access to the exact problem complexity. The result is shown in Figure \ref{Fig:budgetExpt1}.
 	
-	The second experiment is conducted on a testbed of $10$ arms with the means set as Geometric Progression. The testbed involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:4}=0.4-(0.2)^{1:4}$, $r_{5}=0.45$, $r_{6}=0.55$ and $r_{7:10}=0.6+(0.2)^{5-(1:4)}$. AugUCB, APT, Uniform Allocation and UCBE with the same settings  as experiment $1$ are run on this testbed. The result is shown in Figure \ref{Fig:budgetExpt2}. Here, we see that AugUCB beats APT with only UCBE($1$) performing at par with AugUCB. 
+	The second experiment is conducted on a testbed of $100$ arms with the means divided into $4$ groups. Again the testbed involves Gaussian reward distributions with expected rewards of the arms as $r_{1:3}=0.1$, $r_{4:7}=\lbrace 0.35,0.45,0.55,0.65\rbrace$, $r_{8:10}=0.9$ and  $r_{11:100}=0.4$. Also $\sigma_{i=1:7 \text{ and } 11:100}^{2}=0.5$ and $\sigma^{2}_{i=8:10}=0.6$. AugUCB, APT, Uniform Allocation, UCBE and UCBEV with the same settings as experiment $1$ are run on this testbed. The result is shown in Figure \ref{Fig:budgetExpt2}. Here, also we see that AugUCB beats APT.  
+	
+%	The second experiment is conducted on a testbed of $10$ arms with the means set as Geometric Progression. The testbed involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:4}=0.4-(0.2)^{1:4}$, $r_{5}=0.45$, $r_{6}=0.55$ and $r_{7:10}=0.6+(0.2)^{5-(1:4)}$. AugUCB, APT, Uniform Allocation and UCBE with the same settings  as experiment $1$ are run on this testbed. The result is shown in Figure \ref{Fig:budgetExpt2}. Here, we see that AugUCB beats APT with only UCBE($1$) performing at par with AugUCB. 
 
 %\begin{figure}
 %\centering
