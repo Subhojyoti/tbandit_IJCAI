@@ -34,12 +34,12 @@ with probability at least $1-\eta$, where $c_{0}>0$ is a constant and $C_1=\dfra
 
 \begin{proof}
 
-According to the algorithm, the number of rounds is $m=\lbrace 0,1,2,.. M\rbrace $ where $M=\bigg\lfloor \dfrac{1}{2}\log_{2} \dfrac{T}{e}\bigg\rfloor$. So, $\epsilon_{m}\geq 2^{-M}\geq \sqrt{\dfrac{e}{T}}$. Also each round $m$ consists of $|B_{m}|\ell_{m}$ timesteps where $\ell_{m} = \dfrac{\log(\psi T \epsilon_{m}^{2})}{\epsilon_{m}}$ and $B_{m}$ is the set of all surviving arms. 
+According to the algorithm, the number of rounds is $m=\lbrace 0,1,2,.. M\rbrace $ where $M=\bigg\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\bigg\rfloor$. So, $\epsilon_{m}\geq 2^{-M}\geq \sqrt{\frac{e}{T}}$. Also each round $m$ consists of $|B_{m}|\ell_{m}$ timesteps where $\ell_{m} = \frac{\log(\psi T \epsilon_{m}^{2})}{\epsilon_{m}}$ and $B_{m}$ is the set of all surviving arms. 
 
-Let $c_{i} = \sqrt{\dfrac{\rho\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}$ denote the confidence interval, where $n_{i}$ is the number of times an arm $i$ is pulled. Let $A^{'}=\lbrace i\in A|\Delta_{i}\geq b\rbrace$, for $b\geq \sqrt{\frac{e}{T}}$. Let $m_{i}$ be the minimum round that an arm $i$ gets eliminated such that $m_{i}=min\lbrace m| \sqrt{\rho\epsilon_{m}}<\frac{\Delta_{i}}{2}\rbrace$. 
+Let $c_{i} = \sqrt{\frac{\rho\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}$ denote the confidence interval, where $n_{i}$ is the number of times an arm $i$ is pulled. Let $A^{'}=\lbrace i\in A|\Delta_{i}\geq b\rbrace$, for $b\geq \sqrt{\frac{e}{T}}$. Let $m_{i}$ be the minimum round that an arm $i$ gets eliminated such that $m_{i}=min\lbrace m| \sqrt{\rho\epsilon_{m}}<\frac{\Delta_{i}}{2}\rbrace$. 
 
 
-Let $s_{i}=\sqrt{\dfrac{\rho_v \hat{V_{i}} \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}}}$. Let $g_{i}$ be the minimum round that an arm $i$ gets eliminated such that $g_{i}=min\lbrace g| \sqrt{\rho_{v}\epsilon_{g}}<\frac{\Delta_{i}}{2}\rbrace$. 
+Let $s_{i}=\sqrt{\frac{\rho_v \hat{V_{i}} \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}}}$. Let $g_{i}$ be the minimum round that an arm $i$ gets eliminated such that $g_{i}=min\lbrace g| \sqrt{\rho_{v}\epsilon_{g}}<\frac{\Delta_{i}}{2}\rbrace$. 
 %In this proof sub-optimal arms refer to the arms whose $r_{i}$ is lower than the threshold $\tau$.
 
 %At the end of any round $\max\lbrace m_{i},g_{i}\rbrace$, for any arm $i$, two cases are possible.
@@ -56,7 +56,7 @@ For any arm $i$, if it is eliminated from active set $B_{m_{i}}$ then the below 
 
 For \ref{eq:armelim-casea} we can see that it eliminates arms that have performed poorly and removes them them from $B_{m_{i}}$. Similarly, \ref{eq:armelim-caseb} eliminates arms from $B_{m}$ that have performed very well compared to threshold $\tau$.
 
-Each round consist of $|B_{m_{i}}|\ell_{m_{i}}$ timesteps. In the $m_{i}$-th round an arm $i$ can be pulled no more than $\ell_{m_{i}}$ times. So when $n_{i}=\ell_{m_{i}}$, putting the value of $\ell_{m_{i}}=\dfrac{2\log{(\psi T\epsilon_{m_{i}}^{2})}}{\epsilon_{m_{i}}}$ in $c_{i}$ we get, 
+Each round consist of $|B_{m_{i}}|\ell_{m_{i}}$ timesteps. In the $m_{i}$-th round an arm $i$ can be pulled no more than $\ell_{m_{i}}$ times. So when $n_{i}=\ell_{m_{i}}$, putting the value of $\ell_{m_{i}}=\frac{2\log{(\psi T\epsilon_{m_{i}}^{2})}}{\epsilon_{m_{i}}}$ in $c_{i}$ we get, 
 \begin{small}
 \begin{align*}
 c_{i}&=\sqrt{\dfrac{\rho\epsilon_{m_{i}}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}}}\\
@@ -123,7 +123,7 @@ For \ref{eq:armelim-var-casea} we can see that it eliminates arms that have perf
 
 %But, we know that $\epsilon_{m_{i}}=\epsilon_{g_{i}}$ and round consist of $|B_{g_{i}}|\ell_{g_{i}}$ timesteps. 
 
-In the $g_{i}$-th round an arm $i$ can be pulled no more than $\ell_{g_{i}}$ times. So when $n_{i}=\ell_{g_{i}}$, putting the value of $\ell_{g_{i}}=\dfrac{2\log{(\psi T\epsilon_{g_{i}}^{2})}}{\epsilon_{g_{i}}}$ in $s_{i}$ we get, 
+In the $g_{i}$-th round an arm $i$ can be pulled no more than $\ell_{g_{i}}$ times. So when $n_{i}=\ell_{g_{i}}$, putting the value of $\ell_{g_{i}}=\frac{2\log{(\psi T\epsilon_{g_{i}}^{2})}}{\epsilon_{g_{i}}}$ in $s_{i}$ we get, 
 \begin{small}
 \begin{align*}
 s_{i}&=\sqrt{\dfrac{\rho_v \hat{V}_{i} \epsilon_{g_{i}}\log (\psi T\epsilon_{g_{i}}^{2})}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}} \\
@@ -292,7 +292,6 @@ Now, applying the bound from Fact $2$, we can show that for all rounds $m=0,1,2,
 
 
 Therefore we can say that with probability $1-P_{i}$, all arms $i$ above $\frac{\Delta_{i}}{2}$ are accepted and all arms $i$ below $\frac{\Delta_{i}}{2}$ are rejected. 
-
 
 Hence, the simple regret of AugUCB is upper bounded by,
 
