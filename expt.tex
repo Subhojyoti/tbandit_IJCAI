@@ -18,22 +18,49 @@
         %clip mode=individual,grid,grid style={gray!30},
   		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
       	% UCB
-		\addplot table{results/budgetTestAP1/APT1_comp_subsampled.txt};
-		\addplot table{results/budgetTestAP1/UA1_comp_subsampled.txt};
-		\addplot table{results/budgetTestAP1/UCBEM1_comp_subsampled.txt};
-		\addplot table{results/budgetTestAP1/UCBEMV1_comp_subsampled.txt};
-		\addplot table{results/budgetTestAP1/AugUCB1_comp_subsampled.txt};
-		%\addplot table{results/budgetTestAP/UA1.txt};
-      	\legend{APT,Unif Alloc,UCBE($1$,UCBEV($1$),AugUCB}
+		\addplot table{results/budgetTestAP/APT1_comp_subsampled.txt};
+		\addplot table{results/budgetTestAP/UA1_comp_subsampled.txt};
+		\addplot table{results/budgetTestAP/UCBEM1_comp_subsampled.txt};
+		\addplot table{results/budgetTestAP/UCBEMV1_comp_subsampled.txt};
+		\addplot table{results/budgetTestAP/AugUCB1_comp_subsampled.txt};
+		\addplot table{results/budgetTestAP/SR1_comp_subsampled.txt};
+      	\legend{APT,Unif Alloc,UCBE($1$),UCBEV($1$),AugUCB,CSAR}
       	\end{axis}
       	\end{tikzpicture}
   		\label{Fig:budgetExpt1}
     }
-    %\\
+%    &
+%    \subfigure[0.32\textwidth][Experiment $2$: Experiment with $4$ Group Setting ]
+%    {
+%    		\pgfplotsset{
+%		tick label style={font=\Huge},
+%		label style={font=\Huge},
+%		legend style={font=\Large},
+%		}
+%        \begin{tikzpicture}[scale=0.4]
+%        \begin{axis}[
+%		xlabel={timestep},
+%		ylabel={Error Percentage},
+%        %clip mode=individual,grid,grid style={gray!30},
+%       	grid=major,
+%       	clip=true,
+%  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
+%      	% UCB
+%		\addplot table{results/budgetTestGR/APT1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR/UA1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR/UCBEM1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR/UCBEMV1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR/AugUCB1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR/SR1_comp_subsampled.txt};
+%        \legend{APT,Unif Alloc,UCBE($1$),UCBEV($1$),AugUCB,CSAR}
+%      	\end{axis}
+%      	\end{tikzpicture}
+%   		\label{Fig:budgetExpt2} 
+%    }
     &
-    \subfigure[0.32\textwidth][Experiment $2$: Experiment with $4$ Group Setting ]
+    \subfigure[Experiment $2$: Experiment with Geometric Progression ]
     {
-    		\pgfplotsset{
+    	\pgfplotsset{
 		tick label style={font=\Huge},
 		label style={font=\Huge},
 		legend style={font=\Large},
@@ -43,49 +70,21 @@
 		xlabel={timestep},
 		ylabel={Error Percentage},
         %clip mode=individual,grid,grid style={gray!30},
-       	grid=major,
-       	clip=true,
+		grid=major,
+		clip=true,
   		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
-      	% UCB
-		\addplot table{results/budgetTestGR1/APT1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR1/UA1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR1/UCBEM1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR1/UCBEMV1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR1/AugUCB1_comp_subsampled.txt};
-		%\addplot table{results/budgetTestGP/UA1.txt};
-        \legend{APT,Unif Alloc,UCBE($1$),UCBEV1$(1)$,AugUCB}
+        % UCB
+		\addplot table{results/budgetTestGP/APT1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGP/UA1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGP/UCBEM1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGP/UCBEMV1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGP/AugUCB1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGP/SR1_comp_subsampled.txt};
+        \legend{APT,Unif Alloc,UCBE($1$),UCBEV($1$),AugUCB,CSAR}
       	\end{axis}
-      	\end{tikzpicture}
-   		\label{Fig:budgetExpt2} 
+      	\label{Fig:budgetExpt2}
+        \end{tikzpicture}
     }
-%    &
-%    \subfigure[Experiment $3$: Threshold Bandit with $3$ Group Setting ]
-%    {
-%    		\pgfplotsset{
-%		tick label style={font=\Large},
-%		label style={font=\Large},
-%		%legend style={font=\footnotesize}
-%		}
-%        \begin{tikzpicture}[scale=0.5]
-%        \begin{axis}[
-%		xlabel={timestep},
-%		ylabel={Error Percentage},
-%        %clip mode=individual,grid,grid style={gray!30},
-%		grid=major,
-%		clip=true,
-%  		legend style={at={(0.5,-0.2)},anchor=north, legend columns=3} ]
-%        % UCB
-%		\addplot table{results/budgetTestGR/APT1.txt};
-%		\addplot table{results/budgetTestGR/AugUCB1.txt};
-%		\addplot table{results/budgetTestGR/UCBE_1_41.txt};
-%		\addplot table{results/budgetTestGR/UCBE_11.txt};
-%		\addplot table{results/budgetTestGR/UCBE_2561.txt};
-%		\addplot table{results/budgetTestGR/UA1.txt};
-%        \legend{APT,AugUCBE,UCBE($0.25$),UCBE(1),UCBE(256),Unif Alloc}
-%      	\end{axis}
-%      	\label{Fig:budgetExpt3}
-%        \end{tikzpicture}
-%    }
     \end{tabular}
     \caption{Experiments with thresholding bandit}
     \label{fig:budgetExpt}
