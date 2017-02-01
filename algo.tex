@@ -33,7 +33,7 @@
 %\State $N_{0}=\big\lfloor \dfrac{T}{M} \big\rfloor$
 \State \For{$t=K+1,..,T$}
 %\State Pull arm $i$ in $B_m$ such that $\min_{i\in B_{m}}\bigg\lbrace |\hat{r}_{i} - \tau | - \sqrt{\dfrac{\rho_v \hat{V}_{i} \log (\psi T \epsilon_{m}^{2})}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} \bigg\rbrace$, where $n_{i}$ is the number of times the arm $i$ has been pulled.
-\State Pull arm $i$ in $B_m$ such that $\min_{i\in B_{m}}\bigg\lbrace |\hat{r}_{i} - \tau | - s_{i}\bigg\rbrace$
+\State Pull arm $i$ in $B_m$ such that $\min_{i\in B_{m}}\bigg\lbrace |\hat{r}_{i} - \tau | - 2s_{i}\bigg\rbrace$
 \State $t:=t+1$ 
 \ArmElim
 \State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
@@ -82,5 +82,5 @@ where $s_i=\sqrt{\frac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}
 
 
 In algorithm \ref{alg:augucb}, hence referred to as AugUCB, we have three exploration parameters, $\rho, \rho_v$ which are the arm elimination parameters and $\psi$ which is the exploration regulatory factor. The main approach is based on UCB-Improved with modifications suited for the thresholding bandit problem. The active set $B_{0}$ is initialized with all the arms from $A$. We divide the entire budget $T$ into rounds/phases as like UCB-Improved, CCB, SAR and CSAR. After the end of each such round $m$ we eliminate arm(s) from active set $B_{m}$ and update parameters. As suggested by \cite{liu2016modification} to make AugUCB an anytime algorithm and to overcome too much early exploration, we no longer pull all the arms equal number of times in each round but pull the arm that minimizes,  
-$\min_{i\in B_{m}}\bigg\lbrace |\hat{r}_{i} - \tau | - \sqrt{\frac{\rho_v \hat{V}_{i} \log (\psi T \epsilon_{m}^{2})}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} \bigg\rbrace $
+$\min_{i\in B_{m}}\bigg\lbrace |\hat{r}_{i} - \tau | - 2\sqrt{\frac{\rho_v \hat{V}_{i} \log (\psi T \epsilon_{m}^{2})}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} \bigg\rbrace $
 in the active set $B_{m}$. This condition makes it possible to pull the arms closer to the threshold $\tau$ and with suitable choice of $\rho,\rho_v$ and $\psi$ we can fine tune the exploration. 
