@@ -1,5 +1,5 @@
 '''
-Created on Jan 23, 2017
+Created on Dec 5, 2016
 
 @author: Subhojyoti
 '''
@@ -10,7 +10,7 @@ import random
 import numpy
 import fileinput
 
-class AugUCB(object):
+class augucbM(object):
     '''
     classdocs
     '''
@@ -49,26 +49,14 @@ class AugUCB(object):
         #self.psi=1.0
         return self.psi
 
-    def upperBound(self, numPlays):
+    def upperBound(self, numPlays, rho):
         #print self.timeTake*self.delta_tilda*self.delta_tilda
         #return math.sqrt(abs(math.log((self.psi*self.timeTake*self.delta_tilda*self.delta_tilda))) / (2*self.rho*numPlays))
         #return math.sqrt(max(0,math.log((self.psi*self.timeTake*self.delta_tilda*self.delta_tilda))) / (2*self.rho*numPlays))
         return math.sqrt(self.rho * math.log((self.exp_func()*self.numRounds*self.delta_tilda*self.delta_tilda)) / (2*numPlays))
         #return math.sqrt(max(0,math.log((self.psi*self.numRounds))) / (2*self.rho*numPlays))
-
-
-
-    def upperBoundVar(self, numPlays, arm):
-        #print self.timeTake*self.delta_tilda*self.delta_tilda
-        #return math.sqrt(abs(math.log((self.psi*self.timeTake*self.delta_tilda*self.delta_tilda))) / (2*self.rho*numPlays))
-        #return math.sqrt(max(0,math.log((self.psi*self.timeTake*self.delta_tilda*self.delta_tilda))) / (2*self.rho*numPlays))
-        vj=((self.sqPayOffSums[arm]/numPlays) - (self.avgPayOffSums[arm]*self.avgPayOffSums[arm]))
-        #print vj
-        return math.sqrt(self.rho_v * vj * math.log((self.exp_func()*self.numRounds*self.delta_tilda*self.delta_tilda)) / (4*numPlays) + (self.rho_v* math.log((self.exp_func()*self.numRounds*self.delta_tilda*self.delta_tilda)) / (4*numPlays)))
-        #return math.sqrt(self.rho_v * vj * math.log((self.exp_func()*self.numRounds*self.delta_tilda*self.delta_tilda)) / (2*numPlays))
-        #return math.sqrt(max(0,math.log((self.psi*self.numRounds))) / (2*self.rho*numPlays))
-
-
+    
+     
     def rewards(self,choice):
         return random.gauss(self.means[choice],self.variance[choice])
         #print sum(numpy.random.binomial(1,self.means[choice],200))/200.0
@@ -82,48 +70,37 @@ class AugUCB(object):
             if self.B[i]==0:
                 #if (self.avgPayOffSums[i] - self.upperBound1(self.numPlays[i])) < ( self.avgPayOffSums[action] + self.upperBound1(self.numPlays[action])):
                 #if (self.avgPayOffSums[i] - self.upperBound1(self.numPlays[i])) > (1 - self.tau)/2:
-                if (self.avgPayOffSums[i] - self.upperBound(self.numPlays[i])) > self.tau + self.upperBound(self.numPlays[i]):
+                if (self.avgPayOffSums[i] - self.upperBound(self.numPlays[i],self.rho)) > self.tau + self.upperBound(self.numPlays[i],self.rho):
 
                     self.B[i]=-1
+                    self.takeArmTau.append(i)
 
-                    #self.takeArmTau.append(i)
                     print "\n\nRound: "+str(self.t)
                     print "B: "+str(self.B)
                     print "numplays: "+str(self.numPlays)+str(sum(self.numPlays))
+                    print "AvgP: "+str(self.avgPayOffSums)
+                    print "ucbs: "+str(self.ucbs)
+                    print "ucbs1: "+str(self.ucbs1)
+                    print "upbs: "+str(self.upbs)
+                    print "upbs1: "+str(self.upbs1)
+                            #print "gamma: "+str(self.gamma) + " timeTake: "+str(self.timeTake)+ " delta_tilde: "+str(self.delta_tilda)+ " t: "+str(self.t)
+                    print "delta_tilde: "+str(self.delta_tilda)+ " rho: " +str(self.rho) + " t: "+str(self.t)
 
-                if (self.avgPayOffSums[i] + self.upperBound(self.numPlays[i])) < self.tau - self.upperBound(self.numPlays[i]):
+                if (self.avgPayOffSums[i] + self.upperBound(self.numPlays[i],self.rho)) < self.tau - self.upperBound(self.numPlays[i],self.rho):
 
                     self.B[i]=-2
-
-                    print "\n\nRound: "+str(self.t)
-                    print "B: "+str(self.B)
-                    print "numplays: "+str(self.numPlays)+str(sum(self.numPlays))
-
-    def arm_elimination_variance(self):
-
-        for i in range(self.numActions):
-
-            #print self.upbs[i],self.upbs[action]
-            if self.B[i]==0:
-                #if (self.avgPayOffSums[i] - self.upperBound1(self.numPlays[i])) < ( self.avgPayOffSums[action] + self.upperBound1(self.numPlays[action])):
-                #if (self.avgPayOffSums[i] - self.upperBound1(self.numPlays[i])) > (1 - self.tau)/2:
-                if (self.avgPayOffSums[i] - self.upperBoundVar(self.numPlays[i],i)) > self.tau + self.upperBoundVar(self.numPlays[i],i):
-
-                    self.B[i]=-11
-
                     #self.takeArmTau.append(i)
+
                     print "\n\nRound: "+str(self.t)
                     print "B: "+str(self.B)
                     print "numplays: "+str(self.numPlays)+str(sum(self.numPlays))
-
-                if (self.avgPayOffSums[i] + self.upperBoundVar(self.numPlays[i],i)) < self.tau - self.upperBoundVar(self.numPlays[i],i):
-
-                    self.B[i]=-22
-
-                    #self.takeArmTau.append(i)
-                    print "\n\nRound: "+str(self.t)
-                    print "B: "+str(self.B)
-                    print "numplays: "+str(self.numPlays)+str(sum(self.numPlays))
+                    print "AvgP: "+str(self.avgPayOffSums)
+                    print "ucbs: "+str(self.ucbs)
+                    print "ucbs1: "+str(self.ucbs1)
+                    print "upbs: "+str(self.upbs)
+                    print "upbs1: "+str(self.upbs1)
+                    #print "gamma: "+str(self.gamma) + " timeTake: "+str(self.timeTake)+ " delta_tilde: "+str(self.delta_tilda)+ " t: "+str(self.t)
+                    print "delta_tilde: "+str(self.delta_tilda)+ " rho: " +str(self.rho) + " t: "+str(self.t)
 
     def readenv(self):
         data=[]
@@ -145,7 +122,7 @@ class AugUCB(object):
         self.means=(data[0])
         self.variance=(data[1])
 
-    def augucb(self,numActions,K,tau):
+    def augucbM(self,numActions,K,tau):
     
         #Set the environment
         self.max1=999999.0
@@ -160,7 +137,6 @@ class AugUCB(object):
         self.upbs = [0] * self.numActions
         self.upbs1 = [0] * self.numActions
         self.avgPayOffSums = [0] * self.numActions
-        self.sqPayOffSums = [0] * self.numActions
         self.numRounds = 10000
         #self.numRounds = 12000
         self.B = [0] * self.numActions
@@ -173,14 +149,12 @@ class AugUCB(object):
         #bestAction=arms/2
         self.bestAction=self.numActions-1
         
-
-        #self.means =[0.4 for i in range(self.numActions)]
-        #self.variance = [0.5 for i in range(self.numActions)]
-
+        #biases = [1.0 / k for k in range(5,5+numActions)]
+        #means = [0.5 + b for b in biases]
         self.means=[]
         self.variance=[]
         self.readenv()
-
+        
         '''
         i=(1*self.numActions)/3
         while i<self.numActions:
@@ -203,11 +177,8 @@ class AugUCB(object):
         
         for i in range(7,10):
             self.means[i]=0.9
-            self.variance[i]=0.6
 
         self.means[4]=0.45
-        self.variance[5]=0.6
-        self.variance[6]=0.6
         '''
         '''
         j=0
@@ -218,11 +189,10 @@ class AugUCB(object):
         #self.means[3]=0.35
         self.means[4]=0.45
         self.means[5]=0.55
-        self.variance[5]=0.6
+        
         j=0
         for i in range(6,10):
             self.means[i]=0.6+0.05*j
-            self.variance[i]=0.6
             j=j+1
         '''
         '''
@@ -247,9 +217,8 @@ class AugUCB(object):
             
         self.means[self.bestAction]=0.9
         '''
-
+        
         print self.means
-        print self.variance
         
         # initialize empirical sums
         self.t=1
@@ -267,7 +236,6 @@ class AugUCB(object):
             self.arm_reward[action]=self.arm_reward[action]+theReward
             self.numPlays[action] += 1
             self.payoffSums[action] += theReward
-            self.sqPayOffSums[action] += theReward*theReward
             self.avgPayOffSums[action]= self.payoffSums[action]/self.numPlays[action]
             
             
@@ -315,7 +283,6 @@ class AugUCB(object):
         #self.rho = (self.tau*self.tau)/8.0
         #self.rho = 1.0/(8.0*self.tau*self.tau)
         self.rho=1.0/8.0
-        self.rho_v=2.0/3.0
         #self.rho=math.sqrt(self.numRounds)
         #self.gamma=1.0/self.numActions
         #self.p=2.0
@@ -329,7 +296,7 @@ class AugUCB(object):
 
         #self.timeTake=math.floor(self.numRounds/self.gamma)
         self.nm=math.ceil(2*math.log(self.exp_func()*self.numRounds*self.delta_tilda*self.delta_tilda)/self.delta_tilda)
-        self.timeTake=self.numActions * self.nm
+        self.timeTake=self.t + self.numActions * self.nm
         print self.gamma,self.timeTake
 
 
@@ -345,9 +312,12 @@ class AugUCB(object):
             take=self.max1
             for i in range(self.numActions):
                 if self.B[i]==0:
-
-                    self.ucbs[i]=abs(self.avgPayOffSums[i]-self.tau) - self.upperBoundVar(self.numPlays[i],i)
-
+                    #self.func=math.sqrt(1/self.timeTake)
+                    #self.ucbs[i]=(self.payoffSums[i] / self.numPlays[i]) + math.sqrt(2 * math.log(self.t + 1) / self.numPlays[i])
+                    self.ucbs[i]=abs(self.avgPayOffSums[i]-self.tau) - self.upperBound(self.numPlays[i],self.rho)
+                    #self.ucbs[i]=self.upperBound1(self.numPlays[i])
+                    #self.upbs[i]=self.avgPayOffSums[i] - self.upperBound1(self.numPlays[i])
+                    #self.upbs1[i]=self.avgPayOffSums[i] + self.upperBound1(self.numPlays[i])
                     if take>self.ucbs[i]:
                         take=self.ucbs[i]
                         action=i
@@ -360,7 +330,6 @@ class AugUCB(object):
             self.arm_reward[action]=self.arm_reward[action]+theReward
             self.numPlays[action] += 1
             self.payoffSums[action] += theReward
-            self.sqPayOffSums[action] += theReward*theReward
             self.avgPayOffSums[action]= self.payoffSums[action]/self.numPlays[action]
             
             cumulativeReward += theReward
@@ -372,10 +341,34 @@ class AugUCB(object):
             self.actionRegret.append(regret)
             
             self.arm_elimination()
-            self.arm_elimination_variance()
-            
 
 
+            '''
+            #action = max(range(len(self.avgPayOffSums)), key=lambda i: self.avgPayOffSums[i])
+            take=self.min1
+            #take=self.max1
+            for i in range(self.numActions):
+                #if self.B[i]!=-1:
+                    #self.func=math.sqrt(1/self.timeTake)
+                    #self.ucbs[i]=-(self.payoffSums[i] / self.numPlays[i]) + math.sqrt(2 * math.log(self.t + 1) / self.numPlays[i])
+                    #self.ucbs[i]=self.avgPayOffSums[i] + self.upperBound1(self.numPlays[i])
+                    #self.upbs[i]=self.upperBound(self.numPlays[i])
+                    if take<self.avgPayOffSums[i]:
+                        take=self.avgPayOffSums[i]
+                        action=i
+            '''
+                
+            #print "\n\nRound: "+str(self.m)
+            '''
+            for i in range(self.numActions):
+                if self.B[i]==0:
+                    #self.func=math.sqrt(1/self.timeTake)
+                    #self.ucbs[i]=(self.payoffSums[i] / self.numPlays[i]) + math.sqrt(2 * math.log(self.t + 1) / self.numPlays[i])
+                    self.ucbs[i]=self.avgPayOffSums[i] + self.upperBound(self.numPlays[i],self.rho)
+                    self.ucbs1[i]=self.avgPayOffSums[i] - self.upperBound(self.numPlays[i],self.rho)
+                    self.upbs[i]=self.avgPayOffSums[i] - self.upperBound(self.numPlays[i],self.rho)
+                    self.upbs1[i]=self.avgPayOffSums[i] + self.upperBound(self.numPlays[i],self.rho)
+            '''
 
 
             if self.t >= self.timeTake and self.m <= self.gamma:
@@ -392,7 +385,16 @@ class AugUCB(object):
                 break
 
             
-
+            '''   
+            print "B: "+str(self.B)
+            print "numplays: "+str(self.numPlays)+str(sum(self.numPlays))
+            print "AvgP: "+str(self.avgPayOffSums)
+            print "ucbs: "+str(self.ucbs)
+            print "upbs: "+str(self.upbs)
+            print "upbs1: "+str(self.upbs1)
+            #print "gamma: "+str(self.gamma) + " timeTake: "+str(self.timeTake)+ " delta_tilde: "+str(self.delta_tilda)+ " t: "+str(self.t)
+            print "delta_tilde: "+str(self.delta_tilda)+ " t: "+str(self.t)
+            '''
             #if self.t>=self.numRounds or self.remArms()<=self.K:
 
             takeArmsTau=[]
@@ -454,7 +456,7 @@ class AugUCB(object):
             for p in range(0,(self.numRounds - index)):
                 self.maxAction.append(last)
         
-        f = open('testFinal7/testAugUCBV1.txt', 'a')
+        f = open('testFinal7/testAugUCBM1.txt', 'a')
         for r in range(len(self.maxAction)):
             f.writelines("%s\n" % ', '.join(["%d" % k for k in self.maxAction[r]]))
         f.close()
@@ -475,13 +477,13 @@ if __name__ == "__main__":
             
             random.seed(i+j)
             
-            obj=AugUCB()
-            cumulativeReward,bestActionCumulativeReward,regret,arm,timestep,finalSet,finalSetTau=obj.augucb(i,5,0.5)
+            obj=augucbM()
+            cumulativeReward,bestActionCumulativeReward,regret,arm,timestep,finalSet,finalSetTau=obj.augucbM(i,5,0.5)
             if obj.check(finalSet,finalSetTau)==False:
             #if arm!=i/2:
                 wrong=wrong+1
             print "turn: "+str(turn+1)+"\twrong: "+str(wrong)+"\tarms: "+str(i)+"\tbarm: "+str(arm) +"\tbset: "+str(finalSet) + "\tbtset: "+str(finalSetTau) + "\tReward: "+str(cumulativeReward)+"\tbestCumReward: "+str(bestActionCumulativeReward)+"\tregret: "+str(regret)
-            f = open('testFinal7/testAugUCBVtest1.txt', 'a')
+            f = open('testFinal7/testAugUCBMtest1.txt', 'a')
             f.writelines("arms: %d\tbArm: %d\tbSet: %s\tbtSet: %s\ttimestep: %d\tregret: %d\tcumulativeReward: %.2f\tbestCumulativeReward: %.2f\n" % (i, arm, finalSet, finalSetTau, timestep, regret, cumulativeReward, bestActionCumulativeReward))
             f.close()
             
