@@ -27,39 +27,39 @@
 \label{alg:augucb}
 \begin{algorithmic}
 \State {\bf Input:} Time horizon $T$, exploration parameters $\rho_{\mu}$, $\rho_v$ and $\psi$, threshold $\tau$.
-\State {\bf Initialization:} Set $B_{0}:=A$, $M=\bigg\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\bigg\rfloor $, $m:=0$, $\epsilon_{0}:=1$, $\ell_{0}=\big\lceil \frac{2\log(\psi T\epsilon_{0}^{2})}{\epsilon_{0}} \big\rceil$ and $N_{0}=K*\ell_{0} $.
+\State {\bf Initialization:} Set $B_{0}:=A$, $M=\left\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\right\rfloor $, $m:=0$, $\epsilon_{0}:=1$, $\ell_{0}=\left\lceil \frac{2\log(\psi T\epsilon_{0}^{2})}{\epsilon_{0}} \right\rceil$ and $N_{0}=K\ell_{0} $.
 \State Pull each arm once
 %\State \For{$m=0,1,..\big \lfloor \dfrac{1}{2}\log_{2} \dfrac{T}{e}\big\rfloor$}{	
 %\State $N_{0}=\big\lfloor \dfrac{T}{M} \big\rfloor$
 \State \For{$t=K+1,..,T$}
 %\State Pull arm $i$ in $B_m$ such that $\min_{i\in B_{m}}\bigg\lbrace |\hat{r}_{i} - \tau | - \sqrt{\dfrac{\rho_v \hat{V}_{i} \log (\psi T \epsilon_{m}^{2})}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} \bigg\rbrace$, where $n_{i}$ is the number of times the arm $i$ has been pulled.
-\State Pull arm $i$ in $B_m$ such that $\min_{i\in B_{m}}\bigg\lbrace |\hat{r}_{i} - \tau | - 2s_{i}\bigg\rbrace$
+\State Pull arm $i\in\argmin_{j\in B_{m}}\bigg\lbrace |\hat{r}_{j} - \tau | - 2s_{j}\bigg\rbrace$
 \State $t:=t+1$ 
 \ArmElim
 \State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
 \begin{align*}
 %\hat{r}_{i} + \sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}  < \tau -\sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}} 
-\hat{r}_{i} + c_i  < \tau - c_i
+\hat{r}_{i} + c_i  < \tau - c_i \mbox{ or } \hat{r}_{i} - c_i  > \tau + c_i \\
+\text{where $c_i=\sqrt{\frac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}$}
 \end{align*}
-\State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
-\begin{align*}
-%\hat{r}_{i} - \sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}  > \tau +\sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}} 
-\hat{r}_{i} - c_i  > \tau + c_i
-\end{align*}
-where $ c_i=\sqrt{\frac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}} $
+%\State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
+%\begin{align*}
+%%\hat{r}_{i} - \sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}  > \tau +\sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}} 
+%\hat{r}_{i} - c_i  > \tau + c_i
+%\end{align*}
 \EndArmElim
 \ArmElimV
 \State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
 \begin{align*}
 %\hat{r}_{i} + \sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}}  < \tau -\sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}} 
-\hat{r}_{i} + s_i  < \tau - s_i 
+\hat{r}_{i} + s_i  < \tau - s_i \mbox{ or } \hat{r}_{i} - s_i  > \tau + s_i \\
+\text{where $s_i=\sqrt{\frac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}}$}
 \end{align*}
-\State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
-\begin{align*}
-%\hat{r}_{i} - \sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}}  > \tau +\sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} 
-\hat{r}_{i} - s_i  > \tau + s_i
-\end{align*}
-where $s_i=\sqrt{\frac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}}$
+%\State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
+%\begin{align*}
+%%\hat{r}_{i} - \sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}}  > \tau +\sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} 
+%\hat{r}_{i} - s_i  > \tau + s_i
+%\end{align*}
 \EndArmElimV
 \State \If{$t\geq N_{m}$ and $m \leq M$}
 \ResetParam
@@ -67,7 +67,7 @@ where $s_i=\sqrt{\frac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}
 \State $B_{m+1} := B_{m}$
 %\State $p_{m+1}:=p_{m}+1$
 %\State $M := \dfrac{p+1}{p}$
-\State $\ell_{m+1}:=\bigg\lceil \frac{2\log(\psi T\epsilon_{m+1}^{2})}{\epsilon_{m+1}} \bigg\rceil$
+\State $\ell_{m+1}:=\left\lceil \frac{2\log(\psi T\epsilon_{m+1}^{2})}{\epsilon_{m+1}} \right\rceil$
 \State $N_{m+1} := t + |B_{m+1}|\ell_{m+1}$
 % + \lfloorM N_{m}\rfloor $
 \State $m := m+1$

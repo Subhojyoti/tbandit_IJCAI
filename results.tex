@@ -6,9 +6,7 @@ We define problem complexity as,
 \begin{align*}
 H_{1} = \sum_{i=1}^{K}\dfrac{1}{\Delta_{i}^{2}} \text{ ,   } H_{2}=\max_{i\in A}\dfrac{i}{{\Delta_{i}^{2}}} \text{, where } \Delta_{i}=|r_{i}-\tau|
 \end{align*}
-
 This is same as the problem complexity defined in \cite{locatelli2016optimal} for the thresholding bandit problem and is similar to the problem complexity defined in \cite{audibert2010best} for single best arm identification. Also we know that,
-
 \begin{align*}
 H_{2}\leq H_{1}\leq \log(2K)H_{2}
 \end{align*}
@@ -18,11 +16,9 @@ Also, we define $H_{1}^{\sigma}$ (\cite{gabillon2011multi}) and $H_{2}^{\sigma}$
 & H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}\\
 & H_{2}^{\sigma}=\max_{i\in A} i\frac{3\sigma_{i}^{2} + \Delta_i}{\Delta_i^{2}}
 \end{align*}
-
 %\begin{align*}
 %H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}} \geq \sum_{i=1}^{K}\frac{3\sigma_{i}^{2} + \Delta_k}{\Delta_{i}^{-2}}\geq \sum_{i=1}^{K}\frac{3\sigma_{i}^{2} + \Delta_k}{\Delta_{i}^{-2}}
 %\end{align*}
-
 which also gives us that $H_{2}^{\sigma} < H_{1}^{\sigma}$.
 
 
@@ -55,13 +51,14 @@ for $\psi=\frac{T}{\log K}$, $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$.
 
 
 \begin{proof}
+According to the algorithm, the number of rounds is $m=\lbrace 0,1,2,.. M\rbrace $ where $M=\bigg\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\bigg\rfloor$. So, $\epsilon_{m}\geq 2^{-M}\geq \sqrt{\frac{e}{T}}$. Also each round $m$ consists of $|B_{m}|\ell_{m}$ timesteps where $\ell_{m} = \left\lceil\frac{2\log(\psi T \epsilon_{m}^{2})}{\epsilon_{m}}\right\rceil$ and $B_{m}$ is the set of all surviving arms. 
 
-According to the algorithm, the number of rounds is $m=\lbrace 0,1,2,.. M\rbrace $ where $M=\bigg\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\bigg\rfloor$. So, $\epsilon_{m}\geq 2^{-M}\geq \sqrt{\frac{e}{T}}$. Also each round $m$ consists of $|B_{m}|\ell_{m}$ timesteps where $\ell_{m} = \frac{2\log(\psi T \epsilon_{m}^{2})}{\epsilon_{m}}$ and $B_{m}$ is the set of all surviving arms. 
+Let $c_{i} = \sqrt{\frac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}$ denote the confidence interval, where $n_{i}$ is the number of times an arm $i$ is pulled. Let $A^{'}=\lbrace i\in A|\Delta_{i}\geq b\rbrace$, for $b\geq \sqrt{\frac{e}{T}}$. Define $m_{i}=\min\lbrace m| \sqrt{\rho_{\mu}\epsilon_{m}}<\frac{\Delta_{i}}{2}\rbrace$.
+% Let $m_{i}$ be the minimum round such that an arm $i$ gets eliminated such that. 
 
-Let $c_{i} = \sqrt{\frac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}$ denote the confidence interval, where $n_{i}$ is the number of times an arm $i$ is pulled. Let $A^{'}=\lbrace i\in A|\Delta_{i}\geq b\rbrace$, for $b\geq \sqrt{\frac{e}{T}}$. Let $m_{i}$ be the minimum round that an arm $i$ gets eliminated such that $m_{i}=min\lbrace m| \sqrt{\rho_{\mu}\epsilon_{m}}<\frac{\Delta_{i}}{2}\rbrace$. 
-
-
-Let $s_{i}=\sqrt{\frac{\rho_v \hat{V_{i}} \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}}}$. Let $g_{i}$ be the minimum round that an arm $i$ gets eliminated such that $g_{i}=min\lbrace g| \sqrt{\rho_{v}\epsilon_{g}}<\frac{\Delta_{i}}{2}\rbrace$. 
+Let $s_{i}=\sqrt{\frac{\rho_v \hat{V_{i}} \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}}}$ and 
+% $g_{i}$ be the minimum round that an arm $i$ gets eliminated such that 
+$g_{i}=min\lbrace g| \sqrt{\rho_{v}\epsilon_{g}}<\frac{\Delta_{i}}{2}\rbrace$. 
 %In this proof sub-optimal arms refer to the arms whose $r_{i}$ is lower than the threshold $\tau$.
 
 %At the end of any round $\max\lbrace m_{i},g_{i}\rbrace$, for any arm $i$, two cases are possible.
@@ -80,70 +77,71 @@ So, $\xi_{1}$ and $\xi_{2}$ signifies the event till when any arm $i$ will not g
 %\text{ s.t } r_j \geq \tau; \forall t=1,2,..,T | r_i - c_i  > \tau + c_i \text{ or } r_j + c_i < \tau - c_i  \rbrace$. Similarly, $\xi_{2}=\lbrace \forall i\in A \text{ s.t } r_i < \tau \text{ or }\forall j\in A \text{ s.t } r_j \geq \tau; \forall t=1,2,..,T | r_i - s_i  > \tau + s_i \text{ or } r_j + s_i < \tau - s_i  \rbrace$. 
 
 \subsubsection{\textit{Some arm i is not eliminated on or before round $\max\lbrace m_{i},g_{i}\rbrace$}}
-For any arm $i$, if it is eliminated from active set $B_{m_{i}}$ then the below two events have to come true,
+For any arm $i$, if it is eliminated from active set $B_{m_{i}}$ then one of the below two events have to come true,
 \begin{small}
 \begin{align}
 \hat{r}_{i} + c_{i} < \tau - c_{i}, \label{eq:armelim-casea}\\
 \hat{r}_{i} - c_{i} > \tau + c_{i}, \label{eq:armelim-caseb}
 \end{align}
 \end{small}
+For (\ref{eq:armelim-casea}) we can see that it eliminates arms that have performed poorly and removes them  from $B_{m_{i}}$. Similarly, (\ref{eq:armelim-caseb}) eliminates arms from $B_{m_{i}}$ that have performed very well compared to threshold $\tau$.
 
-
-For \ref{eq:armelim-casea} we can see that it eliminates arms that have performed poorly and removes them them from $B_{m_{i}}$. Similarly, \ref{eq:armelim-caseb} eliminates arms from $B_{m}$ that have performed very well compared to threshold $\tau$.
-
-Each round consist of $|B_{m_{i}}|\ell_{m_{i}}$ timesteps. In the $m_{i}$-th round an arm $i$ can be pulled no more than $\ell_{m_{i}}$ times. So when $n_{i}=\ell_{m_{i}}$, putting the value of $\ell_{m_{i}}=\frac{2\log{(\psi T\epsilon_{m_{i}}^{2})}}{\epsilon_{m_{i}}}$ in $c_{i}$ we get, 
+%Each round consists of $|B_{m_{i}}|\ell_{m_{i}}$ timesteps. 
+In the $m_{i}$-th round an arm $i$ can be pulled no more than $\ell_{m_{i}}$ times. So when $n_{i}=\ell_{m_{i}}$, putting the value of $\ell_{m_{i}}\ge\frac{2\log{(\psi T\epsilon_{m_{i}}^{2})}}{\epsilon_{m_{i}}}$ in $c_{i}$ we get, 
 \begin{small}
 \begin{align*}
 c_{i}&=\sqrt{\frac{\rho_{\mu}\epsilon_{m_{i}}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}}}
-=\sqrt{\frac{\rho_{\mu}\epsilon_{m_{i}}\log (\psi T\epsilon_{m_{i}}^{2})}{2*2 \log(\psi T\epsilon_{m_{i}}^{2})}}\\
-& =\frac{\sqrt{\rho_{\mu}\epsilon_{m_{i}}}}{2}
- \leq \sqrt{\rho_{\mu}\epsilon_{m_{i}+1}} < \frac{\Delta_{i}}{4} \text{, as }\rho_{\mu}\in (0,1].
+\le\sqrt{\frac{\rho_{\mu}\epsilon_{m_{i}}\log (\psi T\epsilon_{m_{i}}^{2})}{2*2 \log(\psi T\epsilon_{m_{i}}^{2})}}\\
+& \le\frac{\sqrt{\rho_{\mu}\epsilon_{m_{i}}}}{2}
+ % \leq \sqrt{\rho_{\mu}\epsilon_{m_{i}+1}} 
+ < \frac{\Delta_{i}}{4} \text{, as }\rho_{\mu}\in (0,1].
 \end{align*}
 \end{small}
-
-
-Again, for ${i} \in A^{'}$ for \ref{eq:armelim-casea} elimination condition, 
+Again, for ${i} \in A^{'}$ for the  elimination condition in (\ref{eq:armelim-casea}), 
+%\begin{small}
+%\begin{align*}
+%\hat{r}_{i} + c_{i}&\leq r_{i} + 2c_{i} = r_{i} + 4c_{i} - 2c_{i} \\
+%&< r_{i} + \Delta_{i} - 2c_{i} = \tau -2c_{i} \leq \tau - c_{i}
+%\end{align*}
+%\end{small}
 \begin{small}
 \begin{align*}
-\hat{r}_{i} + c_{i}&\leq r_{i} + 2c_{i} = r_{i} + 4c_{i} - 2c_{i} \\
-&< r_{i} + \Delta_{i} - 2c_{i} = \tau -2c_{i} \leq \tau - c_{i}
+\hat{r}_{i} &\leq r_{i} + 2c_{i} = r_{i} + 4c_{i} - 2c_{i} \\
+&< r_{i} + \Delta_{i} - 2c_{i} = \tau -2c_{i}.
 \end{align*}
 \end{small}
-
-
-Also, for ${i} \in A^{'}$ for \ref{eq:armelim-caseb} elimination condition, 
+Similarly, for ${i} \in A^{'}$ for the  elimination condition in (\ref{eq:armelim-caseb}), 
 \begin{small}
 \begin{align*}
-\hat{r}_{i} - c_{i}&\geq r_{i} - 2c_{i} = r_{i} - 4c_{i} + 2c_{i} \\
-&> r_{i} - \Delta_{i} + 2c_{i}\geq \tau + 2c_{i} \geq \tau + c_{i}
+\hat{r}_{i} &\geq r_{i} - 2c_{i} = r_{i} - 4c_{i} + 2c_{i} \\
+&> r_{i} - \Delta_{i} + 2c_{i}= \tau + 2c_{i}.
 \end{align*}
 \end{small}
 
 
-Now, arm elimination condition is being checked at every timestep, in the $m_{i}$-th round as soon as $n_{i}=\ell_{m_{i}}$, arm $i$ gets eliminated. Applying Chernoff-Hoeffding bound and considering independence of complementary of the event in \ref{eq:armelim-casea},
+%Now, arm elimination condition is being checked at every timestep, in the $m_{i}$-th round as soon as $n_{i}=\ell_{m_{i}}$, arm $i$ gets eliminated. 
+Applying Chernoff-Hoeffding bound and considering independence of complementary of the event in (\ref{eq:armelim-casea}),
 \begin{small}
 \begin{align*}
 %\mathbb{P}\lbrace\hat{r}_{i}\geq r_{i} - 2c_{i}\rbrace &\leq exp(-2(\tau + 2c_{i})^{2}n_{i})\\
-\mathbb{P}\lbrace\hat{r}_{i}\geq r_{i} + 2c_{i}\rbrace &\leq \exp(-4 c_{i}^{2}n_{i})\\
+\mathbb{P}\lbrace\hat{r}_{i}> r_{i} + 2c_{i}\rbrace &\leq \exp(-4 c_{i}^{2}n_{i})\\
 &\leq \exp(-8 * \dfrac{\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}} *n_{i})\\
 &\leq \exp\big(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)
 \end{align*}
 \end{small}
-  
 %  \begin{align*}
 %\mathbb{P}\lbrace\hat{r}_{i}\geq r_{i} - (\tau + 2c_{i})\rbrace &\leq exp(-2(\tau + 2c_{i})^{2}n_{i})\\
 %&\leq \exp(-2(2\tau c_{i})^{2}n_{i}) \text{ , as} (a+b)^{2} \geq (ab)^{2} \text{ for } a,b\in[0,1]\\
 %&\leq \exp(-8 * \tau^{2}\dfrac{\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}} *n_{i})\\
 %&\leq \exp\big(-4\tau^{2}\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)
 %  \end{align*}
-  
 %Similarly, $\mathbb{P}\lbrace\hat{r}_{i}\leq r_{i} + (\tau + 2c_{i})\rbrace\leq \dfrac{1}{(\psi  T\epsilon_{m_{i}}^{2})^{4\tau^{2}\rho_{\mu}}}$
-
-Similarly, $\mathbb{P}\lbrace\hat{r}_{i}\leq r_{i} - 2c_{i}\rbrace\leq \exp\big(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)$
+Similarly for the condition in (\ref{eq:armelim-caseb}), $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2c_{i}\rbrace\leq \exp\big(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)$.
  
 %Summing, the two up, the probability that an arm ${i}$ is not eliminated on or before $m_{i}$-th round based on the \ref{eq:armelim-casea} and \ref{eq:armelim-caseb} elimination condition is  $\bigg(\dfrac{2}{(\psi T\epsilon_{m_{i}}^{2})^{4\tau^{2}\rho_{\mu}}}\bigg)$. 
 
-Summing, the two up, the probability that an arm ${i}$ is not eliminated on or before $m_{i}$-th round based on the \ref{eq:armelim-casea} and \ref{eq:armelim-caseb} elimination condition is  $\big(2\exp\big(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)\big)$. 
+Summing the above two expressions, the probability that arm ${i}$ is not eliminated on or before $m_{i}$-th round %based on the \ref{eq:armelim-casea} and \ref{eq:armelim-caseb} elimination condition is 
+is $\big(2\exp\big(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)\big)$. 
 
 
 Again for any arm $i$, if it is eliminated from active set $B_{g_{i}}$ then the below two events have to come true,
@@ -153,46 +151,44 @@ Again for any arm $i$, if it is eliminated from active set $B_{g_{i}}$ then the 
 \hat{r}_{i} - s_{i} > \tau + s_{i}, \label{eq:armelim-var-caseb}
 \end{align}
 \end{small}
-
-For \ref{eq:armelim-var-casea} we can see that it eliminates arms that have performed poorly and removes them them from $B_{g_{i}}$. Similarly, \ref{eq:armelim-var-caseb} eliminates arms from $B_{g_{i}}$ that have performed very well compared to threshold $\tau$.
-
+%
+% For \ref{eq:armelim-var-casea} we can see that it eliminates arms that have performed poorly and removes them them from $B_{g_{i}}$. Similarly, \ref{eq:armelim-var-caseb} eliminates arms from $B_{g_{i}}$ that have performed very well compared to threshold $\tau$.
 %But, we know that $\epsilon_{m_{i}}=\epsilon_{g_{i}}$ and round consist of $|B_{g_{i}}|\ell_{g_{i}}$ timesteps. 
-
-In the $g_{i}$-th round an arm $i$ can be pulled no more than $\ell_{g_{i}}$ times. So when $n_{i}=\ell_{g_{i}}$, putting the value of $\ell_{g_{i}}=\frac{2\log{(\psi T\epsilon_{g_{i}}^{2})}}{\epsilon_{g_{i}}}$ in $s_{i}$ we get, 
+In the $g_{i}$-th round an arm $i$ can be pulled no more than $\ell_{g_{i}}$ times. So when $n_{i}=\ell_{g_{i}}$, putting the value of $\ell_{g_{i}}\ge\frac{2\log{(\psi T\epsilon_{g_{i}}^{2})}}{\epsilon_{g_{i}}}$ in $s_{i}$ we get, 
 \begin{small}
 \begin{align*}
 s_{i}&=\sqrt{\dfrac{\rho_v \hat{V}_{i} \epsilon_{g_{i}}\log (\psi T\epsilon_{g_{i}}^{2})}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}} \\
 &\leq \sqrt{\dfrac{\rho_v \epsilon_{g_{i}}\log (\psi T\epsilon_{g_{i}}^{2})}{4*2 \log(\psi T\epsilon_{g_{i}}^{2})} + \dfrac{\rho_v \epsilon_{g_{i}} \log{(\psi T\epsilon_{g_{i}}^{2})}}{4*2 \log(\psi T\epsilon_{g_{i}}^{2})} } \text{, as }\hat{V}_{i}\in [0,1].\\
-& \leq \sqrt{\dfrac{\rho_v \epsilon_{g_{i}}}{8} + \dfrac{\rho_v \epsilon_{g_{i}}}{8} } \leq \dfrac{\sqrt{\rho_v \epsilon_{g_{i}}}}{2}\\
-& \leq \sqrt{\rho_v \epsilon_{g_{i}+1}} < \dfrac{\Delta_{i}}{4} \text{, as }\rho_v\in (0,1].
+& \leq \sqrt{\dfrac{\rho_v \epsilon_{g_{i}}}{8} + \dfrac{\rho_v \epsilon_{g_{i}}}{8} } \leq \dfrac{\sqrt{\rho_v \epsilon_{g_{i}}}}{2}< \dfrac{\Delta_{i}}{4} \text{, as }\rho_v\in (0,1].
+%& \leq \sqrt{\rho_v \epsilon_{g_{i}+1}} < \dfrac{\Delta_{i}}{4} \text{, as }\rho_v\in (0,1].
 \end{align*}
 \end{small}
 
-
-Again, for ${i} \in A^{'}$ for \ref{eq:armelim-var-casea} elimination condition,
+Again, for ${i} \in A^{'}$ for the elimination condition in (\ref{eq:armelim-var-casea}),
 \begin{small}
 \begin{align*}
-\hat{r}_{i} + s_{i}&\leq r_{i} + 2s_{i} = r_{i} + 4s_{i} - 2s_{i} \\
-&< r_{i} + \Delta_{i} - 2s_{i} = \tau -2s_{i} \leq \tau - s_{i}
+\hat{r}_{i} &\leq r_{i} + 2s_{i} = r_{i} + 4s_{i} - 2s_{i} \\
+&< r_{i} + \Delta_{i} - 2s_{i} = \tau -2s_{i} % \leq \tau - s_{i}
 \end{align*}
 \end{small} 
 
 
-Also, for ${i} \in A^{'}$ for \ref{eq:armelim-var-caseb} elimination condition, 
+Also, for ${i} \in A^{'}$ for the elimination condition in (\ref{eq:armelim-var-caseb}), 
 \begin{small}
 \begin{align*}
-\hat{r}_{i} - s_{i}&\geq r_{i} - 2s_{i} = r_{i} - 4s_{i} + 2s_{i} \\
-&> r_{i} - \Delta_{i} + 2s_{i}\geq \tau + 2s_{i} \geq \tau + s_{i}
+\hat{r}_{i}&\geq r_{i} - 2s_{i} = r_{i} - 4s_{i} + 2s_{i} \\
+&> r_{i} - \Delta_{i} + 2s_{i}\geq \tau + 2s_{i} % \geq \tau + s_{i}
 \end{align*}
 \end{small}
 
 
-Since, arm elimination condition is being checked at every timestep, in the $g_{i}$-th round as soon as $n_{i}=\ell_{g_{i}}$, arm $i$ gets eliminated. Applying Bernstein inequality and considering independence of complementary of the event in \ref{eq:armelim-var-casea},
+%Since, arm elimination condition is being checked at every timestep, in the $g_{i}$-th round as soon as $n_{i}=\ell_{g_{i}}$, arm $i$ gets eliminated. 
+Applying Bernstein inequality and considering independence of complementary of the event in (\ref{eq:armelim-var-casea}),
 \begin{small}
 \begin{align}
-&\mathbb{P}\lbrace\hat{r}_{i}\geq r_{i} + 2s_{i}\rbrace\\
-&\leq \mathbb{P}\bigg\lbrace \hat{r}_{i} \geq r_{i}+ ( 2\sqrt{\dfrac{\rho_v \hat{V}_{i}\log(\psi T\epsilon_{g_{i}}^{2}) + \rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4n_{i}} }) \bigg\rbrace\\
-&\leq \mathbb{P}\bigg\lbrace \hat{r}_{i} \geq r_{i}+ (2\sqrt{\dfrac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}})\bigg\rbrace \label{eq:prob_eq1}\\ 
+&\mathbb{P}\lbrace\hat{r}_{i}> r_{i} + 2s_{i}\rbrace\\
+&\leq \mathbb{P}\bigg\lbrace \hat{r}_{i} > r_{i}+ ( 2\sqrt{\dfrac{\rho_v \hat{V}_{i}\log(\psi T\epsilon_{g_{i}}^{2}) + \rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4n_{i}} }) \bigg\rbrace\\
+&\leq \mathbb{P}\bigg\lbrace \hat{r}_{i} > r_{i}+ (2\sqrt{\dfrac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}})\bigg\rbrace \label{eq:prob_eq1}\\ 
 &+ \mathbb{P}\bigg\lbrace \hat{V}_{i}\geq \sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}\bigg\rbrace \label{eq:prob_eq2}
 \end{align}
 \end{small}
@@ -207,10 +203,10 @@ Now, we know that in the $g_{i}$-th round,
 \end{small}
 
 
-For the term in \ref{eq:prob_eq1}, by applying Bernstein inequality, we can write as,
+For the term in (\ref{eq:prob_eq1}), by applying Bernstein inequality, we can write as,
 \begin{small}
 \begin{align*}
-&\mathbb{P}\bigg\lbrace \hat{r}_{i}\geq r_{i} + \bigg(2\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}  } \bigg)\bigg\rbrace\\
+&\mathbb{P}\bigg\lbrace \hat{r}_{i}> r_{i} + \bigg(2\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}  } \bigg)\bigg\rbrace\\
 &\leq \exp\bigg(- \dfrac{\bigg(2\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}}\bigg)^{2}n_{i}}{2\sigma_{i}^{2}+\frac{4}{3}\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}+\frac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}}}\bigg) \\
 &\leq \exp\bigg(- \dfrac{\bigg(\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log(\psi T\epsilon_{g_{i}}^{2})\bigg)}{2\sigma_{i}^{2}+\frac{2}{3}\sqrt{\rho_v \epsilon_{g_{i}}}} \bigg)\\
 &\leq \exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg) 
@@ -218,7 +214,7 @@ For the term in \ref{eq:prob_eq1}, by applying Bernstein inequality, we can writ
 \end{small}
  
   
-For the term in \ref{eq:prob_eq2}, by applying Bernstein inequality, we can write as,
+For the term in (\ref{eq:prob_eq2}), by applying Bernstein inequality, we can write as,
 \begin{small}
 \begin{align*}
 &\mathbb{P}\bigg\lbrace \hat{V}_{i}\geq \sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}\bigg\rbrace\\
@@ -233,9 +229,9 @@ For the term in \ref{eq:prob_eq2}, by applying Bernstein inequality, we can writ
 \end{small}
  
   
-Similarly, the condition for the complementary event for the elimination case \ref{eq:armelim-var-caseb} holds such that $\mathbb{P}\lbrace\hat{r}_{i}\leq r_{i} - 2s_{i}\rbrace \leq 2\exp\bigg(- \frac{3\rho_v}{2} \bigg(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)$.
+Similarly, the condition for the complementary event for the elimination case \ref{eq:armelim-var-caseb} holds such that $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2s_{i}\rbrace \leq 2\exp\bigg(- \frac{3\rho_v}{2} \bigg(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)$.
 
-  Summing everything up, the probability that an arm ${i}$ is not eliminated on or before $g_{i}$-th round based on the \ref{eq:armelim-var-casea} and \ref{eq:armelim-var-caseb} elimination condition is  $4\exp\bigg(- \frac{3\rho_v}{2} \bigg(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)$. 
+Again  summing the above expressions, the probability that an arm ${i}$ is not eliminated on or before $g_{i}$-th round based on the (\ref{eq:armelim-var-casea}) and (\ref{eq:armelim-var-caseb}) elimination condition is  $4\exp\bigg(- \frac{3\rho_v}{2} \bigg(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)$. 
   
   
 %\begin{enumerate}
