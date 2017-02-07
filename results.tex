@@ -26,17 +26,14 @@ which also gives us that $H_{2}^{\sigma} < H_{1}^{\sigma}$.
 
 \begin{theorem}
 \label{Result:Theorem:1}
-
-The expected loss of the AugUCB algorithm is given by,
+With $\psi=\frac{T}{\log K}$, $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$,
+the expected loss of the AugUCB algorithm is given by,
 \begin{small}
 \begin{align*}
 &\E[\Ls(T)] \leq \exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{H_2 K (\log K)^2} + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg)\\
-& + \exp\bigg(- \frac{33T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^2}  + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg) 
+& + \exp\bigg(- \frac{33T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^2}  + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg).
 \end{align*}
 \end{small}
-
-for $\psi=\frac{T}{\log K}$, $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$.
-
 %For every $0<\eta <1$ and $\gamma > 1$, there exists time $t$ such that for all $T>t$ the simple regret of AugUCB is upper bounded by,
 %\begin{small}
 %\begin{align*}
@@ -46,9 +43,7 @@ for $\psi=\frac{T}{\log K}$, $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$.
 %\end{align*}
 %\end{small}
 %with probability at least $1-\eta$, where $c_{0}>0$ is a constant and $C_1=\dfrac{K\rho\log (\psi T \frac{\Delta_{i}^{4}}{16\rho^{2}})}{T\Delta_{i}^{2}}$ and $C_2= \dfrac{K\rho_v\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})}{T\Delta_{i}^{2}}$.
-
 \end{theorem}
-
 
 \begin{proof}
 According to the algorithm, the number of rounds is $m=\lbrace 0,1,2,.. M\rbrace $ where $M=\bigg\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\bigg\rfloor$. So, $\epsilon_{m}\geq 2^{-M}\geq \sqrt{\frac{e}{T}}$. Also each round $m$ consists of $|B_{m}|\ell_{m}$ timesteps where $\ell_{m} = \left\lceil\frac{2\log(\psi T \epsilon_{m}^{2})}{\epsilon_{m}}\right\rceil$ and $B_{m}$ is the set of all surviving arms. 
@@ -76,8 +71,12 @@ So, $\xi_{1}$ and $\xi_{2}$ signifies the event till when any arm $i$ will not g
 %Let $\xi_{1}$ be the event such that $\xi_{1}=\lbrace \forall i\in A \text{ s.t } r_i < \tau \text{ or }\forall j\in A 
 %\text{ s.t } r_j \geq \tau; \forall t=1,2,..,T | r_i - c_i  > \tau + c_i \text{ or } r_j + c_i < \tau - c_i  \rbrace$. Similarly, $\xi_{2}=\lbrace \forall i\in A \text{ s.t } r_i < \tau \text{ or }\forall j\in A \text{ s.t } r_j \geq \tau; \forall t=1,2,..,T | r_i - s_i  > \tau + s_i \text{ or } r_j + s_i < \tau - s_i  \rbrace$. 
 
-\subsubsection{\textit{Some arm i is not eliminated on or before round $\max\lbrace m_{i},g_{i}\rbrace$}}
-For any arm $i$, if it is eliminated from active set $B_{m_{i}}$ then one of the below two events have to come true,
+\subsubsection{\textit{Arm i is not eliminated on or before round $\max\lbrace m_{i},g_{i}\rbrace$}}
+
+
+%\textbf{Arm $i$ is not eliminated on or before round $\mathbf{\max\lbrace m_{i},g_{i}\rbrace}$}
+
+For any arm $i$, if it is eliminated from active set $B_{m_{i}}$ then one of the below two events has to occur,
 \begin{small}
 \begin{align}
 \hat{r}_{i} + c_{i} < \tau - c_{i}, \label{eq:armelim-casea}\\
@@ -342,17 +341,15 @@ Now, putting the values of $\psi$, $\rho_{\mu}$, $\rho_v$ and taking $\Delta_{i}
 %\end{small}
 
 
-Now, for the $i$-th arm we can bound it probability of error for any round $m$ by applying Chernoff-Hoeffding and Bernstein inequality ,
+Now, for the $i$-th arm we can bound the probability of error for any round $m$ by applying Chernoff-Hoeffding and Bernstein inequality,
 \begin{small}
 \begin{align*}
-& \Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace \leq \Pb\lbrace |\hat{r}_i -r_i| \leq 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| \leq 2s_i \rbrace\\ 
-&\leq \Pb\lbrace |\hat{r}_i - r_i| \leq \frac{\Delta_i}{2} \rbrace + \Pb\lbrace |\hat{r}_i - r_i| \leq \frac{\Delta_i}{2} \rbrace \\
-&\leq 2\exp( -\frac{\Delta_{i}^{2}}{2}\delta_{m_{i}} ) + 2exp(- \frac{\Delta_{i}^{2}}{2\sigma_{i}^{2}+ \frac{2}{3}\Delta_i}\delta_{g_{i}})
+ \Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace &\leq \Pb\lbrace |\hat{r}_i -r_i| > 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| > 2s_i \rbrace\\ 
+&\leq \Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace + \Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace \\
+&\leq 2\exp( -\frac{\Delta_{i}^{2}}{2}\delta_{m_{i}} ) + 2\exp(- \frac{\Delta_{i}^{2}}{2\sigma_{i}^{2}+ \frac{2}{3}\Delta_i}\delta_{g_{i}})
 \end{align*}
 \end{small}
-
 Now, summing over all arms $K$ and over all rounds $m=0,1,2,..,M$,
-
 \begin{small}
 \begin{align*}
 &\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{\Delta_{i}^{2}}{2}.\frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^2}\bigg)\\
