@@ -14,7 +14,7 @@ H_{2}\leq H_{1}\leq \log(2K)H_{2}
 Also, we define $H_{1}^{\sigma}$ (\cite{gabillon2011multi}) and $H_{2}^{\sigma}$ as,
 \begin{align*}
 & H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}\\
-& H_{2}^{\sigma}=\max_{i\in A} i\frac{3\sigma_{i}^{2} + \Delta_i}{\Delta_i^{2}}
+& H_{2}^{\sigma}=\max_{i\in A} i\frac{3\sigma_{i}^{2} + \Delta_i}{3\Delta_i^{2}}
 \end{align*}
 %\begin{align*}
 %H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}} \geq \sum_{i=1}^{K}\frac{3\sigma_{i}^{2} + \Delta_k}{\Delta_{i}^{-2}}\geq \sum_{i=1}^{K}\frac{3\sigma_{i}^{2} + \Delta_k}{\Delta_{i}^{-2}}
@@ -30,8 +30,8 @@ With $\psi=\frac{T}{\log K}$, $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$,
 the expected loss of the AugUCB algorithm is given by,
 \begin{small}
 \begin{align*}
-&\E[\Ls(T)] \leq \exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{H_2 K (\log K)^2} + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg)\\
-& + \exp\bigg(- \frac{33T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^2}  + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg).
+&\E[\Ls(T)] \leq \exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2H_2 K (\log K)^{3/2}} + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg)\\
+& + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}}  + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg).
 \end{align*}
 \end{small}
 %For every $0<\eta <1$ and $\gamma > 1$, there exists time $t$ such that for all $T>t$ the simple regret of AugUCB is upper bounded by,
@@ -58,7 +58,7 @@ $g_{i}=min\lbrace g| \sqrt{\rho_{v}\epsilon_{g}}<\frac{\Delta_{i}}{2}\rbrace$.
 
 %At the end of any round $\max\lbrace m_{i},g_{i}\rbrace$, for any arm $i$, two cases are possible.
 
-Let $\xi_{1}$ and $\xi_{2}$ be the event such that,
+Let $\xi_{1}$ and $\xi_{2}$ be the favorable event such that,
 \begin{align*}
 \xi_{1}&=\bigg\lbrace \forall i\in A, \forall m=0,1,2,..,M: |\hat{r_i} - r_i| \leq 2c_i\bigg\rbrace\\
 \xi_{2}&=\bigg\lbrace \forall i\in A, \forall m=0,1,2,..,M: |\hat{r_i} - r_i| \leq  2s_i\bigg\rbrace
@@ -303,8 +303,8 @@ Now, putting the values of $\psi$, $\rho_{\mu}$, $\rho_v$ and taking $\Delta_{i}
 &\leq \bigg\lbrace  \frac{4KT\log ( \frac{2 K\log K}{\sqrt{\log K}})}{K\log K}\exp\bigg(-\log ( \frac{2K\log K}{\sqrt{\log K}})\bigg)\\
 & + \frac{64TK\log (\frac{3 K\log K}{\sqrt{\log K}})}{3 K\log K}\exp\bigg(- \log( \frac{3 K\log K}{\sqrt{\log K}}) \bigg) \bigg\rbrace\\
 %%%%%%%%%%%%%%%%%%%
-&\leq \bigg\lbrace  \frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^2}
- + \frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^2}\bigg) \bigg\rbrace\\
+&\leq \bigg\lbrace  \frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}
+ + \frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}}\bigg) \bigg\rbrace\\
 \end{align*}
 \end{small}
 
@@ -339,27 +339,26 @@ Now, putting the values of $\psi$, $\rho_{\mu}$, $\rho_v$ and taking $\Delta_{i}
 %& -\dfrac{c_{0}\sqrt{T}}{16\rho_v H_{2}} + \log\big( 32\gamma C_2\log_{2}\dfrac{T}{e} \big)  \bigg)
 %\end{align*}
 %\end{small}
-
-
-Now, for the $i$-th arm we can bound the probability of error for any round $m$ by applying Chernoff-Hoeffding and Bernstein inequality,
+Now we know that till $m_i$-th round $2c_i > \frac{\Delta_i}{2}$  or till $g_i$ th round $2s_i > \frac{\Delta_i}{2}$. Hence, for the $i$-th arm we can bound the probability of error for any round $m$ by applying Chernoff-Hoeffding and Bernstein inequality,
 \begin{small}
 \begin{align*}
- \Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace &\leq \Pb\lbrace |\hat{r}_i -r_i| > 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| > 2s_i \rbrace\\ 
-&\leq \Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace + \Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace \\
-&\leq 2\exp( -\frac{\Delta_{i}^{2}}{2}\delta_{m_{i}} ) + 2\exp(- \frac{\Delta_{i}^{2}}{2\sigma_{i}^{2}+ \frac{2}{3}\Delta_i}\delta_{g_{i}})
+ \Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace &\geq 1-(\Pb\lbrace |\hat{r}_i -r_i| > 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| > 2s_i \rbrace)\\ 
+&\geq 1-\left(\Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace + \Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace\right) \\
+&\geq 1-\big(2\exp( -\frac{\Delta_{i}^{2}}{4}n_i ) + 2\exp(- \frac{\Delta_{i}^{2}}{4\sigma_{i}^{2}+ \frac{2}{3}\Delta_i}n_i)\big)\\
+&\geq 1-\bigg(2\exp( -\frac{\Delta_{i}^{2}}{4}\delta_{m_{i}} ) + 2\exp(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}\delta_{g_{i}})\bigg)
 \end{align*}
 \end{small}
-Now, summing over all arms $K$ and over all rounds $m=0,1,2,..,M$,
+Now, we know that $1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace)\leq \E[\Ls(T)]$. Summing over all arms $K$ and over all rounds $m=0,1,2,..,M$ we get that,
 \begin{small}
 \begin{align*}
-&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{\Delta_{i}^{2}}{2}.\frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^2}\bigg)\\
-& + 2\exp\bigg(- \frac{\Delta_{i}^{2}}{2\sigma_{i}^{2}+ \frac{2}{3}\Delta_i}.\frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^2} \bigg)\bigg\rbrace\\
+&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{\Delta_{i}^{2}}{4}.\frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}\bigg)\\
+& + 2\exp\bigg(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}.\frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
-&\E[\Ls(T)] \leq K\log_2\frac{T}{e}\bigg\lbrace\exp\bigg( -\frac{1}{i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\sqrt{\log K})}{K (\log K)^2}\bigg)\\
-& + \exp\bigg(- \frac{3}{i\max_i(3\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{11T\log ( K\sqrt{\log K})}{ K(\log K)^2} \bigg)\bigg\rbrace\\
+&\E[\Ls(T)] \leq K\log_2\frac{T}{e}\bigg\lbrace\exp\bigg( -\frac{1}{2i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}\bigg)\\
+& + \exp\bigg(- \frac{3}{i\max_i(6\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{5T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
-&\E[\Ls(T)] \leq K\log_2\frac{T}{e}\bigg\lbrace\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{H_2 K (\log K)^2}\bigg)\\
-& + \exp\bigg(- \frac{33T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^2} \bigg)\bigg\rbrace\\
+&\E[\Ls(T)] \leq K\log_2\frac{T}{e}\bigg\lbrace\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2 H_2 K (\log K)^{3/2}}\bigg)\\
+& + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
 \end{align*}
 \end{small}
 

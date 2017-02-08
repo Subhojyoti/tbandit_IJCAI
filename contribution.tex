@@ -11,8 +11,8 @@ Algorithm  & Upper Bound on Expected Loss \\
 APT         &$\exp(-\frac{T}{64H_1}+2\log((\log(T)+1)K))$ \\\midrule
 CSAR		&$K^2\exp(-\frac{T-K}{72\log(K)H_2})$ \\\midrule
 AugUCB      &
-$\exp\big( -\frac{T\log (2 K\sqrt{\log K})}{H_2 K (\log K)^2} + \log(K(\log_2\frac{T}{e}+1))\big)
-+ \exp \big(- \frac{33T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^2} $
+$\exp\big( -\frac{T\log (2 K\sqrt{\log K})}{2 H_2 K (\log K)^{3/2}} + \log(K(\log_2\frac{T}{e}+1))\big)
++ \exp \big(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}} $
 \newline$ + \log(K\big(\log_2\frac{T}{e}+1))\big)$ \\\bottomrule
 \end{tabular}
 \end{center}
