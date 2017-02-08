@@ -14,7 +14,7 @@ H_{2}\leq H_{1}\leq \log(2K)H_{2}
 Also, we define $H_{1}^{\sigma}$ (\cite{gabillon2011multi}) and $H_{2}^{\sigma}$ as,
 \begin{align*}
 & H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}\\
-& H_{2}^{\sigma}=\max_{i\in A} i\frac{3\sigma_{i}^{2} + \Delta_i}{3\Delta_i^{2}}
+& H_{2}^{\sigma}=\max_{i\in A} i\frac{6\sigma_{i}^{2} + \Delta_i}{3\Delta_i^{2}}
 \end{align*}
 %\begin{align*}
 %H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}} \geq \sum_{i=1}^{K}\frac{3\sigma_{i}^{2} + \Delta_k}{\Delta_{i}^{-2}}\geq \sum_{i=1}^{K}\frac{3\sigma_{i}^{2} + \Delta_k}{\Delta_{i}^{-2}}
@@ -344,7 +344,7 @@ Now we know that till $m_i$-th round $2c_i > \frac{\Delta_i}{2}$  or till $g_i$ 
 \begin{align*}
  \Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace &\geq 1-(\Pb\lbrace |\hat{r}_i -r_i| > 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| > 2s_i \rbrace)\\ 
 &\geq 1-\left(\Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace + \Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace\right) \\
-&\geq 1-\big(2\exp( -\frac{\Delta_{i}^{2}}{4}n_i ) + 2\exp(- \frac{\Delta_{i}^{2}}{4\sigma_{i}^{2}+ \frac{2}{3}\Delta_i}n_i)\big)\\
+&\geq 1-\big(2\exp( -\frac{\Delta_{i}^{2}}{4}n_i ) + 2\exp(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}n_i)\big)\\
 &\geq 1-\bigg(2\exp( -\frac{\Delta_{i}^{2}}{4}\delta_{m_{i}} ) + 2\exp(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}\delta_{g_{i}})\bigg)
 \end{align*}
 \end{small}
@@ -354,10 +354,10 @@ Now, we know that $1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace)\leq 
 &\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{\Delta_{i}^{2}}{4}.\frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}\bigg)\\
 & + 2\exp\bigg(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}.\frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
-&\E[\Ls(T)] \leq K\log_2\frac{T}{e}\bigg\lbrace\exp\bigg( -\frac{1}{2i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}\bigg)\\
+&\E[\Ls(T)] \leq K\left\lceil\log_2\frac{T}{e}\right\rceil\bigg\lbrace\exp\bigg( -\frac{1}{i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\sqrt{\log K})}{2K (\log K)^{3/2}}\bigg)\\
 & + \exp\bigg(- \frac{3}{i\max_i(6\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{5T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
-&\E[\Ls(T)] \leq K\log_2\frac{T}{e}\bigg\lbrace\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2 H_2 K (\log K)^{3/2}}\bigg)\\
+&\E[\Ls(T)] \leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2 H_2 K (\log K)^{3/2}}\bigg)\\
 & + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
 \end{align*}
 \end{small}
