@@ -1,5 +1,3 @@
-
-
 \subsection{Problem Complexity}
 
 We define problem complexity as,
@@ -89,11 +87,12 @@ For (\ref{eq:armelim-casea}) we can see that it eliminates arms that have perfor
 In the $m_{i}$-th round an arm $i$ can be pulled no more than $\ell_{m_{i}}$ times. So when $n_{i}=\ell_{m_{i}}$, putting the value of $\ell_{m_{i}}\ge\frac{2\log{(\psi T\epsilon_{m_{i}}^{2})}}{\epsilon_{m_{i}}}$ in $c_{i}$ we get, 
 \begin{small}
 \begin{align*}
-c_{i}&=\sqrt{\frac{\rho_{\mu}\epsilon_{m_{i}}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}}}
-\le\sqrt{\frac{\rho_{\mu}\epsilon_{m_{i}}\log (\psi T\epsilon_{m_{i}}^{2})}{2*2 \log(\psi T\epsilon_{m_{i}}^{2})}}\\
+c_{i}
+&=\sqrt{\frac{\rho_{\mu}\epsilon_{m_{i}}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}}}
+\le\sqrt{\frac{\rho_{\mu}\epsilon_{i}}\log (\psi T\epsilon_{m_{i}}^{2}){2*2 \log(\psi T\epsilon_{m_{i}}^{2})}}\\
 & \le\frac{\sqrt{\rho_{\mu}\epsilon_{m_{i}}}}{2}
- % \leq \sqrt{\rho_{\mu}\epsilon_{m_{i}+1}} 
- < \frac{\Delta_{i}}{4} \text{, as }\rho_{\mu}\in (0,1].
+% % \leq \sqrt{\rho_{\mu}\epsilon_{m_{i}+1}} 
+< \frac{\Delta_{i}}{4} \text{, as }\rho_{\mu}\in (0,1].
 \end{align*}
 \end{small}
 Again, for ${i} \in A^{'}$ for the  elimination condition in (\ref{eq:armelim-casea}), 
@@ -348,7 +347,7 @@ Now we know that till $m_i$-th round $2c_i > \frac{\Delta_i}{2}$  or till $g_i$ 
 &\geq 1-\bigg(2\exp( -\frac{\Delta_{i}^{2}}{4}\delta_{m_{i}} ) + 2\exp(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}\delta_{g_{i}})\bigg)
 \end{align*}
 \end{small}
-Now, we know that $1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace)\leq \E[\Ls(T)]$. Summing over all arms $K$ and over all rounds $m=0,1,2,..,M$ we get that,
+Now, we know that $\E[\Ls(T)]\le1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace) $. Summing over all arms $K$ and over all rounds $m=0,1,2,..,M$ we get that,
 \begin{small}
 \begin{align*}
 &\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{\Delta_{i}^{2}}{4}.\frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}\bigg)\\
