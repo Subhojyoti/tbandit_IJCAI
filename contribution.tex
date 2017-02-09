@@ -4,16 +4,21 @@ In this paper we propose the Algorithm AugUCB which is an anytime action elimina
 \caption{Expected Loss for different bandit algorithms}
 \label{tab:regret-bds}
 \begin{center}
-\begin{tabular}{|p{1.2cm}|p{6cm}|}
+\begin{tabular}{|p{1.3cm}|p{6.33cm}|}
 \toprule
 Algorithm  & Upper Bound on Expected Loss \\
 \midrule
 APT         &$\exp(-\frac{T}{64H_1}+2\log((\log(T)+1)K))$ \\\midrule
 CSAR		&$K^2\exp(-\frac{T-K}{72\log(K)H_2})$ \\\midrule
 AugUCB      &
-$\exp\big( -\frac{T\log (2 K\sqrt{\log K})}{2 H_2 K (\log K)^{3/2}} + \log(K(\log_2\frac{T}{e}+1))\big)
-+ \exp \big(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}} $
-\newline$ + \log(K\big(\log_2\frac{T}{e}+1))\big)$ \\\bottomrule
+$\exp\left( -\frac{T\log ( 2K\log K)}{ 16 H_2 K\log K} + \log\left(K\left(\log_2\frac{T}{e}\right)\right)\right)$\newline
+ $+$\newline
+ $ \exp\left(- \frac{T\log ( \frac{3}{4} K\log K)}{64H_{2}^{\sigma} K(\log K)}
+ + 2\log\left(K\left(\log_2\frac{T}{e}\right)\right) \right) $
+%$\exp\big( -\frac{T\log (2 K\sqrt{\log K})}{2 H_2 K (\log K)^{3/2}} + \log(K(\log_2\frac{T}{e}+1))\big)
+%+ \exp \big(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}} $
+%\newline$ + \log(K\big(\log_2\frac{T}{e}+1))\big)$ 
+\\\bottomrule
 \end{tabular}
 \end{center}
 \end{table}

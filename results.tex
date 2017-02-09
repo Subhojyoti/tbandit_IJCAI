@@ -12,11 +12,8 @@ H_{2}\leq H_{1}\leq \log(2K)H_{2}
 Also, we define $H_{1}^{\sigma}$ (\cite{gabillon2011multi}) and $H_{2}^{\sigma}$ as,
 \begin{align*}
 & H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}\\
-& H_{2}^{\sigma}=\max_{i\in A} i\frac{6\sigma_{i}^{2} + \Delta_i}{3\Delta_i^{2}}
+& H_{2}^{\sigma}=\max_{i\in A} i\frac{6\sigma_{i}^{2} + \Delta_i}{6\Delta_i^{2}}
 \end{align*}
-%\begin{align*}
-%H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}} \geq \sum_{i=1}^{K}\frac{3\sigma_{i}^{2} + \Delta_k}{\Delta_{i}^{-2}}\geq \sum_{i=1}^{K}\frac{3\sigma_{i}^{2} + \Delta_k}{\Delta_{i}^{-2}}
-%\end{align*}
 which also gives us that $H_{2}^{\sigma} < H_{1}^{\sigma}$.
 
 
@@ -24,14 +21,18 @@ which also gives us that $H_{2}^{\sigma} < H_{1}^{\sigma}$.
 
 \begin{theorem}
 \label{Result:Theorem:1}
-With $\psi=\frac{T}{\log K}$, $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$,
+With $\psi=\frac{T\epsilon_{m}}{8 K\log K}$, $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$,
 the expected loss of the AugUCB algorithm is given by,
-\begin{small}
+%\begin{small}
 \begin{align*}
-&\E[\Ls(T)] \leq \exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2H_2 K (\log K)^{3/2}} + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg)\\
-& + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}}  + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg).
+&\E[\Ls(T)] \leq 
+%\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2H_2 K (\log K)^{3/2}} + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg)\\
+%& + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}}  + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg).
+ \exp\bigg( -\frac{T\log ( 2K\log K)}{ 16 H_2 K\log K} + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg)\\
+& + \exp\bigg(- \frac{T\log ( \frac{3}{4} K\log K)}{64H_{2}^{\sigma} K(\log K)}
+ + 2\log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg) \bigg)  .
 \end{align*}
-\end{small}
+%\end{small}
 %For every $0<\eta <1$ and $\gamma > 1$, there exists time $t$ such that for all $T>t$ the simple regret of AugUCB is upper bounded by,
 %\begin{small}
 %\begin{align*}
@@ -44,12 +45,12 @@ the expected loss of the AugUCB algorithm is given by,
 \end{theorem}
 
 \begin{proof}
-According to the algorithm, the number of rounds is $m=\lbrace 0,1,2,.. M\rbrace $ where $M=\bigg\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\bigg\rfloor$. So, $\epsilon_{m}\geq 2^{-M}\geq \sqrt{\frac{e}{T}}$. Also each round $m$ consists of $|B_{m}|\ell_{m}$ timesteps where $\ell_{m} = \left\lceil\frac{2\log(\psi T \epsilon_{m}^{2})}{\epsilon_{m}}\right\rceil$ and $B_{m}$ is the set of all surviving arms. 
+According to the algorithm, the number of rounds is $m=\lbrace 0,1,2,.. M\rbrace $ where $M=\bigg\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\bigg\rfloor$. So, $\epsilon_{m}\geq 2^{-M}\geq \sqrt{\frac{e}{T}}$. Also each round $m$ consists of $|B_{m}|\ell_{m}$ timesteps where $\ell_{m} = \left\lceil\frac{2\psi\log( T \epsilon_{m})}{\epsilon_{m}}\right\rceil$ and $B_{m}$ is the set of all surviving arms. 
 
-Let $c_{i} = \sqrt{\frac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}$ denote the confidence interval, where $n_{i}$ is the number of times an arm $i$ is pulled. Let $A^{'}=\lbrace i\in A|\Delta_{i}\geq b\rbrace$, for $b\geq \sqrt{\frac{e}{T}}$. Define $m_{i}=\min\lbrace m| \sqrt{\rho_{\mu}\epsilon_{m}}<\frac{\Delta_{i}}{2}\rbrace$.
+Let $c_{i} = \sqrt{\frac{\rho_{\mu}\psi \log{(T\epsilon_{m})}}{2 n_{i}}}$ denote the confidence interval, where $n_{i}$ is the number of times an arm $i$ is pulled. Let $A^{'}=\lbrace i\in A|\Delta_{i}\geq b\rbrace$, for $b\geq \sqrt{\frac{e}{T}}$. Define $m_{i}=\min\lbrace m| \sqrt{\rho_{\mu}\epsilon_{m}}<\frac{\Delta_{i}}{2}\rbrace$.
 % Let $m_{i}$ be the minimum round such that an arm $i$ gets eliminated such that. 
 
-Let $s_{i}=\sqrt{\frac{\rho_v \hat{V_{i}} \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{g}^{2})}}{4 n_{i}}}$ and 
+Let $s_{i}=\sqrt{\frac{\rho_v\psi \hat{V_{i}} \log{( T\epsilon_{g})}}{4 n_{i}} + \frac{\rho_v\psi \log{( T\epsilon_{g})}}{4 n_{i}}}$ and 
 % $g_{i}$ be the minimum round that an arm $i$ gets eliminated such that 
 $g_{i}=min\lbrace g| \sqrt{\rho_{v}\epsilon_{g}}<\frac{\Delta_{i}}{2}\rbrace$. 
 %In this proof sub-optimal arms refer to the arms whose $r_{i}$ is lower than the threshold $\tau$.
@@ -62,39 +63,31 @@ Let $\xi_{1}$ and $\xi_{2}$ be the favorable event such that,
 \xi_{2}&=\bigg\lbrace \forall i\in A, \forall m=0,1,2,..,M: |\hat{r_i} - r_i| \leq  2s_i\bigg\rbrace
 \end{align*}
 
-So, $\xi_{1}$ and $\xi_{2}$ signifies the event till when any arm $i$ will not get eliminated from $B_m$.
-
-%Similarly, $\xi_{2}=\lbrace \forall i\in A \text{ s.t } r_i < \tau \text{ or }\forall j\in A \text{ s.t } r_j \geq \tau; \forall t=1,2,..,T | r_i - s_i  > \tau + s_i \text{ or } r_j + s_i < \tau - s_i  \rbrace$. 
-
-%Let $\xi_{1}$ be the event such that $\xi_{1}=\lbrace \forall i\in A \text{ s.t } r_i < \tau \text{ or }\forall j\in A 
-%\text{ s.t } r_j \geq \tau; \forall t=1,2,..,T | r_i - c_i  > \tau + c_i \text{ or } r_j + c_i < \tau - c_i  \rbrace$. Similarly, $\xi_{2}=\lbrace \forall i\in A \text{ s.t } r_i < \tau \text{ or }\forall j\in A \text{ s.t } r_j \geq \tau; \forall t=1,2,..,T | r_i - s_i  > \tau + s_i \text{ or } r_j + s_i < \tau - s_i  \rbrace$. 
+So, $\xi_{1}$ and $\xi_{2}$ signifies the event till any arm $i$ will get eliminated from $B_m$.
 
 \subsubsection{\textit{Arm i is not eliminated on or before round $\max\lbrace m_{i},g_{i}\rbrace$}}
 
-
-%\textbf{Arm $i$ is not eliminated on or before round $\mathbf{\max\lbrace m_{i},g_{i}\rbrace}$}
-
 For any arm $i$, if it is eliminated from active set $B_{m_{i}}$ then one of the below two events has to occur,
-\begin{small}
+%\begin{small}
 \begin{align}
 \hat{r}_{i} + c_{i} < \tau - c_{i}, \label{eq:armelim-casea}\\
 \hat{r}_{i} - c_{i} > \tau + c_{i}, \label{eq:armelim-caseb}
 \end{align}
-\end{small}
+%\end{small}
 For (\ref{eq:armelim-casea}) we can see that it eliminates arms that have performed poorly and removes them  from $B_{m_{i}}$. Similarly, (\ref{eq:armelim-caseb}) eliminates arms from $B_{m_{i}}$ that have performed very well compared to threshold $\tau$.
 
 %Each round consists of $|B_{m_{i}}|\ell_{m_{i}}$ timesteps. 
-In the $m_{i}$-th round an arm $i$ can be pulled no more than $\ell_{m_{i}}$ times. So when $n_{i}=\ell_{m_{i}}$, putting the value of $\ell_{m_{i}}\ge\frac{2\log{(\psi T\epsilon_{m_{i}}^{2})}}{\epsilon_{m_{i}}}$ in $c_{i}$ we get, 
-\begin{small}
+In the $m_{i}$-th round an arm $i$ can be pulled no more than $\ell_{m_{i}}$ times. So when $n_{i}=\ell_{m_{i}}$, putting the value of $\ell_{m_{i}}\ge\frac{2\psi\log{( T\epsilon_{m_{i}})}}{\epsilon_{m_{i}}}$ in $c_{i}$ we get, 
+%\begin{small}
 \begin{align*}
 c_{i}
-&=\sqrt{\frac{\rho_{\mu}\epsilon_{m_{i}}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}}}
-\le\sqrt{\frac{\rho_{\mu}\epsilon_{i}}\log (\psi T\epsilon_{m_{i}}^{2}){2*2 \log(\psi T\epsilon_{m_{i}}^{2})}}\\
+&=\sqrt{\frac{\rho_{\mu}\psi\epsilon_{m_{i}}\log ( T\epsilon_{m_{i}})}{2 n_{i}}}
+\le\sqrt{\frac{\rho_{\mu}\psi\epsilon_{i}\log ( T\epsilon_{m_{i}})}{2*2 \psi \log( T\epsilon_{m_{i}})}}\\
 & \le\frac{\sqrt{\rho_{\mu}\epsilon_{m_{i}}}}{2}
 % % \leq \sqrt{\rho_{\mu}\epsilon_{m_{i}+1}} 
 < \frac{\Delta_{i}}{4} \text{, as }\rho_{\mu}\in (0,1].
 \end{align*}
-\end{small}
+%\end{small}
 Again, for ${i} \in A^{'}$ for the  elimination condition in (\ref{eq:armelim-casea}), 
 %\begin{small}
 %\begin{align*}
@@ -102,279 +95,250 @@ Again, for ${i} \in A^{'}$ for the  elimination condition in (\ref{eq:armelim-ca
 %&< r_{i} + \Delta_{i} - 2c_{i} = \tau -2c_{i} \leq \tau - c_{i}
 %\end{align*}
 %\end{small}
-\begin{small}
+%\begin{small}
 \begin{align*}
 \hat{r}_{i} &\leq r_{i} + 2c_{i} = r_{i} + 4c_{i} - 2c_{i} \\
 &< r_{i} + \Delta_{i} - 2c_{i} = \tau -2c_{i}.
 \end{align*}
-\end{small}
+%\end{small}
 Similarly, for ${i} \in A^{'}$ for the  elimination condition in (\ref{eq:armelim-caseb}), 
-\begin{small}
+%\begin{small}
 \begin{align*}
 \hat{r}_{i} &\geq r_{i} - 2c_{i} = r_{i} - 4c_{i} + 2c_{i} \\
 &> r_{i} - \Delta_{i} + 2c_{i}= \tau + 2c_{i}.
 \end{align*}
-\end{small}
+%\end{small}
 
 
 %Now, arm elimination condition is being checked at every timestep, in the $m_{i}$-th round as soon as $n_{i}=\ell_{m_{i}}$, arm $i$ gets eliminated. 
 Applying Chernoff-Hoeffding bound and considering independence of complementary of the event in (\ref{eq:armelim-casea}),
-\begin{small}
+%\begin{small}
 \begin{align*}
 %\mathbb{P}\lbrace\hat{r}_{i}\geq r_{i} - 2c_{i}\rbrace &\leq exp(-2(\tau + 2c_{i})^{2}n_{i})\\
 \mathbb{P}\lbrace\hat{r}_{i}> r_{i} + 2c_{i}\rbrace &\leq \exp(-4 c_{i}^{2}n_{i})\\
-&\leq \exp(-8 * \dfrac{\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}} *n_{i})\\
-&\leq \exp\big(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)
+&\leq \exp(-8 * \dfrac{\rho_{\mu}\psi\log ( T\epsilon_{m_{i}})}{2 n_{i}} *n_{i})\\
+&\leq \exp\big(-4\rho_{\mu}\psi\log ( T\epsilon_{m_{i}})\big)\\
+&\leq \exp\left(-\rho_{\mu}\frac{T\epsilon_{m_{i}}}{2K\log K}\log ( T\epsilon_{m_{i}})\right),\\
+&\text{putting the value of $\psi=\frac{T\epsilon_{m_i}}{8K\log K}$}
 \end{align*}
-\end{small}
-%  \begin{align*}
-%\mathbb{P}\lbrace\hat{r}_{i}\geq r_{i} - (\tau + 2c_{i})\rbrace &\leq exp(-2(\tau + 2c_{i})^{2}n_{i})\\
-%&\leq \exp(-2(2\tau c_{i})^{2}n_{i}) \text{ , as} (a+b)^{2} \geq (ab)^{2} \text{ for } a,b\in[0,1]\\
-%&\leq \exp(-8 * \tau^{2}\dfrac{\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})}{2 n_{i}} *n_{i})\\
-%&\leq \exp\big(-4\tau^{2}\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)
-%  \end{align*}
-%Similarly, $\mathbb{P}\lbrace\hat{r}_{i}\leq r_{i} + (\tau + 2c_{i})\rbrace\leq \dfrac{1}{(\psi  T\epsilon_{m_{i}}^{2})^{4\tau^{2}\rho_{\mu}}}$
-Similarly for the condition in (\ref{eq:armelim-caseb}), $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2c_{i}\rbrace\leq \exp\big(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)$.
- 
-%Summing, the two up, the probability that an arm ${i}$ is not eliminated on or before $m_{i}$-th round based on the \ref{eq:armelim-casea} and \ref{eq:armelim-caseb} elimination condition is  $\bigg(\dfrac{2}{(\psi T\epsilon_{m_{i}}^{2})^{4\tau^{2}\rho_{\mu}}}\bigg)$. 
+%\end{small}
+Similarly for the condition in (\ref{eq:armelim-caseb}), $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2c_{i}\rbrace\leq \exp\left(-\frac{T\rho_{\mu}\epsilon_{m_{i}}}{2K\log K}\log ( T\epsilon_{m_{i}})\right)$.
 
-Summing the above two expressions, the probability that arm ${i}$ is not eliminated on or before $m_{i}$-th round %based on the \ref{eq:armelim-casea} and \ref{eq:armelim-caseb} elimination condition is 
-is $\big(2\exp\big(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\big)\big)$. 
+Summing the above two expressions, the probability that arm ${i}$ is not eliminated on or before $m_{i}$-th is $\left(2\exp\left(-\frac{4T\rho_{\mu}\epsilon_{m_{i}}}{8K\log K}\log ( T\epsilon_{m_{i}})\right)\right)$. 
 
 
 Again for any arm $i$, if it is eliminated from active set $B_{g_{i}}$ then the below two events have to come true,
-\begin{small}
+%\begin{small}
 \begin{align}
 \hat{r}_{i} + s_{i} < \tau - s_{i}, \label{eq:armelim-var-casea}\\
 \hat{r}_{i} - s_{i} > \tau + s_{i}, \label{eq:armelim-var-caseb}
 \end{align}
-\end{small}
+%\end{small}
 %
 % For \ref{eq:armelim-var-casea} we can see that it eliminates arms that have performed poorly and removes them them from $B_{g_{i}}$. Similarly, \ref{eq:armelim-var-caseb} eliminates arms from $B_{g_{i}}$ that have performed very well compared to threshold $\tau$.
 %But, we know that $\epsilon_{m_{i}}=\epsilon_{g_{i}}$ and round consist of $|B_{g_{i}}|\ell_{g_{i}}$ timesteps. 
-In the $g_{i}$-th round an arm $i$ can be pulled no more than $\ell_{g_{i}}$ times. So when $n_{i}=\ell_{g_{i}}$, putting the value of $\ell_{g_{i}}\ge\frac{2\log{(\psi T\epsilon_{g_{i}}^{2})}}{\epsilon_{g_{i}}}$ in $s_{i}$ we get, 
-\begin{small}
+In the $g_{i}$-th round an arm $i$ can be pulled no more than $\ell_{g_{i}}$ times. So when $n_{i}=\ell_{g_{i}}$, putting the value of $\ell_{g_{i}}\ge\frac{2\psi\log{( T\epsilon_{g_{i}})}}{\epsilon_{g_{i}}}$ in $s_{i}$ we get, 
+%\begin{small}
 \begin{align*}
-s_{i}&=\sqrt{\dfrac{\rho_v \hat{V}_{i} \epsilon_{g_{i}}\log (\psi T\epsilon_{g_{i}}^{2})}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}} \\
-&\leq \sqrt{\dfrac{\rho_v \epsilon_{g_{i}}\log (\psi T\epsilon_{g_{i}}^{2})}{4*2 \log(\psi T\epsilon_{g_{i}}^{2})} + \dfrac{\rho_v \epsilon_{g_{i}} \log{(\psi T\epsilon_{g_{i}}^{2})}}{4*2 \log(\psi T\epsilon_{g_{i}}^{2})} } \text{, as }\hat{V}_{i}\in [0,1].\\
+s_{i}&=\sqrt{\dfrac{\rho_v \psi \hat{V}_{i} \epsilon_{g_{i}}\log ( T\epsilon_{g_{i}})}{4 n_{i}} + \dfrac{\rho_v \psi\log{( T\epsilon_{g_{i}})}}{4 n_{i}}} \\
+&\leq \sqrt{\dfrac{\rho_v\psi \epsilon_{g_{i}}\log ( T\epsilon_{g_{i}})}{4*2 \log(\psi T\epsilon_{g_{i}})} + \dfrac{\rho_v \psi\epsilon_{g_{i}} \log{( T\epsilon_{g_{i}})}}{4*2\psi \log( T\epsilon_{g_{i}})} } \text{, as }\hat{V}_{i}\in [0,1].\\
 & \leq \sqrt{\dfrac{\rho_v \epsilon_{g_{i}}}{8} + \dfrac{\rho_v \epsilon_{g_{i}}}{8} } \leq \dfrac{\sqrt{\rho_v \epsilon_{g_{i}}}}{2}< \dfrac{\Delta_{i}}{4} \text{, as }\rho_v\in (0,1].
 %& \leq \sqrt{\rho_v \epsilon_{g_{i}+1}} < \dfrac{\Delta_{i}}{4} \text{, as }\rho_v\in (0,1].
 \end{align*}
-\end{small}
+%\end{small}
 
 Again, for ${i} \in A^{'}$ for the elimination condition in (\ref{eq:armelim-var-casea}),
-\begin{small}
+%\begin{small}
 \begin{align*}
 \hat{r}_{i} &\leq r_{i} + 2s_{i} = r_{i} + 4s_{i} - 2s_{i} \\
 &< r_{i} + \Delta_{i} - 2s_{i} = \tau -2s_{i} % \leq \tau - s_{i}
 \end{align*}
-\end{small} 
+%\end{small} 
 
 
 Also, for ${i} \in A^{'}$ for the elimination condition in (\ref{eq:armelim-var-caseb}), 
-\begin{small}
+%\begin{small}
 \begin{align*}
 \hat{r}_{i}&\geq r_{i} - 2s_{i} = r_{i} - 4s_{i} + 2s_{i} \\
 &> r_{i} - \Delta_{i} + 2s_{i}\geq \tau + 2s_{i} % \geq \tau + s_{i}
 \end{align*}
-\end{small}
+%\end{small}
 
 
 %Since, arm elimination condition is being checked at every timestep, in the $g_{i}$-th round as soon as $n_{i}=\ell_{g_{i}}$, arm $i$ gets eliminated. 
 Applying Bernstein inequality and considering independence of complementary of the event in (\ref{eq:armelim-var-casea}),
-\begin{small}
+%\begin{small}
 \begin{align}
 &\mathbb{P}\lbrace\hat{r}_{i}> r_{i} + 2s_{i}\rbrace\\
-&\leq \mathbb{P}\bigg\lbrace \hat{r}_{i} > r_{i}+ ( 2\sqrt{\dfrac{\rho_v \hat{V}_{i}\log(\psi T\epsilon_{g_{i}}^{2}) + \rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4n_{i}} }) \bigg\rbrace\\
-&\leq \mathbb{P}\bigg\lbrace \hat{r}_{i} > r_{i}+ (2\sqrt{\dfrac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}})\bigg\rbrace \label{eq:prob_eq1}\\ 
+&\leq \mathbb{P}\bigg\lbrace \hat{r}_{i} > r_{i}+ ( 2\sqrt{\dfrac{\rho_v\psi \hat{V}_{i}\log( T\epsilon_{g_{i}}) + \rho_v\psi \log{( T\epsilon_{g_{i}})}}{4n_{i}} }) \bigg\rbrace\\
+&\leq \mathbb{P}\bigg\lbrace \hat{r}_{i} > r_{i}+ (2\sqrt{\dfrac{\rho_v\psi [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log( T\epsilon_{g_{i}})}{4n_{i}}})\bigg\rbrace \label{eq:prob_eq1}\\ 
 &+ \mathbb{P}\bigg\lbrace \hat{V}_{i}\geq \sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}\bigg\rbrace \label{eq:prob_eq2}
 \end{align}
-\end{small}
+%\end{small}
  
  
 Now, we know that in the $g_{i}$-th round,
-\begin{small}
+%\begin{small}
 \begin{align*}
-& 2\sqrt{\dfrac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}}\\ &\leq  2\sqrt{\dfrac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{\frac{8\log(\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}}} + \dfrac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{\frac{8\log(\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}}}}\\
+& 2\sqrt{\dfrac{\rho_v\psi [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log( T\epsilon_{g_{i}})}{4n_{i}} + \dfrac{\rho_v\psi  \log{(T\epsilon_{g_{i}})}}{4 n_{i}}}\\ &\leq  2\sqrt{\dfrac{\rho_v\psi [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log( T\epsilon_{g_{i}})}{\frac{8\psi\log( T \epsilon_{g_{i}})}{\epsilon_{g_{i}}}} + \dfrac{\rho_v\psi \log{( T\epsilon_{g_{i}})}}{\frac{8\psi\log( T \epsilon_{g_{i}})}{\epsilon_{g_{i}}}}}\\
 & \leq \dfrac{\sqrt{\rho_v \epsilon_{g_{i}}[\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]}}{2}\leq \sqrt{\rho_v \epsilon_{g_{i}}}
 \end{align*}
-\end{small}
+%\end{small}
 
 
 For the term in (\ref{eq:prob_eq1}), by applying Bernstein inequality, we can write as,
-\begin{small}
+%\begin{small}
 \begin{align*}
-&\mathbb{P}\bigg\lbrace \hat{r}_{i}> r_{i} + \bigg(2\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}  } \bigg)\bigg\rbrace\\
-&\leq \exp\bigg(- \dfrac{\bigg(2\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}}\bigg)^{2}n_{i}}{2\sigma_{i}^{2}+\frac{4}{3}\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}+\frac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}}}\bigg) \\
-&\leq \exp\bigg(- \dfrac{\bigg(\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log(\psi T\epsilon_{g_{i}}^{2})\bigg)}{2\sigma_{i}^{2}+\frac{2}{3}\sqrt{\rho_v \epsilon_{g_{i}}}} \bigg)\\
-&\leq \exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg) 
+&\mathbb{P}\bigg\lbrace \hat{r}_{i}> r_{i} + \bigg(2\sqrt{\frac{\rho_v\psi [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log( T\epsilon_{g_{i}})}{4n_{i}}  } \bigg)\bigg\rbrace\\
+&\leq \exp\bigg(- \dfrac{\bigg(2\sqrt{\frac{\rho_v\psi [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log( T\epsilon_{g_{i}})}{4n_{i}} + \frac{\rho_v\psi \log{( T\epsilon_{g_{i}})}}{4 n_{i}}}\bigg)^{2}n_{i}}{2\sigma_{i}^{2}+\frac{4}{3}\sqrt{\frac{\rho_v\psi [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log( T\epsilon_{g_{i}})}{4n_{i}}+\frac{\rho_v\psi \log{( T\epsilon_{g_{i}})}}{4 n_{i}}}}\bigg) \\
+&\leq \exp\bigg(- \dfrac{\bigg(\rho_v\psi [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} + 1]\log( T\epsilon_{g_{i}})\bigg)}{2\sigma_{i}^{2}+\frac{2}{3}\sqrt{\rho_v \epsilon_{g_{i}}}} \bigg)\\
+&\leq \exp\bigg(- \dfrac{3\rho_v\psi}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log( T\epsilon_{g_{i}}) \bigg)\\
+&\leq \exp\left(- \dfrac{3\rho_v T\epsilon_{g_i}}{16 K\log K} \left(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right),\\
+&\text{ putting the value of $\psi=\frac{T\epsilon_{m_i}}{8K\log K}$}
 \end{align*}
-\end{small}
+%\end{small}
  
   
 For the term in (\ref{eq:prob_eq2}), by applying Bernstein inequality, we can write as,
-\begin{small}
+%\begin{small}
 \begin{align*}
 &\mathbb{P}\bigg\lbrace \hat{V}_{i}\geq \sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}\bigg\rbrace\\
 &\leq \mathbb{P}\bigg\lbrace \dfrac{1}{n_{i}}\sum_{t=1}^{n_{i}}(x_{i,t}-r_{i})^{2}-(\hat{r}_{i}-r_{i})^{2}\geq \sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}\bigg\rbrace\\
 &\leq \mathbb{P}\bigg\lbrace \dfrac{\sum_{t=1}^{n_{i}}(x_{i,t}-r_{i})^{2}}{n_{i}}\geq \sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}} \bigg\rbrace\\
 &\leq \mathbb{P}\bigg\lbrace \dfrac{\sum_{t=1}^{n_{i}}(x_{i,t}-r_{i})^{2}}{n_{i}}\geq \sigma_{i}^{2} +\\
-&\bigg(2\sqrt{\dfrac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{4n_{i}}+\frac{\rho_v \log{(\psi T\epsilon_{g_{i}}^{2})}}{4 n_{i}}}\bigg)\bigg\rbrace\\
-% &\leq \exp\bigg(- \dfrac{\bigg(2\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{2n_{i}}}\bigg)^{2}n_{i}}{2\sigma_{i}^{2}+\frac{4}{3}\sqrt{\frac{\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})}{2n_{i}}}}\bigg) \\
-%&\leq \exp\bigg(- \dfrac{\bigg(\rho_v [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log(\psi T\epsilon_{g_{i}}^{2})\bigg)}{2\sigma_{i}^{2}+\frac{4}{3}\sqrt{\rho_v \epsilon_{g_{i}}}} \bigg)\\
-&\leq \exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg) 
+&\bigg(2\sqrt{\dfrac{\rho_v\psi [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log( T\epsilon_{g_{i}})}{4n_{i}}+\frac{\rho_v\psi  \log{(T\epsilon_{g_{i}})}}{4 n_{i}}}\bigg)\bigg\rbrace\\
+&\leq \exp\bigg(- \dfrac{3\rho_v\psi}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log( T\epsilon_{g_{i}}) \bigg) \\
+&\leq \exp\bigg(- \dfrac{3\rho_vT\epsilon_{g_i}}{16K\log K \epsilon_{g_{i}}} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log( T\epsilon_{g_{i}}) \bigg),\\
+&\text{ putting the value of $\psi=\frac{T\epsilon_{m_i}}{8K\log K}$}
 \end{align*}
-\end{small}
+%\end{small}
  
   
-Similarly, the condition for the complementary event for the elimination case \ref{eq:armelim-var-caseb} holds such that $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2s_{i}\rbrace \leq 2\exp\bigg(- \frac{3\rho_v}{2} \bigg(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)$.
+Similarly, the condition for the complementary event for the elimination case \ref{eq:armelim-var-caseb} holds such that $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2s_{i}\rbrace \leq 2\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{16K\log K} \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)$.
 
-Again  summing the above expressions, the probability that an arm ${i}$ is not eliminated on or before $g_{i}$-th round based on the (\ref{eq:armelim-var-casea}) and (\ref{eq:armelim-var-caseb}) elimination condition is  $4\exp\bigg(- \frac{3\rho_v}{2} \bigg(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)$. 
+Again  summing the above expressions, the probability that an arm ${i}$ is not eliminated on or before $g_{i}$-th round based on the (\ref{eq:armelim-var-casea}) and (\ref{eq:armelim-var-caseb}) elimination condition is  $4\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{16K\log K} \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)$. 
   
-  
-%\begin{enumerate}
-%\item \emph{Fact 1:} From above we know that the probability of elimination of a sub-optimal arm in the $\max\lbrace m_{i}, g_{i}\rbrace$-th round being not eliminated is bounded above by $P_{m_{i}}\leq 2\exp\bigg(-4\rho\log (\psi T\epsilon_{m_{i}}^{2})\bigg) + 4\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)$.
-%\item \emph{Fact 2:} From \cite{tolpin2012mcts} we know that, for every $0<\eta <1$ and $\gamma > 1$, there exists $t$ such that for all $T>t$ the probability of a sub-optimal arm $i$ being sampled in the $m_{i}$-th round is bounded by $Q_{m_{i}}\leq 2\gamma \exp(-c_{m_{i}}\dfrac{\sqrt{T}}{2})$, where $c_{m_{i}}=\dfrac{c_{0}}{2^{m_{i}}}$.
-%\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Not Required for probability of error for AugUCB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-We start with an upper bound on the number of plays $\delta_{\max\lbrace m_{i}, g_{i}\rbrace}$ in the $\max\lbrace m_{i}, g_{i}\rbrace$-th round. We know that the total number of arms surviving in the $\max\lbrace m_{i}, g_{i}\rbrace$-th arm is, 
-
-\begin{small}
-\begin{align*}
-&|B_{\max\lbrace m_{i}, g_{i}\rbrace}|=2K\exp\bigg(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\bigg)\\ 
-& + 4K\exp\bigg(- \frac{3\rho_v}{2} \big(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\big) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)
-\end{align*}     
-\end{small}
-
-
-Again for AugUCB, we know that the number of pulls allocated for each surviving arm $i$ in the $m_{i}$-th round is $\ell_{m_{i}}=\frac{2\log (\psi T \epsilon_{m_{i}}^{2})}{\epsilon_{m_{i}}}$ or for the $g_{i}$-th round is $\ell_{g_{i}}=\frac{2\log (\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}}$. Therefore, the proportion of plays $\delta_{\max\lbrace m_{i}, g_{i}\rbrace}$ in the $\max\lbrace m_{i}, g_{i}\rbrace$-th round can be written as,
-
-\begin{small}
-\begin{align*}
-&\delta_{\max\lbrace m_{i}, g_{i}\rbrace}=(|B_{m_{i}}|.\ell_{m_{i}}) + (|B_{g_{i}}|.\ell_{g_{i}})\\
-&\leq 2K\exp\bigg(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\bigg).\dfrac{2\log (\psi T \epsilon_{m_{i}}^{2})}{\epsilon_{m_{i}}}\\
- & + 4K\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2})\bigg).\dfrac{2\log (\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}} \\
-& \leq \dfrac{4K\log (\psi T \epsilon_{m_{i}}^{2})}{\epsilon_{m_{i}}}\exp\bigg(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\bigg)\\
-& + \dfrac{8K\log (\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}}\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)
-\end{align*}
-\end{small}
-
-%\begin{small}
-%\begin{align*}
-%&\delta_{\max\lbrace m_{i}, g_{i}\rbrace}=\dfrac{(|B_{m_{i}}|.\ell_{m_{i}})}{T} + \dfrac{(|B_{g_{i}}|.\ell_{g_{i}})}{T}\\
-%&\leq \dfrac{2K}{T}\exp\bigg(-4\rho\log (\psi T\epsilon_{m_{i}}^{2})\bigg).\dfrac{2\log (\psi T \epsilon_{m_{i}}^{2})}{\epsilon_{m_{i}}}
-%\\ & + \dfrac{4K}{T}\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2})\bigg).\dfrac{2\log (\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}} \\
-%& \leq \dfrac{4K\log (\psi T \epsilon_{m_{i}}^{2})}{T\epsilon_{m_{i}}}\exp\bigg(-4\rho\log (\psi T\epsilon_{m_{i}}^{2})\bigg)\\
-%& + \dfrac{8K\log (\psi T \epsilon_{g_{i}}^{2})}{T\epsilon_{g_{i}}}\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)
-%\end{align*}
-%\end{small}
-
-Now, in the $\max\lbrace m_{i}, g_{i}\rbrace$-th round $\sqrt{\rho_{\mu}\epsilon_{m_{i}}}\leq \frac{\Delta_{i}}{2}$ or $\sqrt{\rho_v\epsilon_{g_{i}}}\leq \frac{\Delta_{i}}{2}$. Hence,
-
-\begin{small}
-\begin{align*}
-&\delta_{\max\lbrace m_{i},g_{i}\rbrace} \leq \dfrac{4K\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})}{\frac{\Delta_{i}^{2}}{4\rho_{\mu}}}\exp\bigg(-4\rho_{\mu}\log (\psi T\frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})\bigg)\\
-& + \dfrac{8K\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})}{\frac{\Delta_{i}^{2}}{4\rho_{v}}}\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\frac{\Delta_{i}}{2}+1}{3\sigma_{i}^{2}+\frac{\Delta_{i}}{2}}\bigg) \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg)\\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-&\leq 16 C_1\exp\bigg(-4\rho_{\mu}\log (\psi T\frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})\bigg)\\
-& + 32C_2\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg) \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg)\\
-&\text{where $C_1=\frac{K\rho_{\mu}\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})}{\Delta_{i}^{2}}$ and $C_2= \frac{K\rho_v\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})}{\Delta_{i}^{2}}$}\\
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-&\leq 16 C_1\exp\bigg(-4\rho_{\mu}\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})\bigg)
- + 32C_2\exp\bigg(- \dfrac{3\rho_v}{2} \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg)
-\end{align*}
-\end{small}
-
-%Summing over all rounds $m=0,1,..,M$,
-Now, putting the values of $\psi$, $\rho_{\mu}$, $\rho_v$ and taking $\Delta_{i}\geq\min_{i\in A}\Delta=\sqrt{\frac{K\log K}{T}}\geq \sqrt{\frac{e}{T}},\forall i\in A$( see \cite{auer2010ucb}), 
-
-\begin{small}
-\begin{align*}
-& \delta_{\max\lbrace m_{i}, g_{i}\rbrace}= \bigg\lbrace 16 C_1\exp\bigg(-4\rho_{\mu}\log (\psi T\frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})\bigg)\\
-& + 32C_2\exp\bigg(- \frac{3\rho_v}{2} \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg) \bigg\rbrace\\
-%%%%%%%%%%%%%%%%%%%%
-&\leq \bigg\lbrace  \frac{2K\log ( T^2 \frac{4\Delta_{i}^{4}}{\log K})}{\Delta_{i}^{2}}\exp\bigg(-\frac{1}{2}\log ( T^2\frac{4\Delta_{i}^{4}}{\log K})\bigg)\\
-& + \frac{32K\log ( T^2 \frac{9\Delta_{i}^{4}}{\log K})}{3\Delta_{i}^{2}}\exp\bigg(- \frac{1}{2} \log( T^2 \frac{9\Delta_{i}^{4}}{\log K}) \bigg) \bigg\rbrace\\
-%%%%%%%%%%%%%%%%%%%%
-&\leq \bigg\lbrace  \frac{4K\log ( T \frac{2\Delta_{i}^{2}}{\sqrt{\log K}})}{\Delta_{i}^{2}}\exp\bigg(-\log ( T\frac{2\Delta_{i}^{2}}{\sqrt{\log K}})\bigg)\\
-& + \frac{64K\log ( T \frac{3\Delta_{i}^{2}}{\sqrt{\log K}})}{3\Delta_{i}^{2}}\exp\bigg(- \log( T \frac{3\Delta_{i}^{2}}{\sqrt{\log K}}) \bigg) \bigg\rbrace\\
-%%%%%%%%%%%%%%%%%%%%
-&\leq \bigg\lbrace  \frac{4KT\log ( \frac{2 K\log K}{\sqrt{\log K}})}{K\log K}\exp\bigg(-\log ( \frac{2K\log K}{\sqrt{\log K}})\bigg)\\
-& + \frac{64TK\log (\frac{3 K\log K}{\sqrt{\log K}})}{3 K\log K}\exp\bigg(- \log( \frac{3 K\log K}{\sqrt{\log K}}) \bigg) \bigg\rbrace\\
-%%%%%%%%%%%%%%%%%%%
-&\leq \bigg\lbrace  \frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}
- + \frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}}\bigg) \bigg\rbrace\\
-\end{align*}
-\end{small}
-
-%Now, applying the bound from Fact $2$, we can show that for all rounds $m=0,1,2,...,M$ the probability of the sub-optimal arm $i$ being pulled is bounded above by,
+%We start with an upper bound on the number of plays $\delta_{\max\lbrace m_{i}, g_{i}\rbrace}$ in the $\max\lbrace m_{i}, g_{i}\rbrace$-th round. We know that the total number of arms surviving in the $\max\lbrace m_{i}, g_{i}\rbrace$-th arm is, 
 %
 %\begin{small}
 %\begin{align*}
-%&P_{i} = \sum_{m=0}^{M} \delta_{m_{i}}.Q_{m_{i}} + \sum_{g=0}^{M} \delta_{g_{i}}.Q_{g_{i}}\\
-%& \leq \sum_{m=0}^{M} \bigg\lbrace 16C_1\exp\bigg(-4\rho\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})\bigg). 2\gamma \exp(-\dfrac{c_{0}\sqrt{T}}{2^{m_{i}}.4}) \\ &+  32C_2\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg) \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg).\\
-%& 2\gamma \exp(-\dfrac{c_{0}\sqrt{T}}{2^{g_{i}}.4})\bigg\rbrace\\
-%%%%%%%%%%%%%%%%%%%
-%& \leq M \gamma \bigg\lbrace 32C_1\exp\bigg(-4\rho\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})-\dfrac{c_{0}\sqrt{T}}{\frac{4\rho}{\Delta_{i}^{2}}.4}\bigg)\\
-%& + 64C_2\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg)\log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})\\
-%& -\dfrac{c_{0}\sqrt{T}}{\frac{4\rho_v}{\Delta_{i}^{2}}.4}  \bigg) \bigg\rbrace
-%\text{, as $\frac{1}{2^{m_{i}}}=\epsilon_{m_{i}}$ or $\frac{1}{2^{g_{i}}}=\epsilon_{g_{i}}$ }  \\
-%%%%%%%%%%%%%%%%%%%
-%& \leq \gamma\log_{2}\dfrac{T}{e}\bigg\lbrace \bigg(16C_1\exp\bigg(-4\rho\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})-\dfrac{c_{0}\sqrt{T}}{16\rho\Delta_{i}^{-2}}\bigg)\\
-%&+  32C_2\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg)\log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})\\
-%& -\dfrac{c_{0}\sqrt{T}}{16\rho_v\Delta_{i}^{-2}}  \bigg)\bigg\rbrace 
-%\text{ for $M=\big \lfloor \dfrac{1}{2}\log_{2} \dfrac{T}{e}\big\rfloor$}\\
-%%%%%%%%%%%%%%%%%%%
-%& \leq \gamma\log_{2}\dfrac{T}{e}\bigg\lbrace 16C_1\exp\bigg(-4\rho\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})-\dfrac{c_{0}\sqrt{T}}{16\rho i\max_{i}\Delta_{i}^{-2}}\bigg) \\
-%& +  32C_2\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg)\log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})\\
-%& -\dfrac{c_{0}\sqrt{T}}{16\rho_vi\max_{i}\Delta_{i}^{-2}}  \bigg) \bigg\rbrace\\
-%%%%%%%%%%%%%%%%%%
-%& \leq \gamma\log_{2}\dfrac{T}{e}\bigg\lbrace 16C_1\exp\bigg(-4\rho\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})-\dfrac{c_{0}\sqrt{T}}{16\rho H_{2}}\bigg) \\
-%& + 32C_2\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg)\log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})\\
-%& -\dfrac{c_{0}\sqrt{T}}{16\rho_v H_{2}}  \bigg)\bigg\rbrace\\
-%%%%%%%%%%%%%%%%%%
-%& \leq \exp\bigg(-4\rho\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})-\dfrac{c_{0}\sqrt{T}}{16\rho H_{2}} + \log \big( 16\gamma C_1\log_{2}\dfrac{T}{e}\big) \bigg)\\
-%& + \exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg)\log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})\\
-%& -\dfrac{c_{0}\sqrt{T}}{16\rho_v H_{2}} + \log\big( 32\gamma C_2\log_{2}\dfrac{T}{e} \big)  \bigg)
+%&|B_{\max\lbrace m_{i}, g_{i}\rbrace}|=2K\exp\bigg(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\bigg)\\ 
+%& + 4K\exp\bigg(- \frac{3\rho_v}{2} \big(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\big) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)
+%\end{align*}     
+%\end{small}
+%
+%
+%Again for AugUCB, we know that the number of pulls allocated for each surviving arm $i$ in the $m_{i}$-th round is $\ell_{m_{i}}=\frac{2\log (\psi T \epsilon_{m_{i}}^{2})}{\epsilon_{m_{i}}}$ or for the $g_{i}$-th round is $\ell_{g_{i}}=\frac{2\log (\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}}$. Therefore, the proportion of plays $\delta_{\max\lbrace m_{i}, g_{i}\rbrace}$ in the $\max\lbrace m_{i}, g_{i}\rbrace$-th round can be written as,
+%
+%\begin{small}
+%\begin{align*}
+%&\delta_{\max\lbrace m_{i}, g_{i}\rbrace}=(|B_{m_{i}}|.\ell_{m_{i}}) + (|B_{g_{i}}|.\ell_{g_{i}})\\
+%&\leq 2K\exp\bigg(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\bigg).\dfrac{2\log (\psi T \epsilon_{m_{i}}^{2})}{\epsilon_{m_{i}}}\\
+% & + 4K\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2})\bigg).\dfrac{2\log (\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}} \\
+%& \leq \dfrac{4K\log (\psi T \epsilon_{m_{i}}^{2})}{\epsilon_{m_{i}}}\exp\bigg(-4\rho_{\mu}\log (\psi T\epsilon_{m_{i}}^{2})\bigg)\\
+%& + \dfrac{8K\log (\psi T \epsilon_{g_{i}}^{2})}{\epsilon_{g_{i}}}\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log(\psi T\epsilon_{g_{i}}^{2}) \bigg)
 %\end{align*}
 %\end{small}
-Now we know that till $m_i$-th round $2c_i > \frac{\Delta_i}{2}$  or till $g_i$ th round $2s_i > \frac{\Delta_i}{2}$. Hence, for the $i$-th arm we can bound the probability of error for any round $m$ by applying Chernoff-Hoeffding and Bernstein inequality,
-\begin{small}
+
+%Now, in the $\max\lbrace m_{i}, g_{i}\rbrace$-th round $\sqrt{\rho_{\mu}\epsilon_{m_{i}}}\leq \frac{\Delta_{i}}{2}$ or $\sqrt{\rho_v\epsilon_{g_{i}}}\leq \frac{\Delta_{i}}{2}$. Hence,
+%
+%\begin{small}
+%\begin{align*}
+%&\delta_{\max\lbrace m_{i},g_{i}\rbrace} \leq \dfrac{4K\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})}{\frac{\Delta_{i}^{2}}{4\rho_{\mu}}}\exp\bigg(-4\rho_{\mu}\log (\psi T\frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})\bigg)\\
+%& + \dfrac{8K\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})}{\frac{\Delta_{i}^{2}}{4\rho_{v}}}\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{\sigma_{i}^{2}+\frac{\Delta_{i}}{2}+1}{3\sigma_{i}^{2}+\frac{\Delta_{i}}{2}}\bigg) \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg)\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%&\leq 16 C_1\exp\bigg(-4\rho_{\mu}\log (\psi T\frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})\bigg)\\
+%& + 32C_2\exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg) \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg)\\
+%&\text{where $C_1=\frac{K\rho_{\mu}\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})}{\Delta_{i}^{2}}$ and $C_2= \frac{K\rho_v\log (\psi T \frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})}{\Delta_{i}^{2}}$}\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%&\leq 16 C_1\exp\bigg(-4\rho_{\mu}\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})\bigg)
+% + 32C_2\exp\bigg(- \dfrac{3\rho_v}{2} \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg)
+%\end{align*}
+%\end{small}
+%
+%%Summing over all rounds $m=0,1,..,M$,
+%Now, putting the values of $\psi$, $\rho_{\mu}$, $\rho_v$ and taking $\Delta_{i}\geq\min_{i\in A}\Delta=\sqrt{\frac{K\log K}{T}}\geq \sqrt{\frac{e}{T}},\forall i\in A$( see \cite{auer2010ucb}), 
+%
+%\begin{small}
+%\begin{align*}
+%& \delta_{\max\lbrace m_{i}, g_{i}\rbrace}= \bigg\lbrace 16 C_1\exp\bigg(-4\rho_{\mu}\log (\psi T\frac{\Delta_{i}^{4}}{16\rho_{\mu}^{2}})\bigg)\\
+%& + 32C_2\exp\bigg(- \frac{3\rho_v}{2} \log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}}) \bigg) \bigg\rbrace\\
+%%%%%%%%%%%%%%%%%%%%%
+%&\leq \bigg\lbrace  \frac{2K\log ( T^2 \frac{4\Delta_{i}^{4}}{\log K})}{\Delta_{i}^{2}}\exp\bigg(-\frac{1}{2}\log ( T^2\frac{4\Delta_{i}^{4}}{\log K})\bigg)\\
+%& + \frac{32K\log ( T^2 \frac{9\Delta_{i}^{4}}{\log K})}{3\Delta_{i}^{2}}\exp\bigg(- \frac{1}{2} \log( T^2 \frac{9\Delta_{i}^{4}}{\log K}) \bigg) \bigg\rbrace\\
+%%%%%%%%%%%%%%%%%%%%%
+%&\leq \bigg\lbrace  \frac{4K\log ( T \frac{2\Delta_{i}^{2}}{\sqrt{\log K}})}{\Delta_{i}^{2}}\exp\bigg(-\log ( T\frac{2\Delta_{i}^{2}}{\sqrt{\log K}})\bigg)\\
+%& + \frac{64K\log ( T \frac{3\Delta_{i}^{2}}{\sqrt{\log K}})}{3\Delta_{i}^{2}}\exp\bigg(- \log( T \frac{3\Delta_{i}^{2}}{\sqrt{\log K}}) \bigg) \bigg\rbrace\\
+%%%%%%%%%%%%%%%%%%%%%
+%&\leq \bigg\lbrace  \frac{4KT\log ( \frac{2 K\log K}{\sqrt{\log K}})}{K\log K}\exp\bigg(-\log ( \frac{2K\log K}{\sqrt{\log K}})\bigg)\\
+%& + \frac{64TK\log (\frac{3 K\log K}{\sqrt{\log K}})}{3 K\log K}\exp\bigg(- \log( \frac{3 K\log K}{\sqrt{\log K}}) \bigg) \bigg\rbrace\\
+%%%%%%%%%%%%%%%%%%%%
+%&\leq \bigg\lbrace  \frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}
+% + \frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}}\bigg) \bigg\rbrace\\
+%\end{align*}
+%\end{small}
+%Now we know that till $m_i$-th round $2c_i > \frac{\Delta_i}{2}$  or till $g_i$ th round $2s_i > \frac{\Delta_i}{2}$. Hence, for the $i$-th arm we can bound the probability of error for any round $m$ by applying Chernoff-Hoeffding and Bernstein inequality,
+%\begin{small}
+%\begin{align*}
+% \Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace &\geq 1-(\Pb\lbrace |\hat{r}_i -r_i| > 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| > 2s_i \rbrace)\\ 
+%&\geq 1-\left(\Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace + \Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace\right) \\
+%&\geq 1-\big(2\exp( -\frac{\Delta_{i}^{2}}{4}n_i ) + 2\exp(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}n_i)\big)\\
+%&\geq 1-\bigg(2\exp( -\frac{\Delta_{i}^{2}}{4}\delta_{m_{i}} ) + 2\exp(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}\delta_{g_{i}})\bigg)
+%\end{align*}
+%\end{small}
+%Now, we know that $\E[\Ls(T)]\le1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace) $. Summing over all arms $K$ and over all rounds $m=0,1,2,..,M$ we get that,
+%\begin{small}
+%\begin{align*}
+%&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{\Delta_{i}^{2}}{4}.\frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}\bigg)\\
+%& + 2\exp\bigg(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}.\frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
+%%%%%%%%%%%%%%%%
+%&\E[\Ls(T)] \leq K\left\lceil\log_2\frac{T}{e}\right\rceil\bigg\lbrace\exp\bigg( -\frac{1}{i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\sqrt{\log K})}{2K (\log K)^{3/2}}\bigg)\\
+%& + \exp\bigg(- \frac{3}{i\max_i(6\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{5T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
+%%%%%%%%%%%%%%%%
+%&\E[\Ls(T)] \leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2 H_2 K (\log K)^{3/2}}\bigg)\\
+%& + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
+%\end{align*}
+%\end{small}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Not Required for probability of error for AugUCB
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Hence, for the $i$-th arm we can bound the probability of error till the event $\xi_1$ or $\xi_2$ by,
+%\begin{small}
 \begin{align*}
- \Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace &\geq 1-(\Pb\lbrace |\hat{r}_i -r_i| > 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| > 2s_i \rbrace)\\ 
-&\geq 1-\left(\Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace + \Pb\lbrace |\hat{r}_i - r_i| > \frac{\Delta_i}{2} \rbrace\right) \\
-&\geq 1-\big(2\exp( -\frac{\Delta_{i}^{2}}{4}n_i ) + 2\exp(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}n_i)\big)\\
-&\geq 1-\bigg(2\exp( -\frac{\Delta_{i}^{2}}{4}\delta_{m_{i}} ) + 2\exp(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}\delta_{g_{i}})\bigg)
+ & \Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace \geq 1-(\Pb\lbrace |\hat{r}_i -r_i| > 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| > 2s_i \rbrace)\\
+&\geq 1- \bigg( \left(2\exp\left(-\frac{T\rho_{\mu}\epsilon_{m_{i}}}{2K\log K}\log ( T\epsilon_{m_{i}})\right)\right)\\
+& + 4\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{16K\log K} \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)\bigg)
 \end{align*}
-\end{small}
-Now, we know that $\E[\Ls(T)]\le1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace) $. Summing over all arms $K$ and over all rounds $m=0,1,2,..,M$ we get that,
-\begin{small}
+%\end{small}
+Now, in the $m_i$-th round or in the $g_i$-th round we know that $\sqrt{\epsilon_{m_{i}}\rho_{\mu}}<\frac{\Delta_i}{2}$ or  $\sqrt{\epsilon_{g_{i}}\rho_{v}}<\frac{\Delta_i}{2}$.
+%\begin{small}
 \begin{align*}
-&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{\Delta_{i}^{2}}{4}.\frac{2T\log (2 K\sqrt{\log K})}{K (\log K)^{3/2}}\bigg)\\
-& + 2\exp\bigg(- \frac{\Delta_{i}^{2}}{8\sigma_{i}^{2}+ \frac{4}{3}\Delta_i}.\frac{22T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
+&\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace \geq 1- \bigg( 2\exp\left(-\frac{T\rho_{\mu}\frac{\Delta_{i}^{2}}{4\rho_{\mu}}}{2K\log K}\log ( T\frac{\Delta_{i}^{2}}{4\rho_{\mu}})\right)\\
+& + 4\exp\left(- \frac{3T\rho_v\frac{\Delta_{i}^{2}}{4\rho_{v}}}{16 K\log K} \left(\frac{\sigma_{i}^{2}+\frac{\Delta_{i}}{2}+1}{3\sigma_{i}^{2}+\frac{\Delta_{i}}{2}}\right) \log( T\frac{\Delta_{i}^{2}}{4\rho_{v}}) \right)\bigg)\\
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+&\geq 1-\bigg( 2\exp\left(-\frac{T\Delta_{i}^{2}}{8K\log K}\log( 2T\Delta_{i}^{2})\right) \\
+& + 4\exp\left(- \frac{3T\Delta_{i}^{2}}{16 K\log K} \left(\frac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\right) \log( \frac{3}{4} T\Delta_{i}^{2}) \right)\bigg),\\
+&\text{putting the values of $\rho_{\mu}$ and $\rho_{v}$.}
+\end{align*}
+%\end{small}
+Now, we know that $\E[\Ls(T)]\le 1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace) $. Summing over all arms $K$ and over all rounds $m=0,1,2,..,M$ we get that,
+%\begin{small}
+\begin{align*}
+&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace \bigg( 2\exp\left(-\frac{2T\Delta_{i}^{2}}{8K\log K}\log(2 T\Delta_{i}^{2})\right) \\
+& + 4\exp\left(- \frac{3T\Delta_{i}^{2}}{64 K\log K} \left(\frac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\right) \log( \frac{3}{4} T\Delta_{i}^{2}) \right)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
-&\E[\Ls(T)] \leq K\left\lceil\log_2\frac{T}{e}\right\rceil\bigg\lbrace\exp\bigg( -\frac{1}{i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\sqrt{\log K})}{2K (\log K)^{3/2}}\bigg)\\
-& + \exp\bigg(- \frac{3}{i\max_i(6\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{5T\log ( K\sqrt{\log K})}{ K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
+& \leq K\left\lceil\log_2\frac{T}{e}\right\rceil\bigg\lbrace\exp\bigg( -\frac{T}{i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\log K)}{16K \log K}\bigg)\\
+& + 2\exp\bigg(- \frac{6T}{i\max_i(6\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{\log (\frac{3}{4} K\log K)}{ 64K\log K} \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
-&\E[\Ls(T)] \leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2 H_2 K (\log K)^{3/2}}\bigg)\\
-& + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}} \bigg)\bigg\rbrace\\
+&\leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T\log ( 2K\log K)}{ 16 H_2 K\log K}\bigg)\\
+& + 2\exp\bigg(- \frac{T\log ( \frac{3}{4} K\log K)}{64H_{2}^{\sigma} K(\log K)} \bigg)\bigg\rbrace\\
 \end{align*}
-\end{small}
-
-
-%Therefore we can say that with probability $1-P_{i}$, all arms $i$ above $\frac{\Delta_{i}}{2}$ are accepted and all arms $i$ below $\frac{\Delta_{i}}{2}$ are rejected. 
-%
-%Hence, the simple regret of AugUCB is upper bounded by,
-%
-%\begin{small}
-%\begin{align*}
-%& SR_{AugUCB} \leq \sum_{i=1}^{K} \Delta_{i}. P_{i}\\
-%& \leq \sum_{i=1}^{K} \Delta_{i}\bigg\lbrace \exp\bigg(-4\rho\log (\psi T\frac{\Delta_{i}^{4}}{16\rho^{2}})-\dfrac{c_{0}\sqrt{T}}{16\rho H_{2}}\\
-%& + \log \big( 16\gamma C_1\log_{2}\dfrac{T}{e} \big) \bigg) + \exp\bigg(- \dfrac{3\rho_v}{2} \bigg(\dfrac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\bigg)\log(\psi T\frac{\Delta_{i}^{4}}{16\rho_{v}^{2}})\\
-%& -\dfrac{c_{0}\sqrt{T}}{16\rho_v H_{2}} + \log\big ( 32\gamma C_2\log_{2}\dfrac{T}{e} \big)  \bigg)\bigg\rbrace
-%\end{align*}
 %\end{small}
-
 \end{proof}
 
 %	Next we specialize the result of Theorem \ref{Result:Theorem:1} in Corollary \ref{Result:Corollary:1}.
