@@ -326,14 +326,14 @@ Now, in the $m_i$-th round or in the $g_i$-th round we know that $\sqrt{\epsilon
 &\text{putting the values of $\rho_{\mu}$ and $\rho_{v}$.}
 \end{align*}
 %\end{small}
-Now, we know that $\E[\Ls(T)]\le 1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace) $. Summing over all arms $K$ and over all rounds $m=0,1,2,..,M$ we get that,
+Now, we know that $\E[\Ls(T)]\le 1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace) $. Summing over all arms $K$ and over all rounds $m=0,1,2,..,\max\lbrace m_{i} ,g_{i}\rbrace$ we get that,
 %\begin{small}
 \begin{align*}
-&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{M}\bigg\lbrace \bigg( 2\exp\left(-\frac{2T\Delta_{i}^{2}}{8K\log K}\log(2 T\Delta_{i}^{2})\right) \\
+&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{\max\lbrace m_{i} ,g_{i}\rbrace}\bigg\lbrace \bigg( 2\exp\left(-\frac{2T\Delta_{i}^{2}}{8K\log K}\log(2 T\Delta_{i}^{2})\right) \\
 & + 4\exp\left(- \frac{3T\Delta_{i}^{2}}{64 K\log K} \left(\frac{2\sigma_{i}^{2}+\Delta_{i}+2}{6\sigma_{i}^{2}+\Delta_{i}}\right) \log( \frac{3}{4} T\Delta_{i}^{2}) \right)\bigg\rbrace\\
-%%%%%%%%%%%%%%%
-& \leq K\left\lceil\log_2\frac{T}{e}\right\rceil\bigg\lbrace\exp\bigg( -\frac{T}{i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\log K)}{16K \log K}\bigg)\\
-& + 2\exp\bigg(- \frac{6T}{i\max_i(6\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{\log (\frac{3}{4} K\log K)}{ 64K\log K} \bigg)\bigg\rbrace\\
+%%%%%%%%%%%%%%%%
+& \leq K\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{T}{i\max_{i}\Delta_{i}^{-2}}.\frac{T\log (2 K\log K)}{16K \log K}\bigg)\\
+& + 4\exp\bigg(- \frac{6T}{i\max_i(6\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{\log (\frac{3}{4} K\log K)}{ 64K\log K} \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
 &\leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T\log ( 2K\log K)}{ 16 H_2 K\log K}\bigg)\\
 & + 2\exp\bigg(- \frac{T\log ( \frac{3}{4} K\log K)}{64H_{2}^{\sigma} K(\log K)} \bigg)\bigg\rbrace\\
