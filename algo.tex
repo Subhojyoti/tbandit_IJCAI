@@ -22,54 +22,84 @@
 \algrenewtext{EndResetParam}{\algorithmicendResetParam}
 \algtext*{EndResetParam}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Old Algorithm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\begin{algorithm}[th!]
+%\caption{AugmentedUCB}
+%\label{alg:augucb}
+%\begin{algorithmic}
+%\State {\bf Input:} Time horizon $T$, exploration parameters $\rho_{\mu}$, $\rho_v$ and $\psi$, threshold $\tau$.
+%\State {\bf Initialization:} Set $B_{0}:=A$, $M=\left\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\right\rfloor $, $m:=0$, $\epsilon_{0}:=1$, $\ell_{0}=\left\lceil \frac{2\psi\log( T\epsilon_{0}^{2})}{\epsilon_{0}} \right\rceil$ and $N_{0}=K\ell_{0} $.
+%\State Pull each arm once
+%\State \For{$t=K+1,..,T$}
+%\State Pull arm $i\in\argmin_{j\in B_{m}}\bigg\lbrace |\hat{r}_{j} - \tau | - 2s_{j}\bigg\rbrace$
+%\State $t:=t+1$ 
+%\ArmElim
+%\State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
+%\begin{align*}
+%\hat{r}_{i} + c_i  < \tau - c_i \mbox{ or } \hat{r}_{i} - c_i  > \tau + c_i \\
+%\text{where $c_i=\sqrt{\frac{\rho_{\mu}\psi\log{( T\epsilon_{m}^{2})}}{2 n_{i}}}$}
+%\end{align*}
+%\EndArmElim
+%\ArmElimV
+%\State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
+%\begin{align*}
+%\hat{r}_{i} + s_i  < \tau - s_i \mbox{ or } \hat{r}_{i} - s_i  > \tau + s_i \\
+%\text{where $s_i=\sqrt{\frac{\rho_v\psi\hat{V}_{i}\log{( T\epsilon_{m}^{2})}}{4 n_{i}} + \frac{\rho_v\psi \log{(T\epsilon_{m}^{2})}}{4 n_{i}}}$}
+%\end{align*}
+%\EndArmElimV
+%\State \If{$t\geq N_{m}$ and $m \leq M$}
+%\ResetParam
+%\State $\epsilon_{m+1}:=\frac{\epsilon_{m}}{2}$
+%\State $B_{m+1} := B_{m}$
+%\State $\ell_{m+1}:=\left\lceil \frac{2\psi\log( T\epsilon_{m+1}^{2})}{\epsilon_{m+1}} \right\rceil$
+%\State $N_{m+1} := t + |B_{m+1}|\ell_{m+1}$
+%\State $m := m+1$
+%\EndResetParam
+%\EndIf
+%\EndFor
+%\State Output $\hat{S}_{\tau}=\lbrace i: \hat{r}_{i}\geq \tau \rbrace$.
+%\end{algorithmic}
+%\end{algorithm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%New 	Algorithm
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \begin{algorithm}[th!]
 \caption{AugmentedUCB}
 \label{alg:augucb}
 \begin{algorithmic}
 \State {\bf Input:} Time horizon $T$, exploration parameters $\rho_{\mu}$, $\rho_v$ and $\psi$, threshold $\tau$.
-\State {\bf Initialization:} Set $B_{0}:=A$, $M=\left\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\right\rfloor $, $m:=0$, $\epsilon_{0}:=1$, $\ell_{0}=\left\lceil \frac{2\log(\psi T\epsilon_{0}^{2})}{\epsilon_{0}} \right\rceil$ and $N_{0}=K\ell_{0} $.
+\State {\bf Initialization:} Set $B_{0}:=A$, $M=\left\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\right\rfloor $, $m:=0$, $\epsilon_{0}:=1$, $\ell_{0}=\left\lceil \frac{2\psi\log( T\epsilon_{0})}{\epsilon_{0}} \right\rceil$ and $N_{0}=K\ell_{0} $.
 \State Pull each arm once
-%\State \For{$m=0,1,..\big \lfloor \dfrac{1}{2}\log_{2} \dfrac{T}{e}\big\rfloor$}{	
-%\State $N_{0}=\big\lfloor \dfrac{T}{M} \big\rfloor$
 \State \For{$t=K+1,..,T$}
-%\State Pull arm $i$ in $B_m$ such that $\min_{i\in B_{m}}\bigg\lbrace |\hat{r}_{i} - \tau | - \sqrt{\dfrac{\rho_v \hat{V}_{i} \log (\psi T \epsilon_{m}^{2})}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} \bigg\rbrace$, where $n_{i}$ is the number of times the arm $i$ has been pulled.
 \State Pull arm $i\in\argmin_{j\in B_{m}}\bigg\lbrace |\hat{r}_{j} - \tau | - 2s_{j}\bigg\rbrace$
 \State $t:=t+1$ 
 \ArmElim
 \State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
 \begin{align*}
-%\hat{r}_{i} + \sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}  < \tau -\sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}} 
 \hat{r}_{i} + c_i  < \tau - c_i \mbox{ or } \hat{r}_{i} - c_i  > \tau + c_i \\
-\text{where $c_i=\sqrt{\frac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}$}
+\text{where $c_i=\sqrt{\frac{\rho_{\mu}\psi\log{( T\epsilon_{m})}}{2 n_{i}}}$}
 \end{align*}
-%\State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
-%\begin{align*}
-%%\hat{r}_{i} - \sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}}  > \tau +\sqrt{\dfrac{\rho_{\mu}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}} 
-%\hat{r}_{i} - c_i  > \tau + c_i
-%\end{align*}
 \EndArmElim
 \ArmElimV
 \State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
 \begin{align*}
-%\hat{r}_{i} + \sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}}  < \tau -\sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{2 n_{i}}} 
 \hat{r}_{i} + s_i  < \tau - s_i \mbox{ or } \hat{r}_{i} - s_i  > \tau + s_i \\
-\text{where $s_i=\sqrt{\frac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}}$}
+\text{where $s_i=\sqrt{\frac{\rho_v\psi\hat{V}_{i}\log{( T\epsilon_{m})}}{4 n_{i}} + \frac{\rho_v\psi \log{(T\epsilon_{m})}}{4 n_{i}}}$}
 \end{align*}
-%\State For each arm $i \in B_{m}$, remove arm ${i}$ from $B_{m}$ if
-%\begin{align*}
-%%\hat{r}_{i} - \sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}}  > \tau +\sqrt{\dfrac{\rho_v\hat{V}_{i}\log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}} + \dfrac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} 
-%\hat{r}_{i} - s_i  > \tau + s_i
-%\end{align*}
 \EndArmElimV
 \State \If{$t\geq N_{m}$ and $m \leq M$}
 \ResetParam
 \State $\epsilon_{m+1}:=\frac{\epsilon_{m}}{2}$
 \State $B_{m+1} := B_{m}$
-%\State $p_{m+1}:=p_{m}+1$
-%\State $M := \dfrac{p+1}{p}$
-\State $\ell_{m+1}:=\left\lceil \frac{2\log(\psi T\epsilon_{m+1}^{2})}{\epsilon_{m+1}} \right\rceil$
+\State $\ell_{m+1}:=\left\lceil \frac{2\psi\log( T\epsilon_{m+1})}{\epsilon_{m+1}} \right\rceil$
 \State $N_{m+1} := t + |B_{m+1}|\ell_{m+1}$
-% + \lfloorM N_{m}\rfloor $
 \State $m := m+1$
 \EndResetParam
 \EndIf
@@ -78,9 +108,7 @@
 \end{algorithmic}
 \end{algorithm}
 
-%The threshold $\tau$ is also given as an input. AugUCB combines the power of UCB-Improved (\cite{auer2010ucb}), APT (\cite{locatelli2016optimal}) and SAR (\cite{gabillon2011multi}) or CSAR(\cite{chen2014combinatorial}). The choice of $M$ comes from UCB-Improved which necessarily entails that the $\epsilon_{m}\geq \sqrt{\frac{e}{T}}$. So, $M$ is the total number of rounds and is the same as UCB-Improved.
-
 
 In algorithm \ref{alg:augucb}, hence referred to as AugUCB, we have three exploration parameters, $\rho_{\mu}, \rho_v$ which are the arm elimination parameters and $\psi$ which is the exploration regulatory factor. The main approach is based on UCB-Improved with modifications suited for the thresholding bandit problem. The active set $B_{0}$ is initialized with all the arms from $A$. We divide the entire budget $T$ into rounds/phases as like UCB-Improved, CCB, SAR and CSAR. After the end of each such round $m$ we eliminate arm(s) from active set $B_{m}$ and update parameters. As suggested by \cite{liu2016modification} to make AugUCB an anytime algorithm and to overcome too much early exploration, we no longer pull all the arms equal number of times in each round but pull the arm that minimizes,  
-$\min_{i\in B_{m}}\big\lbrace |\hat{r}_{i} - \tau | - 2\sqrt{\frac{\rho_v \hat{V}_{i} \log (\psi T \epsilon_{m}^{2})}{4 n_{i}} + \frac{\rho_v \log{(\psi T\epsilon_{m}^{2})}}{4 n_{i}}} \big\rbrace $
-in the active set $B_{m}$. This condition makes it possible to pull the arms closer to the threshold $\tau$ and with suitable choice of $\rho_{\mu},\rho_v$ and $\psi$ we can fine tune the exploration. 
+$\min_{i\in B_{m}}\big\lbrace |\hat{r}_{i} - \tau | - 2\sqrt{\frac{\rho_v\psi \hat{V}_{i} \log ( T \epsilon_{m})}{4 n_{i}} + \frac{\rho_v\psi \log{( T\epsilon_{m})}}{4 n_{i}}} \big\rbrace $
+in the active set $B_{m}$. This condition makes it possible to pull the arms closer to the threshold $\tau$ and with suitable choice of $\rho_{\mu},\rho_v$ and $\psi$ we can fine tune the exploration. Also because of the said condition, like \cite{liu2016modification} we also claim that AugUCB is an anytime algorithm. The choice of exploration factor $\psi$ comes directly from \cite{audibert2010best} and \cite{bubeck2011pure} which states that in pure exploration setup, the exploring factor must be linear in $T$ to give us an exponentially small probability of error rather than logarithmic which is suited for minimizing cumulative regret.
