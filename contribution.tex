@@ -12,19 +12,20 @@ APT         &$\exp(-\frac{T}{64H_1}+2\log((\log(T)+1)K))$ \\\midrule
 CSAR		&$K^2\exp(-\frac{T-K}{72\log(K)H_2})$ \\\midrule
 %Gap-EV		&$6TK\exp(-\frac{1}{512}\frac{T-2K}{H_1^{\sigma}})$ \\\midrule
 AugUCB      &
-$\exp\left( -\frac{T\log ( \frac{1}{2} K\log K)}{ 32 H_2 K\log K} + \log\left(K\left(\log_2\frac{T}{e}\right)\right)\right)$\newline
+$\exp\left( -\frac{T}{ 64 H_2 a} + \log\left(K\left(\log_2\frac{T}{e}+1\right)\right)\right)$\newline
  $+$ \newline  
- $ \exp\left(- \frac{T\log ( \frac{3}{16} K\log K)}{256 H_{2}^{\sigma} K(\log K)}
- + \log\left(2K\left(\log_2\frac{T}{e}\right)\right) \right) $
+ $ \exp\left(- \frac{T}{4096 H_{2}^{\sigma} a}
+ + \log\left(2K\left(\log_2\frac{T}{e}+1\right)\right) \right) $\newline
+ where $a=(\log(\frac{3}{16} K\log K))$
 \\\bottomrule
 \end{tabular}
 \end{center}
 \end{table}
 Empirically we show that for a large number of arms when the variance of the arms lying above $\tau$ are high, our algorithm performs better than all other algorithms, except the algorithm UCBEV (modified from Gap-EV for TBP) which has access to the underlying problem complexity and also is a variance-aware algorithm. Irrespective of this case AugUCB also employs elimination of arms based on mean estimation only and is the first such algorithm which uses elimination by both mean and variance estimation simultaneously. AugUCB requires three input parameters and the exact choices for these parameters are derived in Theorem \ref{Result:Theorem:1}. Also, unlike SAR or CSAR, AugUCB does not have explicit accept or reject set rather the arm elimination conditions simply removes arm(s) if it is sufficiently sure that the mean of the arms are very high or very low about the threshold based on mean and variance estimation thereby re-allocating the remaining budget among the surviving arms. This although is a tactic similar to SAR or CSAR, but here at any round, an arbitrary number of arms can be accepted or rejected thereby improving upon SAR and CSAR which accepts/rejects one arm in every round. Also their round lengths are non-adaptive and they pull all the arms equal number of times in each round. 
 %At every timestep AugUCB pulls the arm that minimizes thereby making this an anytime algorithm whereby we need not finish every round. 
-The rest of the paper is divided as follows, in section \ref{notation} we introduce the notations and the in the next section \ref{algorithm} we present AugUCB. 
+The rest of the paper is divided as follows, in section \ref{algorithm} we present notations and AugUCB. 
 Section \ref{results} contains our main theorem on expected loss, section \ref{expt} contains the numerical experiments and we conclude in section \ref{conclusion}.
 
-
+%in section \ref{notation} we introduce the notations and the
 
   
