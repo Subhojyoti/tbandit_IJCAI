@@ -2,17 +2,18 @@
 
 We define problem complexity as,
 \begin{align*}
-H_{1} = \sum_{i=1}^{K}\dfrac{1}{\Delta_{i}^{2}} \text{ ,   } H_{2}=\max_{i\in \mathcal{A}}\dfrac{i}{{\Delta_{i}^{2}}} \text{, where } \Delta_{i}=|r_{i}-\tau|
+& H_{1} = \sum_{i=1}^{K}\dfrac{1}{\Delta_{i}^{2}} \text{ ,   } H_{2}=\min_{i\in \mathcal{A}}\dfrac{i}{{\Delta_{(i)}^{2}}} \text{, where } \Delta_{i}=|r_{i}-\tau| \text{ and }\\
+& \text{ $\Delta_{(i)}$ is an increasing ordering of $\Delta_i$ }
 \end{align*}
-This is same as the problem complexity defined in \cite{locatelli2016optimal} for the thresholding bandit problem and is similar to the problem complexity defined in \cite{chen2014combinatorial} ($H_{CSAR,2}$). Also we know from \cite{locatelli2016optimal} that,
+$H_1$ and $H_2$ is same as the problem complexity defined in \cite{locatelli2016optimal} for the thresholding bandit problem while $H_{CSAR,2}=\max_{i}\frac{i}{\Delta_{(i)}^2}$ is defined in \cite{chen2014combinatorial}. Also we know from \cite{locatelli2016optimal} that,
 \begin{align*}
-H_{2}\leq H_{1}\leq \log(K)H_{2}
+H_{2}\leq H_{1}\leq \log(2K)H_{2} \text{ and } H_1 \leq \log(K)H_{CSAR,2}
 \end{align*}
 
 Also, we define $H_{1}^{\sigma}$ ( from \cite{gabillon2011multi}) and $H_{2}^{\sigma}$ (introduced in this paper) as,
 \begin{align*}
 & H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}\\
-& H_{2}^{\sigma}=\max_{i\in \mathcal{A}} i\frac{12\sigma_{i}^{2} + \Delta_i}{12\Delta_i^{2}}
+& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\frac{12\sigma_{(i)}^{2} + \Delta_{(i)}}{12\Delta_{(i)}^{2}}
 \end{align*}
 which also gives us that $H_{2}^{\sigma} < H_{1}^{\sigma}$.
 
@@ -21,16 +22,17 @@ which also gives us that $H_{2}^{\sigma} < H_{1}^{\sigma}$.
 
 \begin{theorem}
 \label{Result:Theorem:1}
-For $K\geq 4$ and with $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$,
+For $K\geq 4$, with $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$,
 the expected loss of the AugUCB algorithm is given by,
 %\begin{small}
 \begin{align*}
 &\E[\Ls(T)]
 %\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2H_2 K (\log K)^{3/2}} + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg)\\
 %& + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}}  + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg).
- \leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T}{ 64 H_2 (\log(\frac{3}{16} K\log K))}\bigg)\\
-& + 2\exp\bigg(- \frac{T}{4096 H_{2}^{\sigma} (\log(\frac{3}{16} K\log K))} \bigg)\bigg\rbrace  .
+ \leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T}{ 64 H_2 a}\bigg)\\
+& + 2\exp\bigg(- \frac{T}{4096 H_{2}^{\sigma} a} \bigg)\bigg\rbrace
 \end{align*}
+where $a=\log(\frac{3}{16} K\log K)$
 %\end{small}
 %For every $0<\eta <1$ and $\gamma > 1$, there exists time $t$ such that for all $T>t$ the simple regret of AugUCB is upper bounded by,
 %\begin{small}
@@ -117,13 +119,13 @@ Applying Chernoff-Hoeffding bound and considering independence of complementary 
 &\mathbb{P}\lbrace\hat{r}_{i}> r_{i} + 2c_{i}\rbrace \leq \exp(-4 c_{i}^{2}n_{i})\\
 &\leq \exp(-8 * \dfrac{\rho_{\mu}\psi_{m_i}\log ( T\epsilon_{m_{i}})}{2 n_{i}} *n_{i})\\
 &\leq \exp\big(-4\rho_{\mu}\psi_{m_i}\log ( T\epsilon_{m_{i}})\big)\\
-&\leq \exp\left(-\rho_{\mu}\frac{T\epsilon_{m_{i}}}{32a}\log ( T\epsilon_{m_{i}})\right),\\
+&\leq \exp\left(-\rho_{\mu}\frac{T\epsilon_{m_{i}}}{32 a^2}\log ( T\epsilon_{m_{i}})\right),\\
 &\text{putting the value of $\psi_{m_i}=\frac{T\epsilon_{m_i}}{128(\log(\frac{3}{16} K\log K))^{2}}$}
 \end{align*}
 %\end{small}
-Similarly for the condition in (\ref{eq:armelim-caseb}), $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2c_{i}\rbrace\leq \exp\left(-\frac{T\rho_{\mu}\epsilon_{m_{i}}}{32a}\log ( T\epsilon_{m_{i}})\right)$.
+Similarly for the condition in (\ref{eq:armelim-caseb}), $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2c_{i}\rbrace\leq \exp\left(-\frac{T\rho_{\mu}\epsilon_{m_{i}}}{32 a^2 }\log ( T\epsilon_{m_{i}})\right)$.
 
-Summing the above two expressions, the probability that arm ${i}$ is not eliminated on or before $m_{i}$-th is $\left(2\exp\left(-\frac{T\rho_{\mu}\epsilon_{m_{i}}}{32a}\log ( T\epsilon_{m_{i}})\right)\right)$. 
+Summing the above two expressions, the probability that arm ${i}$ is not eliminated on or before $m_{i}$-th is $\left(2\exp\left(-\frac{T\rho_{\mu}\epsilon_{m_{i}}}{32 a^2 }\log ( T\epsilon_{m_{i}})\right)\right)$. 
 
 
 Again for any arm $i$, if it is eliminated from active set $B_{g_{i}}$ then the below two events have to come true,
@@ -219,15 +221,15 @@ For the term in (\ref{eq:prob_eq2}), by applying Bernstein inequality, we can wr
 &\leq \mathbb{P}\bigg\lbrace \dfrac{\sum_{t=1}^{n_{i}}(x_{i,t}-r_{i})^{2}}{n_{i}}\geq \sigma_{i}^{2} +\\
 &\bigg(2\sqrt{\dfrac{\rho_v\psi_{g_i} [\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}]\log( T\epsilon_{g_{i}})}{4n_{i}}+\frac{\rho_v\psi_{g_i}  \log{(T\epsilon_{g_{i}})}}{4 n_{i}}}\bigg)\bigg\rbrace\\
 &\leq \exp\bigg(- \dfrac{3\rho_v\psi_{g_i}}{2} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log( T\epsilon_{g_{i}}) \bigg) \\
-&\leq \exp\bigg(- \dfrac{3\rho_vT\epsilon_{g_i}}{256 a^2 \epsilon_{g_{i}}} \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log( T\epsilon_{g_{i}}) \bigg),\\
+&\leq \exp\bigg(- \dfrac{3\rho_vT\epsilon_{g_i}}{256 a^2 } \bigg(\dfrac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\bigg) \log( T\epsilon_{g_{i}}) \bigg),\\
 &\text{ putting the value of $\psi_{g_i}=\frac{T\epsilon_{g_i}}{128(\log(\frac{3}{16} K\log K))^{2}}$}
 \end{align*}
 %\end{small}
  
   
-Similarly, the condition for the complementary event for the elimination case \ref{eq:armelim-var-caseb} holds such that $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2s_{i}\rbrace \leq 2\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{256a} \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)$.
+Similarly, the condition for the complementary event for the elimination case \ref{eq:armelim-var-caseb} holds such that $\mathbb{P}\lbrace\hat{r}_{i}< r_{i} - 2s_{i}\rbrace \leq 2\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{256 a^2 } \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)$.
 
-Again  summing the above expressions, the probability that an arm ${i}$ is not eliminated on or before $g_{i}$-th round based on the (\ref{eq:armelim-var-casea}) and (\ref{eq:armelim-var-caseb}) elimination condition is  $4\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{256a} \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)$. 
+Again  summing the above expressions, the probability that an arm ${i}$ is not eliminated on or before $g_{i}$-th round based on the (\ref{eq:armelim-var-casea}) and (\ref{eq:armelim-var-caseb}) elimination condition is  $4\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{256 a^2 } \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)$. 
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %Not Required for probability of error for AugUCB
@@ -323,8 +325,8 @@ Hence, for the $i$-th arm we can bound the probability of it getting eliminated 
 \begin{align*}
  & \Pb\lbrace \text{$i\in \mathcal{A}^{'}$ getting eliminated on or before round $\max\lbrace m_i, g_i\rbrace$} \rbrace \\
 &\geq 1-(\Pb\lbrace |\hat{r}_i -r_i| > 2c_i \rbrace + \Pb\lbrace |\hat{r}_i -r_i| > 2s_i \rbrace)\\
-&\geq 1- \bigg( \left(2\exp\left(-\frac{T\rho_{\mu}\epsilon_{m_{i}}}{32a}\log ( T\epsilon_{m_{i}})\right)\right)\\
-& + 4\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{256a} \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)\bigg)
+&\geq 1- \bigg( \left(2\exp\left(-\frac{T\rho_{\mu}\epsilon_{m_{i}}}{32 a^2}\log ( T\epsilon_{m_{i}})\right)\right)\\
+& + 4\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{256 a^2 } \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)\bigg)
 \end{align*}
 %\end{small}
 Now, in the $m_i$-th round or in the $g_i$-th round we know that $\frac{\Delta_i}{4}\leq\sqrt{\epsilon_{m_{i}}\rho_{\mu}}<\frac{\Delta_i}{2}$ or  $\frac{\Delta_i}{4}\leq\sqrt{\epsilon_{g_{i}}\rho_{v}}<\frac{\Delta_i}{2}$.
@@ -332,11 +334,11 @@ Now, in the $m_i$-th round or in the $g_i$-th round we know that $\frac{\Delta_i
 \begin{align*}
 &\Pb\lbrace \text{$i\in \mathcal{A}^{'}$ getting eliminated on or before round $\max\lbrace m_i, g_i\rbrace$} \rbrace\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-& \geq 1- \bigg( 2\exp\left(-\frac{T\rho_{\mu}\frac{\Delta_{i}^{2}}{16\rho_{\mu}}}{32a}\log ( T\frac{\Delta_{i}^{2}}{16\rho_{\mu}})\right)\\
-& + 4\exp\left(- \frac{3T\rho_v\frac{\Delta_{i}^{2}}{16\rho_{v}}}{256a} \left(\frac{\sigma_{i}^{2}+\frac{\Delta_{i}}{4}+1}{3\sigma_{i}^{2}+\frac{\Delta_{i}}{4}}\right) \log( T\frac{\Delta_{i}^{2}}{16\rho_{v}}) \right)\bigg)\\
+& \geq 1- \bigg( 2\exp\left(-\frac{T\rho_{\mu}\frac{\Delta_{i}^{2}}{16\rho_{\mu}}}{32 a^2 }\log ( T\frac{\Delta_{i}^{2}}{16\rho_{\mu}})\right)\\
+& + 4\exp\left(- \frac{3T\rho_v\frac{\Delta_{i}^{2}}{16\rho_{v}}}{256 a^2} \left(\frac{\sigma_{i}^{2}+\frac{\Delta_{i}}{4}+1}{3\sigma_{i}^{2}+\frac{\Delta_{i}}{4}}\right) \log( T\frac{\Delta_{i}^{2}}{16\rho_{v}}) \right)\bigg)\\
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	
 &\geq 1-\bigg( 2\exp\left(-\frac{T\Delta_{i}^{2}}{64a}\log( \frac{T\Delta_{i}^{2}}{2})\right) \\
-& + 4\exp\left(- \frac{3T\Delta_{i}^{2}}{4096a} \left(\frac{4\sigma_{i}^{2}+\Delta_{i}+4}{12\sigma_{i}^{2}+\Delta_{i}}\right) \log( \frac{3}{16} T\Delta_{i}^{2}) \right)\bigg),\\
+& + 4\exp\left(- \frac{3T\Delta_{i}^{2}}{4096 a^2} \left(\frac{4\sigma_{i}^{2}+\Delta_{i}+4}{12\sigma_{i}^{2}+\Delta_{i}}\right) \log( \frac{3}{16} T\Delta_{i}^{2}) \right)\bigg),\\
 &\text{putting the values of $\rho_{\mu}$ and $\rho_{v}$.}
 \end{align*}
 %\end{small}
@@ -345,11 +347,11 @@ Also, $\E[\Ls(T)]\le 1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace) $.
 %and summing over all arms $K$ and over all rounds $m=0,1,2,..,\max\lbrace m_{i} ,g_{i}\rbrace$
 %\begin{small}
 \begin{align*}
-&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{\max\lbrace m_{i} ,g_{i}\rbrace}\bigg\lbrace \bigg( 2\exp\left(-\frac{T\Delta_{i}^{2} \log(\frac{T\Delta_{i}^{2}}{2})}{64a}\right) \\
-& + 4\exp\left(- \frac{3T\Delta_{i}^{2}}{4096a} \left(\frac{4\sigma_{i}^{2}+\Delta_{i}+4}{12\sigma_{i}^{2}+\Delta_{i}}\right) \log( \frac{3}{16} T\Delta_{i}^{2}) \right)\bigg\rbrace\\
+&\E[\Ls(T)] \leq \sum_{i=1}^{K}\sum_{m=0}^{\max\lbrace m_{i} ,g_{i}\rbrace}\bigg\lbrace \bigg( 2\exp\left(-\frac{T\Delta_{i}^{2} \log(\frac{T\Delta_{i}^{2}}{2})}{64 a^2 }\right) \\
+& + 4\exp\left(- \frac{3T\Delta_{i}^{2}}{4096 a^2 } \left(\frac{4\sigma_{i}^{2}+\Delta_{i}+4}{12\sigma_{i}^{2}+\Delta_{i}}\right) \log( \frac{3}{16} T\Delta_{i}^{2}) \right)\bigg\rbrace\\
 %%%%%%%%%%%%%%%%
-& \leq K\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{T}{i\max_{i}\Delta_{i}^{-2}}.\frac{\log (\frac{1}{2} K\log K)}{64a}\bigg)\\
-& + 4\exp\bigg(- \frac{12T}{i\max_i(12\sigma_{i}^{2}+ \Delta_i)\Delta_{i}^{-2}}.\frac{\log (\frac{3}{16} K\log K)}{4096a} \bigg)\bigg\rbrace\\
+& \leq K\sum_{m=0}^{M}\bigg\lbrace 2\exp\bigg( -\frac{T}{i\min_{i}\Delta_{(i)}^{-2}}.\frac{\log (\frac{1}{2} K\log K)}{64 a^2 }\bigg)\\
+& + 4\exp\bigg(- \frac{12T}{i\min_i(12\sigma_{(i)}^{2}+ \Delta_{(i)})\Delta_{(i)}^{-2}}.\frac{\log (\frac{3}{16} K\log K)}{4096 a^2 } \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
 &\leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T\log ( \frac{1}{2} K\log K)}{ 64 H_2 a^2}\bigg)\\
 & + 2\exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 H_{2}^{\sigma} a^2} \bigg)\bigg\rbrace\\
