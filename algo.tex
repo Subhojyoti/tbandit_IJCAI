@@ -98,7 +98,7 @@
 \ResetParam
 \State $\epsilon_{m+1}:=\frac{\epsilon_{m}}{2}$
 \State $B_{m+1} := B_{m}$
-\State $\psi_{m+1}=\frac{T\epsilon_{m+1}}{8 K\log K}$
+\State $\psi_{m+1}=\frac{T\epsilon_{m+1}}{(\log(\frac{3}{16}\log K))^{2}}$
 \State $\ell_{m+1}:=\left\lceil \frac{2\psi_{m+1}\log( T\epsilon_{m+1})}{\epsilon_{m+1}} \right\rceil$
 \State $N_{m+1} := t + |B_{m+1}|\ell_{m+1}$
 \State $m := m+1$
