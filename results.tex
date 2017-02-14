@@ -13,7 +13,7 @@ H_{2}\leq H_{1}\leq \log(2K)H_{2} \text{ and } H_1 \leq \log(K)H_{CSAR,2}
 Also, we define $H_{1}^{\sigma}$ ( from \cite{gabillon2011multi}) and $H_{2}^{\sigma}$ (introduced in this paper) as,
 \begin{align*}
 & H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}\\
-& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\tilde{\Delta}_{(i)} \text{, where } \tilde{\Delta}_{(i)}=\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}
+& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\tilde{\Delta}_{(i)}^{-2} \text{, where } \tilde{\Delta}_{i}^{-2}=\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}
 %& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\frac{12\sigma_{(i)}^{2} + \Delta_{(i)}}{12\Delta_{(i)}^{2}}
 \end{align*}
 which also gives us that $H_{2}^{\sigma} \leq H_{1}^{\sigma} \leq \log(2K) H_{2}^{\sigma}$.
@@ -358,7 +358,7 @@ Also, $\E[\Ls(T)]\le 1- (\Pb\lbrace \xi_1\rbrace  + \Pb\lbrace \xi_2 \rbrace) $.
 & + 2\exp\bigg(- \frac{T\Delta_{i}^{2}\log ( \frac{3}{16} K\log K)}{4096 (\sigma_{i} + \sqrt{\sigma_{i}^{2} + (16/3)\Delta_{i}}) a^2} \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
 &\leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T\log ( \frac{1}{2} K\log K)}{ 64 H_2 (\log(\frac{3}{16} K\log K))^{2}}\bigg)\\
-& + 2\exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \min_{i}i\tilde{\Delta}_{(i)} (\log(\frac{3}{16} K\log K))^{2}} \bigg)\bigg\rbrace\\
+& + 2\exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \min_{i}i\tilde{\Delta}_{(i)}^{-2} (\log(\frac{3}{16} K\log K))^{2}} \bigg)\bigg\rbrace\\
 %%%%%%%%%%%%%%%
 &\leq K\left(\log_2\frac{T}{e}+1\right)\bigg\lbrace\exp\bigg( -\frac{T}{ 64 H_2 (\log(\frac{3}{16} K\log K))}\bigg)\\
 & + 2\exp\bigg(- \frac{T}{4096 H_{2}^{\sigma} (\log(\frac{3}{16} K\log K))} \bigg)\bigg\rbrace\\

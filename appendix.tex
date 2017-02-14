@@ -1,14 +1,14 @@
 \appendix
 \begin{align*}
 & H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}\\
-& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\tilde{\Delta}_{(i)}^{2} \text{, where } \tilde{\Delta}_{(i)}^{2}=\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}
+& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\tilde{\Delta}_{(i)}^{-2} \text{, where } \tilde{\Delta}_{i}^{-2}=\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}
 %& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\frac{12\sigma_{(i)}^{2} + \Delta_{(i)}}{12\Delta_{(i)}^{2}}
 \end{align*}
 
 We know that $\sigma_{i}\in [0,1], \forall i\in \mathcal{A}$ and $\Delta_{i}\in [0,1], \forall i\in \mathcal{A}$ and so $\sigma_{i}^{2} \leq \sigma_{i}$ and $\sqrt{\Delta_{i}} \geq \Delta_{i}$.
 
 \begin{align*}
-\left(\frac{(3\Delta_{i}^{2}). 4\sigma_{i}^{2}+\Delta_{i}+4}{12\sigma_{i}^{2}+\Delta_{i}}\right) & >  \left(\frac{12\Delta_{i}^{2}}{12\sigma_{i}^{2}+\Delta_{i}}\right)\\
+(3\Delta_{i}^{2}).\left(\frac{4\sigma_{i}^{2}+\Delta_{i}+4}{12\sigma_{i}^{2}+\Delta_{i}}\right) & >  \left(\frac{12\Delta_{i}^{2}}{12\sigma_{i}^{2}+\Delta_{i}}\right)\\
 & > \left(\frac{12\Delta_{i}^{2}}{12\sigma_{i}^{2}+12\Delta_{i}}\right)\\
 & > \left(\frac{\Delta_{i}^{2}}{\sigma_{i}+\Delta_{i}}\right)\\
 %& > \left(\frac{\Delta_{i}^{2}}{\sigma_{i}+(\sigma_{i}^{2} + (16/3)\Delta_{i})}\right)\\
@@ -18,7 +18,7 @@ We know that $\sigma_{i}\in [0,1], \forall i\in \mathcal{A}$ and $\Delta_{i}\in 
 
 Now, from \cite{audibert2010best} we know that,
 \begin{align*}
-\sum_{i=1}^{K}\tilde{\Delta}_{i} = \tilde{\Delta}_{(2)}^{-2} + \sum_{i=2}^{K}\frac{1}{i}i\tilde{\Delta}_{(i)}^{-2} &\leq \bar{\log K}\max_{i}i\tilde{\Delta}_{(i)}^{-2}\\
+\sum_{i=1}^{K}\tilde{\Delta}_{i}^{-2} = \tilde{\Delta}_{(2)}^{-2} + \sum_{i=2}^{K}\frac{1}{i}i\tilde{\Delta}_{(i)}^{-2} &\leq \bar{\log K}\max_{i}i\tilde{\Delta}_{(i)}^{-2}\\
 & \leq \log(2K) H_{2}^{\sigma}, \text{ as $\bar{\log K} \leq \log(2K)$}
 \end{align*}
 
