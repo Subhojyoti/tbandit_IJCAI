@@ -22,10 +22,6 @@ $\exp\left( -\frac{T}{ 64 H_2 a} + \log\left(K\left(\log_2\frac{T}{e}+1\right)\r
 \end{table}
 Empirically we show that for a large number of arms when the variance of the arms lying above $\tau$ are high, our algorithm performs better than all other algorithms, except the algorithm UCBEV (modified from Gap-EV for TBP) which has access to the underlying problem complexity and also is a variance-aware algorithm. Irrespective of this case AugUCB also employs elimination of arms based on mean estimation only and is the first such algorithm which uses elimination by both mean and variance estimation simultaneously. AugUCB requires three input parameters and the exact choices for these parameters are derived in Theorem \ref{Result:Theorem:1}. Also, unlike SAR or CSAR, AugUCB does not have explicit accept or reject set rather the arm elimination conditions simply removes arm(s) if it is sufficiently sure that the mean of the arms are very high or very low about the threshold based on mean and variance estimation thereby re-allocating the remaining budget among the surviving arms. This although is a tactic similar to SAR or CSAR, but here at any round, an arbitrary number of arms can be accepted or rejected thereby improving upon SAR and CSAR which accepts/rejects one arm in every round. Also their round lengths are non-adaptive and they pull all the arms equal number of times in each round. 
 %At every timestep AugUCB pulls the arm that minimizes thereby making this an anytime algorithm whereby we need not finish every round. 
-
 The remainder of the paper is organized as follows. In section \ref{algorithm} we present our AugUCB algorithm. 
 Section \ref{results} contains our main theorem on expected loss, while section \ref{expt} contains the numerical experiments. We finally draw our conclusions in section \ref{conclusion}.
-
 %in section \ref{notation} we introduce the notations and the
-
-  
