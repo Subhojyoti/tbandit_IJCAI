@@ -24,3 +24,12 @@ Now, from \cite{audibert2010best} we know that,
 
 So, $H_{2}^{\sigma} \leq H_{1}^{\sigma} \leq \log(2K) H_{2}^{\sigma}$
 
+\textbf{Regarding union bound}\\
+\begin{align*}
+\Pb\lbrace\xi_1 \cup \xi_2\rbrace &= \Pb\lbrace\xi_1\rbrace + \Pb\lbrace\xi_2\rbrace - \Pb\lbrace\xi_1 \cap \xi_2\rbrace\\
+ &\leq \Pb\lbrace\xi_1\rbrace + \Pb\lbrace\xi_2\rbrace
+\end{align*}
+So,
+\begin{align*}
+1-\Pb\lbrace\xi_1 \cup \xi_2\rbrace \geq 1-\Pb\lbrace\xi_1\rbrace + \Pb\lbrace\xi_2\rbrace \geq \E[\Ls(T)] \end{align*}
+
