@@ -23,7 +23,7 @@
         %clip mode=individual,grid,grid style={gray!30},
         clip=true,
         %clip mode=individual,grid,grid style={gray!30},
-  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
+  		legend style={at={(0.5,1.4)},anchor=north, legend columns=3} ]
       	% UCB
 		\addplot table{results/budgetTestAP/APT12_comp_subsampled.txt};
 		%\addplot table{results/budgetTestAP/AugUCB12_comp_subsampled.txt};
@@ -32,8 +32,9 @@
 		\addplot table{results/budgetTestAP/UCBEMV1_comp_subsampled.txt};
 		\addplot table{results/budgetTestAP/SR1_comp_subsampled.txt};
 		\addplot table{results/budgetTestAP/UA1_comp_subsampled.txt};
-		%\addplot table{results/budgetTestAP/AugUCBM11_comp_subsampled.txt};
-      	\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+		\addplot table{results/budgetTestAP/AugUCBM12_comp_subsampled.txt};
+		\addplot table{results/budgetTestAP/AugUCBV1_comp_subsampled.txt};
+      	\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
       	\end{axis}
       	\end{tikzpicture}
   		\label{Fig:budgetExpt1}
@@ -81,7 +82,7 @@
         %clip mode=individual,grid,grid style={gray!30},
 		grid=major,
 		clip=true,
-  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
+  		legend style={at={(0.5,1.4)},anchor=north, legend columns=3} ]
         % UCB
 		\addplot table{results/budgetTestGP/APT12_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCB12_comp_subsampled.txt};
@@ -90,7 +91,9 @@
 		\addplot table{results/budgetTestGP/UCBEMV1_comp_subsampled.txt};
 		\addplot table{results/budgetTestGP/SR1_comp_subsampled.txt};
 		\addplot table{results/budgetTestGP/UA1_comp_subsampled.txt};
-        \legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+		\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
+		\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
+        \legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
       	\end{axis}
       	\label{Fig:budgetExpt2}
         \end{tikzpicture}
