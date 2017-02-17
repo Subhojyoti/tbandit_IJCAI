@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.5.24)  17 FEB 2017 17:13
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.5.24)  17 FEB 2017 19:05
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -935,49 +935,42 @@ Overfull \hbox (0.79112pt too wide) in paragraph at lines 14--14
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 1.
 )) (./results.tex [3]
-Underfull \hbox (badness 1769) in paragraph at lines 70--79
+Underfull \hbox (badness 1769) in paragraph at lines 83--92
 \OT1/ptm/m/n/10 go-rithm, Also, for each arm $\OML/cmm/m/it/10 i \OMS/cmsy/m/n/
 10 2 A$\OT1/ptm/m/n/10 , de-fine $\OML/cmm/m/it/10 m[] \OT1/cmr/m/n/10 =
  []
 
 
-Overfull \hbox (10.71458pt too wide) in paragraph at lines 240--240
+Overfull \hbox (10.71458pt too wide) in paragraph at lines 253--253
 [] 
  []
 
 [4]
-Overfull \hbox (5.23514pt too wide) in paragraph at lines 355--355
+Overfull \hbox (5.23514pt too wide) in paragraph at lines 369--369
 [] 
  []
 
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 358.
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 372.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 358.
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 372.
 
-Underfull \hbox (badness 1168) in paragraph at lines 360--361
+Underfull \hbox (badness 1168) in paragraph at lines 374--375
 []\OT1/ptm/m/n/10 To ob-tain $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 c\OT1/cmr/m/n/1
 0 )$ \OT1/ptm/m/n/10 we have used the in-equal-ity $\OT1/cmr/m/n/10 ^^A[] \OMS/
 cmsy/m/n/10 ^^T
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 361--362
-[]\OT1/ptm/m/n/10 To ob-tain $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d\OT1/cmr/m/n/1
-0 )$ \OT1/ptm/m/n/10 and $\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 e\OT1/cmr/m/n/10 )$
-\OT1/ptm/m/n/10 , re-call that $[] \OT1/cmr/m/n/10 =
+Underfull \hbox (badness 7047) in paragraph at lines 375--376
+[]$\OT1/cmr/m/n/10 (\OML/cmm/m/it/10 d\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n/10 is ob-
+tained sim-ply by sub-sti-tut-ing $[] \OT1/cmr/m/n/10 =
  []
 
-
-Underfull \hbox (badness 1360) in paragraph at lines 361--362
-[]$ \OT1/ptm/m/n/10 and $\OML/cmm/m/it/10 a \OT1/cmr/m/n/10 = []([]\OML/cmm/m/i
-t/10 K [] K\OT1/cmr/m/n/10 )$\OT1/ptm/m/n/10 . Fi-
- []
-
-) (./expt.tex
+) (./expt.tex [5]
 PGFPlots: reading {results/budgetTestAP/APT12_comp_subsampled.txt}
 PGFPlots: reading {results/budgetTestAP/AugUCBV1_comp_subsampled.txt}
 PGFPlots: reading {results/budgetTestAP/UCBEM1_comp_subsampled.txt}
@@ -1034,9 +1027,6 @@ Underfull \hbox (badness 1661) in paragraph at lines 139--139
  []
 
 
-LaTeX Warning: `!h' float specifier changed to `!ht'.
-
-[5]
 Underfull \hbox (badness 1874) in paragraph at lines 148--149
 \OT1/ptm/m/n/10 pected re-wards of the arms as $\OML/cmm/m/it/10 r[] \OT1/cmr/m
 /n/10 = 0\OML/cmm/m/it/10 :\OT1/cmr/m/n/10 1$\OT1/ptm/m/n/10 , $\OML/cmm/m/it/1
@@ -1123,7 +1113,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 27--28
 Here is how much of TeX's memory you used:
  26667 strings out of 493089
  661615 string characters out of 6134842
- 934717 words of memory out of 5000000
+ 930808 words of memory out of 5000000
  29565 multiletter control sequences out of 15000+600000
  36477 words of font info for 94 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
@@ -1150,7 +1140,7 @@ texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2
 015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-
 dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on ijcai17.pdf (8 pages, 279608 bytes).
+Output written on ijcai17.pdf (8 pages, 280217 bytes).
 PDF statistics:
  119 PDF objects out of 1000 (max. 8388607)
  87 compressed objects within 1 object stream

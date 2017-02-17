@@ -13,23 +13,36 @@ $H_{CSAR,2}$ is the complexity term appearing in the bound for the CSAR algorith
 %
 %$H_1$ and $H_2$ is same as the problem complexity defined in \cite{locatelli2016optimal} for the thresholding bandit problem while $H_{CSAR,2}=\max_{i}\frac{i}{\Delta_{(i)}^2}$ is defined in \cite{chen2014combinatorial}. Also we know from \cite{locatelli2016optimal} that,
 \begin{align*}
-H_{2}\leq H_{1}\leq \log(2K)H_{2} \hspace{1mm} \text{ and } \hspace{1mm} H_1 \leq \log(K)H_{CSAR,2}
+H_{1}\leq \log(2K)H_{2} \mbox{ and }
+ H_1 \leq \log(K)H_{CSAR,2}.
 \end{align*}
 
 As ours is a variance-aware algorithm, we require $H_{1}^{\sigma}$ (as defined in \cite{gabillon2011multi}) that incorporates reward variances into its expression as given below:
 \begin{align*}
- H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}.
+ H_{\sigma,1}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}.
 \end{align*}
-Finally, analogous to $H_2$, in this paper we introduce the complexity term $H_2^\sigma$, which is given by
+Finally, analogous to $H_{CSAR,2}$, in this paper we introduce the complexity term $H_{\sigma,2}$, which is given by
 %and $H_{2}^{\sigma}$ (introduced in this paper) as,
 \begin{align*}
 %& H_{1}^{\sigma}=\sum_{i=1}^{K}\frac{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}{\Delta_{i}^{2}}\\
-H_{2}^{\sigma}=\min_{i\in \mathcal{A}} \frac{i}{\tilde{\Delta}_{(i)}^{2}}%& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\frac{12\sigma_{(i)}^{2} + \Delta_{(i)}}{12\Delta_{(i)}^{2}}
+H_{\sigma,2}=\max_{i\in \mathcal{A}} \frac{i}{\tilde{\Delta}_{(i)}^{2}}%& H_{2}^{\sigma}=\min_{i\in \mathcal{A}} i\frac{12\sigma_{(i)}^{2} + \Delta_{(i)}}{12\Delta_{(i)}^{2}}
 \end{align*}
-where $\tilde{\Delta}_{i}^{2}=\frac{\Delta_{i}^{2}}{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}$, and $(\tilde{\Delta}_{(i)})$ is an increasing ordering of $(\tilde{\Delta}_{i})$.
-Similar to the relation between $H_1$ and $H_2$, it can be shown that
-%which also gives us that 
-$H_{2}^{\sigma} \leq H_{1}^{\sigma} \leq \log(2K) H_{2}^{\sigma}$.
+where $\tilde{\Delta}_{i}^{2}=\frac{\Delta_{i}^{2}}{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}$, and $(\tilde{\Delta}_{(i)})$ is an increasing ordering of $(\tilde{\Delta}_{i})$. Following the results in \cite{audibert2010best}, we can show that
+\begin{align*}
+H_{\sigma,2}\le H_{\sigma,1}\le\overline{\log}(K) H_{\sigma,2} \le \log(2K) H_{\sigma,2}.
+\end{align*}
+
+
+%Similar to the relation between $H_1$ and $H_2$, it can be shown that
+%%which also gives us that 
+%$H_{2}^{\sigma} \leq H_{1}^{\sigma} \leq \log(2K) H_{2}^{\sigma}$.
+%
+%Also, from \cite{audibert2010best} we know that,
+%\begin{align*}
+%\sum_{i=1}^{K}\tilde{\Delta}_{i}^{-2} = \tilde{\Delta}_{(2)}^{-2} + \sum_{i=2}^{K}\frac{1}{i}i\tilde{\Delta}_{(i)}^{-2} &\leq \bar{\log K}\min_{i}i\tilde{\Delta}_{(i)}^{-2}\\
+%& \leq \log(2K) H_{2}^{\sigma}, \text{ as $\bar{\log K} \leq \log(2K)$}
+%\end{align*}
+
 
 %\subsection{Theorem 1}
 Our main result is summarized in the following theorem where we prove an  upper bound on the expected loss. 
@@ -44,10 +57,10 @@ the expected loss of the AugUCB algorithm is given by,
 \E[\Ls(T)]
 %\exp\bigg( -\frac{T\log (2 K\sqrt{\log K})}{2H_2 K (\log K)^{3/2}} + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg)\\
 %& + \exp\bigg(- \frac{5T\log ( K\sqrt{\log K})}{H_{2}^{\sigma} K(\log K)^{3/2}}  + \log\bigg(K\big(\log_2\frac{T}{e}+1\big)\bigg)\bigg).
-& \leq 2K\left(\log_2\frac{T}{e}+1\right)
+& \leq 2KT
 % \bigg\lbrace\exp\bigg( -\frac{T}{ 64 H_2 a}\bigg)
 % + 2
- \exp\bigg(- \frac{T}{4096 H_{2}^{\sigma} a} \bigg)
+ \exp\bigg(- \frac{T}{4096 aH_{\sigma,2}} \bigg)
  %\bigg\rbrace
 \end{align*}
 where $a=\log(\frac{3}{16} K\log K)$.
@@ -350,20 +363,22 @@ Note that, on $\xi$ each arm $i\in \mathcal{A}$  is eliminated correctly in the 
 &\overset{(a)}{\le} 4T \sum_{i\in\mathcal{A}} \exp\left(- \frac{3T\Delta_{i}^{2}}{4096 a^2} \left(\frac{4\sigma_{i}^{2}+\Delta_{i}+4}{12\sigma_{i}^{2}+\Delta_{i}}\right) \log( \frac{3}{16} T\Delta_{i}^{2}) \right) \\
 &\overset{(b)}{\le} 4T \sum_{i\in\mathcal{A}}\exp\bigg(- \frac{12T\Delta_{i}^{2}}{(12\sigma_{i}+ 12\Delta_{i})}\frac{\log (\frac{3}{16} K\log K)}{4096 a^2 } \bigg) \\
 &\overset{(c)}{\le} 4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\Delta_{i}^{2}\log ( \frac{3}{16} K\log K)}{4096 (\sigma_{i} + \sqrt{\sigma_{i}^{2} + (16/3)\Delta_{i}}) a^2} \bigg) \\
-& \overset{(d)}{\le}4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \max_{i}(i\tilde{\Delta}_{(i)}^{-2}) (\log(\frac{3}{16} K\log K))^{2}} \bigg) \\
-& \overset{(e)}{\le}4KT \exp\bigg(- \frac{T}{4096 H_{2}^{\sigma} (\log(\frac{3}{16} K\log K))}\bigg).
+& \overset{(d)}{\le} 4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \tilde{\Delta}_i^{-2} a^2} \bigg) \\
+& \overset{(e)}{\le}4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \max_{j}(j\tilde{\Delta}_{(j)}^{-2}) (\log(\frac{3}{16} K\log K))^{2}} \bigg) \\
+& \overset{(f)}{\le}4KT \exp\bigg(- \frac{T}{4096 H_{2}^{\sigma} (\log(\frac{3}{16} K\log K))}\bigg).
 \end{align*}
 The following are used to achieve the above simplification:
 \begin{itemize}
 \item $(a)$ is obtained by noting that in round $m_i$ we have $\frac{\Delta_i}{4}\leq\sqrt{\epsilon_{m_{i}}\rho}<\frac{\Delta_i}{2}$.
 \item For $(b)$, we note that the function $x\mapsto x\exp(-Cx^2)$, where $x\in[0,1]$, is  decreasing on $[1/\sqrt{2C},1]$ for any $C>0$ (see \cite{bubeck2011pure,auer2010ucb}). Thus, using $C=\lfloor \sqrt{e/T}\rfloor$ and putting $\min_{i\in \mathcal{A}}\Delta_i =\Delta =\sqrt{\frac{K\log K}{T}} > \sqrt{\frac{e}{T}},\forall i\in \mathcal{A}$ we obtain (b).
 \item To obtain $(c)$ we have used the inequality $\Delta_i\le \sqrt{\sigma_{i}^{2} + (16/3)\Delta_{i}}$ (which holds because $\Delta_i\in[0,1]$).
-\item To obtain $(d)$ and $(e)$, recall that $\tilde{\Delta}_i=\frac{\Delta_{i}^{2}}{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}$ and $a=\log(\frac{3}{16} K\log K)$. Finally, note that
+\item $(d)$ is obtained simply by substituting $\tilde{\Delta}_i=\frac{\Delta_{i}^{2}}{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}$ and $a=\log(\frac{3}{16} K\log K)$.
+\item Finally, to obtain $(e)$ and $(f)$ , note that, 
 \begin{align*}
-\tilde{\Delta}_i^{-2}\le \max_{j\in\mathcal{A}}\Delta_{(j)}^{-2}\le  \max_{j\in\mathcal{A}}j \Delta_{(j)}^{-2}=H_2^\sigma.
+\tilde{\Delta}_i^{-2}\le i\tilde{\Delta}_i^{-2} \le \max_{j\in\mathcal{A}}j\Delta_{(j)}^{-2}=H_2^\sigma.
 \end{align*}
 \end{itemize}
-
+\noindent
 %Again  summing the above expressions, the probability that an arm ${i}$ is not eliminated on or before $g_{i}$-th round based on the (\ref{eq:armelim-var-casea}) and (\ref{eq:armelim-var-caseb}) elimination condition is  $4\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{256 a^2 } \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)$. 
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
