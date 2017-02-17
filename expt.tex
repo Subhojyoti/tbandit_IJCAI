@@ -121,22 +121,54 @@
 		clip=true,
   		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
         % UCB
-		\addplot table{results/budgetTestGPBern/APT1_comp_subsampled.txt};
-		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR2/APT1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR2/AugUCBV1_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBV_1_13_comp_subsampled.txt};
-		\addplot table{results/budgetTestGPBern/UCBEM1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGPBern/UCBEMV1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGPBern/SR1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGPBern/UA1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR2/UCBEM1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR2/UCBEMV1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR2/SR1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR2/UA1_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
-        \legend{APT,UCBE,UCBEV,CSAR,Unif Alloc}
+        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,Unif Alloc}
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
       	\end{axis}
       	\label{Fig:budgetExpt4}
         \end{tikzpicture}
     }
+%    \subfigure[0.32\textwidth][Experiment $4$: Experiment with Geometric Progression (Bernoulli) ]
+%    {
+%    	\pgfplotsset{
+%		tick label style={font=\Huge},
+%		label style={font=\Huge},
+%		legend style={font=\Large},
+%		}
+%        \begin{tikzpicture}[scale=0.4]
+%        \begin{axis}[
+%		xlabel={timestep},
+%		ylabel={Error Percentage},
+%        %clip mode=individual,grid,grid style={gray!30},
+%		grid=major,
+%		clip=true,
+%  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
+%        % UCB
+%		\addplot table{results/budgetTestGPBern/APT1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
+%		%\addplot table{results/budgetTestGP/AugUCBV_1_13_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGPBern/UCBEM1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGPBern/UCBEMV1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGPBern/SR1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGPBern/UA1_comp_subsampled.txt};
+%		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
+%		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
+%        %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
+%        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+%        %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+%      	\end{axis}
+%      	\label{Fig:budgetExpt4}
+%        \end{tikzpicture}
+%    }
     \end{tabular}
     \caption{Experiments with thresholding bandit}
     \label{fig:budgetExpt}
