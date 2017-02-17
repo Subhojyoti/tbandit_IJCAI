@@ -1,5 +1,12 @@
 \begin{thebibliography}{}
 
+\bibitem[\protect\citeauthoryear{Abernethy \bgroup \em et al.\egroup
+  }{2016}]{abernethy2016threshold}
+Jacob~D Abernethy, Kareem Amin, and Ruihao Zhu.
+\newblock Threshold bandits, with and without censored feedback.
+\newblock In {\em Advances In Neural Information Processing Systems}, pages
+  4889--4897, 2016.
+
 \bibitem[\protect\citeauthoryear{Audibert and
   Bubeck}{2009}]{audibert2009minimax}
 Jean-Yves Audibert and S{\'e}bastien Bubeck.
