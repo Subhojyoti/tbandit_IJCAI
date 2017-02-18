@@ -26,12 +26,11 @@
 \maketitle
 
 \begin{abstract}
-We propose the  Augmented-UCB (AugUCB) algorithm for the thresholding bandit problem, which is an instance of the combinatorial fixed-budget pure-exploration stochastic multi-armed bandit setup. Our algorithm is 
+In this paper we propose the Augmented UCB (AugUCB) algorithm for the fixed-budget setting of a specific combinatorial, pure-exploration, stochastic multi-armed bandit setup called the thresholding bandit problem. Our algorithm is based on arm elimination, employing both the mean and variance estimates. Theoretically, our algorithm provides a weaker guarantee (in terms of an upper bound on the expected loss) than UCBEV, a variant of GAP-EV (\cite{gabillon2011multi}) algorithm modified for thresholding bandit problem. But Gap-EV requires access to problem complexity while AugUCB requires no such complexity parameters as input. Also through simulation experiments we establish that our algorithm, owing to its utilization of variance estimates in arm elimination, performs   significantly better than state-of-the-art APT and CSAR algorithms, particularly when a large number of arms with different means and variances are involved. 
 %is an anytime arm elimination variance-aware algorithm, and is the first of its kind which employs arm elimination 
-based on arm elimination, employing both the mean and variance estimates.  
-Theoretically, our algorithm provides a weaker guarantee (in terms of an upper bound on the expected loss) than APT \cite{locatelli2016optimal} and CSAR \cite{chen2014combinatorial}.
-However, through simulation experiments we establish that our algorithm, being variance-aware, performs  better than APT and CSAR algorithms, particularly when a large number of arms are involved. 
 
+
+%We propose the  Augmented-UCB (AugUCB) algorithm for the thresholding bandit problem, which is an instance of the combinatorial fixed-budget pure-exploration stochastic multi-armed bandit setup.
 %the latter ones since it is a variance-aware algorithm. In the considered test cases comprising large number of arms, our algorithm has consistently performed much better than the state-of-the art APT and CSAR algorithms.  
 \end{abstract}
 
