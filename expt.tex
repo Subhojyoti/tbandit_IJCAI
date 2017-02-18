@@ -195,7 +195,7 @@
 		\addplot table{results/budgetTestGR4/UA1_comp_subsampled.txt};
         \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,Unif Alloc}
       	\end{axis}
-      	\label{Fig:budgetExpt5}
+      	\label{Fig:budgetExpt6}
         \end{tikzpicture}
     }
     \end{tabular}
@@ -212,4 +212,4 @@
 	
 	The fifth experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set  in two groups.  The testbed is same as the previous experiment but involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:5}=0.45$ and $r_{6:10}=0.55$. The result is shown in Figure \ref{Fig:budgetExpt5}. Here, AugUCB and APT perform almost similarly with both UCBE and UCBEV beating AugUCB.
 	
-	The sixth experiment is conducted on a testbed of $100$ arms involving Gaussian reward distributions with the mean of first $10$ arms set  in two groups with with expected rewards of the arms as $r_{1:5}=0.45$, $r_{6:10}=0.55$ and $r_{11:100}=0.4$. Variance is set as $\sigma_{1:5}^{2}=0.3$ and $\sigma_{6:10}^{2}=0.8$. Then $\sigma_{11:100}^{2}$ is chosen uniform randomly between $0.2-0.3$. We name this setup Advanced because in this setup the variances are set in such a way that only a variance aware algorithm will perform very well and non variance aware will perform poorly. Here UCBEV performs very well compared to others and only caught up by AugUCB. Because of such large difference in the variances between the arms below and above $\tau$, APT, UCBE and CSAR performs very badly. Also in all the experiments we see that although CSAR performs well initially, but it quickly exhausts its budget and always saturates at a higher error percentage since it has non-adaptive round length and it is pulling all arms equally in each round    
+	The sixth experiment is conducted on a testbed of $100$ arms involving Gaussian reward distributions with the mean of first $10$ arms set  in two groups with with expected rewards of the arms as $r_{1:5}=0.45$, $r_{6:10}=0.55$ and $r_{11:100}=0.4$. Variance is set as $\sigma_{1:5}^{2}=0.3$ and $\sigma_{6:10}^{2}=0.8$. Then $\sigma_{11:100}^{2}$ is chosen uniform randomly between $0.2-0.3$. We name this setup Advanced because in this setup the variances are set in such a way that only a variance aware algorithm will perform very well and non variance aware will perform poorly. Here UCBEV performs very well compared to others and only caught up by AugUCB. Because of such large difference in the variances between the arms below and above $\tau$, APT, UCBE and CSAR performs very badly. The result is shown in Figure \ref{Fig:budgetExpt6}. Also in all the experiments we see that although CSAR performs well initially, but it quickly exhausts its budget and always saturates at a higher error percentage since it has non-adaptive round length and it is pulling all arms equally in each round.
