@@ -16,7 +16,7 @@ Thus, we find that the upper bound for AugUCB is weaker than that for UCBEV.
 \caption{AugUCB vs.\ State of the art}
 \label{tab:regret-bds}
 \begin{center}
-\begin{tabular}{|p{1.3cm}|p{6.35cm}|}
+\begin{tabular}{|p{1.3cm}|p{6.4cm}|}
 % \toprule
 \hline
 Algorithm  & Upper Bound on Expected Loss \\
@@ -31,11 +31,11 @@ CSAR		&$K^2\exp\left(-\dfrac{T-K}{72\log(K)H_{CSAR,2}}\right)$ \\
 %\midrule
 \hline
 \hline
-UCBEV		&$\exp\left(-\dfrac{1}{512}\dfrac{T-2K}{H_{\sigma,1}} + \log\left(6KT\right)\right)$ \\
+UCBEV		&$\exp\left(-\dfrac{1}{512}\dfrac{T-2K}{H_{\sigma,1}} + \log\left(KT\right)\right)$ \\
 %\midrule
 \hline
 \hline
-AugUCB      &$ \exp\left(- \dfrac{T}{4096 \log(K\log K)H_{\sigma,2}} + \log\left(2KT\right) \right) $ \\
+AugUCB      &$ \exp\left(- \dfrac{T}{4096 \log(K\log K)H_{\sigma,2}} + \log\left(KT\right) \right) $ \\
 \hline
 %\bottomrule
 \end{tabular}
