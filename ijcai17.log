@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.5.24)  18 FEB 2017 17:48
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2016.5.24)  18 FEB 2017 17:51
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -933,7 +933,7 @@ Overfull \hbox (0.79112pt too wide) in paragraph at lines 38--38
  []
 
 
-Overfull \hbox (8.73145pt too wide) in paragraph at lines 38--39
+Overfull \hbox (13.84955pt too wide) in paragraph at lines 38--39
 []|$[] []$| 
  []
 
@@ -1137,7 +1137,7 @@ texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2
 015/texmf-dist/fonts/type1/urw/times/utmb8a.pfb></usr/local/texlive/2015/texmf-
 dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/texlive/2015/texmf-dist/fonts
 /type1/urw/times/utmri8a.pfb>
-Output written on ijcai17.pdf (7 pages, 283943 bytes).
+Output written on ijcai17.pdf (7 pages, 283932 bytes).
 PDF statistics:
  116 PDF objects out of 1000 (max. 8388607)
  85 compressed objects within 1 object stream
