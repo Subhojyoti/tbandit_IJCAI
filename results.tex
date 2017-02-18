@@ -60,10 +60,10 @@ the expected loss of the AugUCB algorithm is given by,
 & \leq 2KT
 % \bigg\lbrace\exp\bigg( -\frac{T}{ 64 H_2 a}\bigg)
 % + 2
- \exp\bigg(- \frac{T}{4096 aH_{\sigma,2}} \bigg)
+ \exp\bigg(- \frac{T}{4096 \log( K\log K) H_{\sigma,2}} \bigg).
  %\bigg\rbrace
 \end{align*}
-where $a=\log(\frac{3}{16} K\log K)$.
+%where $a=\log(\frac{3}{16} K\log K)$.
 %\end{small}
 %For every $0<\eta <1$ and $\gamma > 1$, there exists time $t$ such that for all $T>t$ the simple regret of AugUCB is upper bounded by,
 %\begin{small}
@@ -77,7 +77,9 @@ where $a=\log(\frac{3}{16} K\log K)$.
 \end{theorem}
 
 \begin{proof}
-The proof comprises of three modules. In the first module we investigate the necessary conditions for arm elimination within a specified number of rounds, which is motivated by the technique in \cite{auer2010ucb}. Bounds on the arm-elimination probability is then obtained; however, since we use variance estimates, we invoke the Bernstein inequality (as in \cite{audibert2009exploration}) rather that the Chernoff-Hoeffding bounds (which is appropriate for the UCB-Improved \cite{auer2010ucb}). In the second module, as in \cite{locatelli2016optimal}, we define a favorable event that will yield a bound for the expected loss. In the final module we conclude by combining the results for the first two modules. The details are as follows. 
+The proof comprises of two modules. In the first module we investigate the necessary conditions for arm elimination within a specified number of rounds, which is motivated by the technique in \cite{auer2010ucb}. Bounds on the arm-elimination probability is then obtained; however, since we use variance estimates, we invoke the Bernstein inequality (as in \cite{audibert2009exploration}) rather that the Chernoff-Hoeffding bounds (which is appropriate for the UCB-Improved \cite{auer2010ucb}). In the second module, as in \cite{locatelli2016optimal}, we first define a favourable event that will yield an upper bound on the expected loss. Using union bound, we then incorporate the result from module-1 (on the arm elimination probability), and finally derive the result through a series of simplifications.
+%In the final module we conclude by combining the results for the first two modules. 
+The details are as follows. 
 
 
 \textbf{Arm Elimination:} Recall the notations used in the algorithm, Also, for each arm $i\in\mathcal{A}$, define $m_{i}=\min\left\lbrace m| \sqrt{\rho\epsilon_{m}}<\frac{\Delta_{i}}{2}\right\rbrace$. In the $m_i$-th round, whenever $n_i=\ell_{m_i}\ge\frac{2\psi_{m_i}\log{(T\epsilon_{m_{i}})}}{\epsilon_{m_{i}}}$, we obtain (as $\hat{v}_i\in[0,1]$)
@@ -317,7 +319,7 @@ Also, note that $(a)$ is obtained by using  $\psi_{m_i}=\frac{T\epsilon_{m_i}}{1
 % For the term in , by applying Bernstein inequality, we can write as,
 %\begin{small}
 \begin{align}
-&\mathbb{P}\bigg\lbrace \hat{v}_{i}\geq \sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}\bigg\rbrace\nonumber\\
+&\mathbb{P}\bigg\lbrace \hat{v}_{i}\geq \sigma_{i}^{2}+\sqrt{\rho\epsilon_{m_{i}}}\bigg\rbrace\nonumber\\
 &\leq \mathbb{P}\bigg\lbrace \dfrac{1}{n_{i}}\sum_{t=1}^{n_{i}}(X_{i,t}-r_{i})^{2}-(\hat{r}_{i}-r_{i})^{2}\geq \sigma_{i}^{2}+\sqrt{\rho\epsilon_{m_{i}}}\bigg\rbrace\nonumber\\
 &\leq \mathbb{P}\bigg\lbrace \dfrac{\sum_{t=1}^{n_{i}}(X_{i,t}-r_{i})^{2}}{n_{i}}\geq \sigma_{i}^{2}+\sqrt{\rho\epsilon_{m_{i}}} \bigg\rbrace\nonumber\\
 &\overset{(a)}{\leq} \mathbb{P}\bigg\lbrace \dfrac{\sum_{t=1}^{n_{i}}(X_{i,t}-r_{i})^{2}}{n_{i}}\geq \sigma_{i}^{2} + 2\bar{s}_i\bigg\rbrace \nonumber\\
@@ -365,15 +367,18 @@ Note that, on $\xi$ each arm $i\in \mathcal{A}$  is eliminated correctly in the 
 &\overset{(c)}{\le} 4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\Delta_{i}^{2}\log ( \frac{3}{16} K\log K)}{4096 (\sigma_{i} + \sqrt{\sigma_{i}^{2} + (16/3)\Delta_{i}}) a^2} \bigg) \\
 & \overset{(d)}{\le} 4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \tilde{\Delta}_i^{-2} a^2} \bigg) \\
 & \overset{(e)}{\le}4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \max_{j}(j\tilde{\Delta}_{(j)}^{-2}) (\log(\frac{3}{16} K\log K))^{2}} \bigg) \\
-& \overset{(f)}{\le}4KT \exp\bigg(- \frac{T}{4096 H_{\sigma,2} (\log(\frac{3}{16} K\log K))}\bigg).
+& \overset{(f)}{\le}4KT \exp\bigg(- \frac{T}{4096 H_{\sigma,2} (\log(K\log K))}\bigg).
 \end{align*}
-The following are used to achieve the above simplification:
+The justification for the above simplifications are as follows:
 \begin{itemize}
-\item $(a)$ is obtained by noting that in round $m_i$ we have $\frac{\Delta_i}{4}\leq\sqrt{\epsilon_{m_{i}}\rho}<\frac{\Delta_i}{2}$.
-\item For $(b)$, we note that the function $x\mapsto x\exp(-Cx^2)$, where $x\in[0,1]$, is  decreasing on $[1/\sqrt{2C},1]$ for any $C>0$ (see \cite{bubeck2011pure,auer2010ucb}). Thus, using $C=\lfloor \sqrt{e/T}\rfloor$ and putting $\min_{i\in \mathcal{A}}\Delta_i =\Delta =\sqrt{\frac{K\log K}{T}} > \sqrt{\frac{e}{T}},\forall i\in \mathcal{A}$ we obtain (b).
+\item $(a)$ is obtained by noting that in round $m_i$ we have 
+\begin{align*}\frac{\Delta_i}{4}\leq\sqrt{\epsilon_{m_{i}}\rho}<\frac{\Delta_i}{2}.\end{align*}
+\item For $(b)$, we note that the function $x\mapsto x\exp(-Cx^2)$, where $x\in[0,1]$, is  decreasing on $[1/\sqrt{2C},1]$ for any $C>0$ (see \cite{bubeck2011pure,auer2010ucb}). Thus, using $C=\lfloor \sqrt{e/T}\rfloor$ and $\min_{j\in \mathcal{A}}\Delta_j =\Delta =\sqrt{\frac{K\log K}{T}} > \sqrt{\frac{e}{T}}$,
+%\forall i\in \mathcal{A}$ 
+we obtain (b).
 \item To obtain $(c)$ we have used the inequality $\Delta_i\le \sqrt{\sigma_{i}^{2} + (16/3)\Delta_{i}}$ (which holds because $\Delta_i\in[0,1]$).
 \item $(d)$ is obtained simply by substituting $\tilde{\Delta}_i=\frac{\Delta_{i}^{2}}{\sigma_{i}+\sqrt{\sigma_{i}^{2}+(16/3)\Delta_{i}}}$ and $a=\log(\frac{3}{16} K\log K)$.
-\item Finally, to obtain $(e)$ and $(f)$ , note that, 
+\item Finally, to obtain $(e)$ and $(f)$, note that 
 \begin{align*}
 \tilde{\Delta}_i^{-2}\le i\tilde{\Delta}_i^{-2} \le \max_{j\in\mathcal{A}}j\Delta_{(j)}^{-2}=H_{\sigma,2}.
 \end{align*}

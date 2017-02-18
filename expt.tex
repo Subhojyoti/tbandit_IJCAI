@@ -1,15 +1,37 @@
+In this section, we compare the empirical performance of AugUCB against the performances of the
+APT, CSAR, UCBE and UCBEV algorithms. We also implement the uniform-allocation (labeled UA) strategy, where at each time-step an arm is sampled uniformly from the set of all arms; UA is known to be optimal if all arms are equally difficult to classify. APT (proposed in \cite{locatelli2016optimal}) is run with $\epsilon=0.05$, which denotes the precision with which the algorithm suggests the set of good arms. CSAR is modified for the TBP setting such that it behaves as a Successive Reject algorithm whereby it rejects the arm farthest from $\tau$ after each round.
+Similarly we modify the UCBE \cite{audibert2009exploration} and UCBEV \cite{gabillon2011multi} algorithms  (originally proposed for single best arm and TopM identification problems, respectively) to suit the TBP setting. 
+%to \cite{locatelli2016optimal} to suit the goal of finding arms above the threshold $\tau$. 
+Following  \cite{locatelli2016optimal} the exploration parameter $a$ in UCBE is set to $a=\frac{T-K}{H_1}$, while for UCBEV we set $a = \frac{T-2K}{H_{\sigma,1}}$. Then, at each time-step $t=1,2,..,T$ we pull the arm that minimizes
+ $\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \rbrace$, where $a$ is set as mentioned above for UCBE and UCBEV respectively. Finally, for AugUCB we take $\rho=\frac{1}{3}$ as in  Theorem \ref{Result:Theorem:1}.
 
+%Again, for UCBEV, following \cite{gabillon2011multi}, we modify it such that the exploration parameter $a = \frac{T-2K}{H_{\sigma,1}}$. Then for each timestep $t=1,2,..,T$ we pull the arm that minimizes $\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \rbrace$, where $n_{i}$ is the number of times the arm $i$ is pulled till $t-1$ timestep and $a$ is set as mentioned above for UCBE and UCBEV respectively. Also, APT is run with $\epsilon=0.05$, which denotes the precision with which the algorithm suggests the best set of arms and we modify CSAR as per \cite{locatelli2016optimal} such that it behaves as a Successive Reject algorithm whereby it rejects the arm farthest from $\tau$ after each phase. For AugUCB we take $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$ as in Theorem \ref{Result:Theorem:1}. In all the testbeds AugUCB, APT, CSAR, Uniform Allocation, UCBE and UCBEV are run with the same settings as mentioned above.
 
-	In this section we compare the empirical performance of AugUCB against APT, Uniform Allocation, CSAR, UCBE and UCBEV algorithm. The threshold $\tau$ is set at $0.5$ for all experiments. Each algorithm is run independently $500$ times for $10000$ timesteps and the output set of arms suggested by the algorithms at every timestep is recorded. The output is considered erroneous if the correct set of arms is not $i=\lbrace 6,7,8,9,10 \rbrace$ (true for all the experiments). The error percentage over $500$ runs is plotted against $10000$ timesteps. For the uniform allocation algorithm, for each $t=1,2,..,T$ the arms are sampled uniformly. For UCBE algorithm (\cite{audibert2009exploration}) which was built for single best arm identification, we modify it according to \cite{locatelli2016optimal} to suit the goal of finding arms above the threshold $\tau$. So the exploration parameter $a$ in UCBE is set to $a=\frac{T-K}{H_1}$. Again, for UCBEV, following \cite{gabillon2011multi}, we modify it such that the exploration parameter $a = \frac{T-2K}{H_{1}^{\sigma}}$. Then for each timestep $t=1,2,..,T$ we pull the arm that minimizes $\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \rbrace$, where $n_{i}$ is the number of times the arm $i$ is pulled till $t-1$ timestep and $a$ is set as mentioned above for UCBE and UCBEV respectively. Also, APT is run with $\epsilon=0.05$, which denotes the precision with which the algorithm suggests the best set of arms and we modify CSAR as per \cite{locatelli2016optimal} such that it behaves as a Successive Reject algorithm whereby it rejects the arm farthest from $\tau$ after each phase. For AugUCB we take $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$ as in Theorem \ref{Result:Theorem:1}. In all the testbeds AugUCB, APT, CSAR, Uniform Allocation, UCBE and UCBEV are run with the same settings as mentioned above. 
+In total we conduct a set of six experiments with different reward means and variances. However, 
+in all the experiments, the threshold $\tau$ is set to $0.5$. %for all experiments. 
+Also, the number of arms in each experiment is $K=100$ (indexed $i=1,2,\cdots,100$), of which $\lbrace 6,7,8,9,10 \rbrace$ arms have their reward means above $\tau$. In all the experiments, each algorithm is run independently for $10000$ time-steps, and the output set of arms suggested by each algorithm at every time-step is recorded. The experiment is repeated for $500$ independent iterations, and the average error percentage is plotted against the $10000$ time-steps. 
+
+ %The output is considered erroneous if the correct set of arms is not $i=\lbrace 6,7,8,9,10 \rbrace$ (true for all the experiments). The error percentage over $500$ runs is plotted against $10000$ timesteps. 
+ 
+ %For the uniform allocation algorithm, for each $t=1,2,..,T$ the arms are sampled uniformly. 
+ 
+ 
 %Also we run AugUCBM with arm elimination just by mean estimation and AugUCBV with arm elimination just by variance estimation. For AugUCBM, at every timestep we pull arm that minimizes $i\in\argmin_{j\in B_{m}}\bigg\lbrace |\hat{r}_{j} - \tau | - 2c_{j}\bigg\rbrace$ while for AugUCBV we pull arm that minimizes $i\in\argmin_{j\in B_{m}}\bigg\lbrace |\hat{r}_{j} - \tau | - 2s_{j}\bigg\rbrace$.
 
-	The first experiment is conducted on a testbed of $100$ arms involving Gaussian reward distribution with expected rewards of the arms $r_{1:4}=0.2+(0:3)*0.05$, $r_{5}=0.45$, $r_{6}=0.55$, $r_{7:10}=0.65+(0:3)*0.05$ and $r_{11:100}$=0.4. The means of first $10$ arms are set as arithmetic progression. Variance is set as $\sigma_{1:5}^{2}=0.5$ and $\sigma_{6:10}^{2}=0.6$. Then $\sigma_{11:100}^{2}$ is chosen uniform randomly between $0.38-0.42$. The means in the testbed are chosen in such a way that any algorithm has to spend a significant amount of budget to explore all the arms and variance is chosen in such a way that the arms above $\tau$ have high variance whereas arms below $\tau$ have lower variance. The result is shown in Figure \ref{Fig:budgetExpt1}. In this experiment we see that UCBEV which has access to the problem complexity and is a variance-aware algorithm beats all other algorithm including UCBE which has access to the problem complexity but does not take into account the variance of the arms. AugUCB with the said parameters outperforms UCBE, APT and the other non variance-aware algorithms that we have considered. 	
+%	The first experiment is conducted on a testbed of $100$ arms involving 
+	
+\textbf{Experiment-1:} Here, we consider Gaussian reward distributions, with expected rewards of the arms being $r_{1:4}=0.2+(0:3)\cdot0.05$, $r_{5}=0.45$, $r_{6}=0.55$, $r_{7:10}=0.65+(0:3)\cdot0.05$ and $r_{11:100}=0.4$; note that, the means of first $10$ arms follow an arithmetic progression. The corresponding variances are $\sigma_{1:5}^{2}=0.5$ and $\sigma_{6:10}^{2}=0.6$, while $\sigma_{11:100}^{2}$ is chosen independently and uniform in the  interval $[0.38,0.42]$.
+% Then $\sigma_{11:100}^{2}$ is chosen uniform randomly between $0.38-0.42$.
+ The means in the testbed are chosen in such a way that any algorithm has to spend a significant amount of budget to explore all the arms and variance is chosen in such a way that the arms above $\tau$ have high variance whereas arms below $\tau$ have lower variance. The result is shown in Figure \ref{Fig:budgetExpt1},
+ where we see that UCBEV, which has access to the problem complexity and is a variance-aware algorithm, outperforms all the algorithm (including UCBE which also has access to the problem complexity but does not take into account the variances of the arms).  AugUCB, being variance-aware, 
+ % with the said parameters 
+ outperforms UCBE, APT and the other non variance-aware algorithms that we have considered. 	
 %AugUCBM with just mean estimation performs worse than AugUCB or AugUCBV, which have a matching performance in this setup.
 	
-	\begin{figure}[!h]
+	\begin{figure}[t]
     \centering
     \begin{tabular}{cc}
-    \subfigure[0.32\textwidth][Experiment $1$: Experiment with Arithmetic Progression (Gaussian)]
+    \subfigure[0.32\textwidth][Experiment-$1$: Arithmetic Progression (Gaussian)]
     {
     		\pgfplotsset{
 		tick label style={font=\Huge},
@@ -36,13 +58,13 @@
 		%\addplot table{results/budgetTestAP/AugUCBM12_comp_subsampled.txt};
 		%\addplot table{results/budgetTestAP/AugUCBV1_comp_subsampled.txt};
       	%\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
-      	\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+      	\legend{APT,AugUCB,UCBE,UCBEV,CSAR,UA}
       	\end{axis}
       	\end{tikzpicture}
   		\label{Fig:budgetExpt1}
     }
     &
-    \subfigure[0.32\textwidth][Experiment $2$: Experiment with Geometric Progression (Gaussian)]
+    \subfigure[0.32\textwidth][Experiment-$2$: Geometric Progression (Gaussian)]
     {
     	\pgfplotsset{
 		tick label style={font=\Huge},
@@ -68,7 +90,7 @@
 		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
-        \legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+        \legend{APT,AugUCB,UCBE,UCBEV,CSAR,UA}
       	\end{axis}
       	\label{Fig:budgetExpt2}
         \end{tikzpicture}
@@ -77,7 +99,7 @@
     % New row
     %%%%%%%%%%
     \\
-    \subfigure[0.32\textwidth][Experiment $3$: Experiment with three Group Setting (Gaussian)]
+    \subfigure[0.32\textwidth][Experiment-$3$: Three Group Setting (Gaussian)]
     {
     		\pgfplotsset{
 		tick label style={font=\Huge},
@@ -99,13 +121,13 @@
 		\addplot table{results/budgetTestGR1/UCBEMV1_comp_subsampled.txt};
 		\addplot table{results/budgetTestGR1/SR1_comp_subsampled.txt};
 		\addplot table{results/budgetTestGR1/UA1_comp_subsampled.txt};
-        \legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+        \legend{APT,AugUCB,UCBE,UCBEV,CSAR,UA}
       	\end{axis}
       	\end{tikzpicture}
    		\label{Fig:budgetExpt3} 
     }
     &
-    \subfigure[0.32\textwidth][Experiment $4$: Experiment with two Group Setting (Gaussian) ]
+    \subfigure[0.32\textwidth][Experiment-$4$: Two Group Setting (Gaussian) ]
     {
     	\pgfplotsset{
 		tick label style={font=\Huge},
@@ -131,14 +153,14 @@
 		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
-        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,UA}
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
       	\end{axis}
       	\label{Fig:budgetExpt4}
         \end{tikzpicture}
     }
     \\
-    \subfigure[0.32\textwidth][Experiment $5$: Experiment with two Group Setting (Bernoulli) ]
+    \subfigure[0.32\textwidth][Experiment-$5$: Two Group Setting (Bernoulli) ]
     {
     	\pgfplotsset{
 		tick label style={font=\Huge},
@@ -164,14 +186,14 @@
 		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
-        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,UA}
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
       	\end{axis}
       	\label{Fig:budgetExpt5}
         \end{tikzpicture}
     }
     &
-    \subfigure[0.32\textwidth][Experiment $6$: Experiment with two Group Setting (Advanced) ]
+    \subfigure[0.32\textwidth][Experiment-$6$: Two Group Setting (Advanced) ]
     {
     	\pgfplotsset{
 		tick label style={font=\Huge},
@@ -193,7 +215,7 @@
 		\addplot table{results/budgetTestGR4/UCBEMV1_comp_subsampled.txt};
 		\addplot table{results/budgetTestGR4/SR1_comp_subsampled.txt};
 		\addplot table{results/budgetTestGR4/UA1_comp_subsampled.txt};
-        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,UA}
       	\end{axis}
       	\label{Fig:budgetExpt6}
         \end{tikzpicture}
@@ -204,12 +226,40 @@
 \end{figure}
 
 	
-	The second experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set as Geometric Progression. The testbed involves Gaussian reward distribution with expected rewards of the arms as $r_{1:4}=0.4-(0.2)^{1:4}$, $r_{5}=0.45$, $r_{6}=0.55$ and $r_{7:10}=0.6+(0.2)^{5-(1:4)}$. The variances of all the arms and $r_{11:100}$ are set in the same way as in experiment $1$. The result is shown in Figure \ref{Fig:budgetExpt2}. Here, again we see that AugUCB beats APT, UCBE and all the non-variance aware algorithms with only UCBEV beating AugUCB. 
+	%The second experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set as Geometric Progression. 
+\textbf{Experiment-2:} In this experiment also we use Gaussian for the reward distribution, however, here the means of first $10$ arms is set as a Geometric Progression.
+% The testbed involves Gaussian reward distribution with expected rewards of the arms as 
+Formally, the reward means are $r_{1:4}=0.4-(0.2)^{1:4}$, $r_{5}=0.45$, $r_{6}=0.55$, $r_{7:10}=0.6+(0.2)^{5-(1:4)}$ and $r_{11:100}=0.4$; the variances of all the arms are as set similarly as in experiment $1$. The corresponding results are shown in Figure \ref{Fig:budgetExpt2}. Again we see that AugUCB outperforms the other algorithms, except UCBEV. 
 	
-	The third experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set  in three groups. The testbed involves Gaussian reward distribution with expected rewards of the arms as $r_{1:3}=0.1$, $r_{4:7}=\lbrace 0.35, 0.45, 0.55, 0.65\rbrace$ and $r_{8:10}=0.9$. The variances of all the arms and $r_{11:100}$ are set in the same way as in experiment $1$. The result is shown in Figure \ref{Fig:budgetExpt3}. Here, also we see that AugUCB beats APT, UCBE and all the non-variance aware algorithms with only UCBEV beating AugUCB. 
+%The third experiment is conducted on a testbed of $100$ arms with the means of first 
+\textbf{Experiment-3:} In this experiment, the means of the first
+$10$ arms are set  in three groups. The testbed again involves Gaussian reward distributions, however with expected rewards being $r_{1:3}=0.1$, $r_{4:7}=\lbrace 0.35, 0.45, 0.55, 0.65\rbrace$, $r_{8:10}=0.9$ and  $r_{11:100}=0.4$. The variances of all the arms are set in the same way as in experiment $1$. The results from this experiment are presented  Figure \ref{Fig:budgetExpt3}. The observations are inline with the observations made in the previous experiments.
+
+%Here, also we see that AugUCB beats APT, UCBE and all the non-variance aware algorithms with only UCBEV beating AugUCB. 
 	
-	The fourth experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set  in two groups.  The testbed involves Gaussian reward distribution with expected rewards of the arms as $r_{1:5}=0.45$ and $r_{6:10}=0.55$. The variances of all the arms and $r_{11:100}$ are set in the same way as in experiment $1$. The result is shown in Figure \ref{Fig:budgetExpt4}. Here, also only UCBEV beats AugUCB.
 	
-	The fifth experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set  in two groups.  The testbed is same as the previous experiment but involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:5}=0.45$ and $r_{6:10}=0.55$. The result is shown in Figure \ref{Fig:budgetExpt5}. Here, AugUCB and APT perform almost similarly with both UCBE and UCBEV beating AugUCB.
+\textbf{Experiment-4:} Here, the means of first $10$ arms are set in two groups.  The testbed again involves Gaussian reward distributions with expected rewards of the arms set to $r_{1:5}=0.45$, $r_{6:10}=0.55$ and $r_{11:100}=0.4$. The variances are set in the same way as in experiment $1$. The results are shown in Figure \ref{Fig:budgetExpt4}, from where we again observe the good performance of AugUCB.
+
 	
-	The sixth experiment is conducted on a testbed of $100$ arms involving Gaussian reward distributions with the mean of first $10$ arms set  in two groups with with expected rewards of the arms as $r_{1:5}=0.45$, $r_{6:10}=0.55$ and $r_{11:100}=0.4$. Variance is set as $\sigma_{1:5}^{2}=0.3$ and $\sigma_{6:10}^{2}=0.8$. Then $\sigma_{11:100}^{2}$ is chosen uniform randomly between $0.2-0.3$. We name this setup Advanced because in this setup the variances are set in such a way that only a variance aware algorithm will perform very well and non variance aware will perform poorly. Here UCBEV performs very well compared to others and only caught up by AugUCB. Because of such large difference in the variances between the arms below and above $\tau$, APT, UCBE and CSAR performs very badly. The result is shown in Figure \ref{Fig:budgetExpt6}. Also in all the experiments we see that although CSAR performs well initially, but it quickly exhausts its budget and always saturates at a higher error percentage since it has non-adaptive round length and it is pulling all arms equally in each round.
+\textbf{Experiment-5:} 
+%The fifth experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set  in two groups.  
+This setting is similar to that considered in Experiment-4, but with the reward distributions being Bernoulli instead of Gaussian.  
+%The testbed is same as the previous experiment but involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:5}=0.45$ and $r_{6:10}=0.55$. 
+The results for this case is shown in Figure \ref{Fig:budgetExpt5}. Here, we observe that UCBE and UCBEV beating outperforms AugUCB, while the performance of  AugUCB is comparable with that achieved by APT.
+	
+\textbf{Experiment-6:} This is again the two group setting involving Gaussian reward distributions. The reward means are as in Experiment-4, while the 
+%The sixth experiment is conducted on a testbed of $100$ arms involving Gaussian reward distributions with the mean of first $10$ arms set  in two groups with with expected rewards of the arms as $r_{1:5}=0.45$, $r_{6:10}=0.55$ and $r_{11:100}=0.4$. 
+variances are set as $\sigma_{1:5}^{2}=0.3$, $\sigma_{6:10}^{2}=0.8$ and $\sigma_{11:100}^{2}$ are independently and uniformly chosen in the interval $[0.2,0.3]$.  The corresponding results are shown in Figure \ref{Fig:budgetExpt6}.
+ We refer to this setup as \emph{Advanced} because 
+here the chosen variance values are such that only  variance-aware algorithms will perform well.
+% well and non variance aware will perform poorly. 
+Hence, we see that UCBEV performs very well in comparison with the other algorithms. However,  it is interesting to note that the performance of  AugUCB catches-up with UCBEV as the time-step increases. 
+% Because of such large difference in the variances between the arms below and above $\tau$, APT, UCBE and CSAR performs very badly. 
+
+
+Finally, note that in all the experiments although CSAR performs well initially, but it quickly exhausts its budget and always saturates at a higher error percentage. This is because it pulls all arms equally in each round, where the round lengths are non-adaptive.
+
+
+
+
+

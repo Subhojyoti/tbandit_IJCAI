@@ -1,20 +1,43 @@
-In this paper we propose the Algorithm AugUCB which is an action elimination algorithm suited for the TBP problem. It combines the approach of UCB-Improved, CCB (\cite{liu2016modification}) and APT algorithm. Our algorithm is a variance-aware algorithm which takes into account the empirical variance of the arms. We also address an open problem raised in \cite{auer2010ucb} of coming up with an algorithm that can eliminate arms based on variance. Both CSAR and APT are not variance-aware algorithms. The expected loss of various algorithms is shown in Table \ref{tab:regret-bds}. The terms $H_1, H_2, H_{CSAR,2}, H_1^{\sigma}$ and $H_2^{\sigma}$ signifies problem complexity and are defined in section \ref{results}. The term containing $H_{2}^{\sigma}$ is comparable to the similar terms (containing $H_1^{\sigma}$) for the error probability of Gap-EV(\cite{gabillon2011multi} algorithm which we modify to perform in the TBP problem and name it as UCBEV. The error probability of UCBEV for single bandit multi-armed case is given in Table \ref{tab:regret-bds}. We see that $\log(\frac{3}{16} K\log K) H_2^{\sigma} > H_1^{\sigma}$ and hence our algorithm is weaker with respect to UCBEV for single  multi-armed bandit scenario. But UCBEV algorithm needs the complexity factor $H_1^{\sigma}$ as input for optimal performance (which is not a realistic scenario) whereas AugUCB requires no such complexity factor as input. 
+In this paper we propose AugUCB, which is an arm-elimination based algorithm for the considered thresholding bandit problem. AugUCB essentially combines the approach of UCB-Improved, CCB \cite{liu2016modification} and APT algorithms. Our algorithm takes into account the empirical variances of the arms; to the best of our knowledge this is the first variance-aware algorithm for the considered TBP. 
+Thus, we also address an open problem discussed in \cite{auer2010ucb} of designing an algorithm that can eliminate arms based on variance estimates. In this regard, note that both CSAR and APT are not variance-aware algorithms. 
+
+In Table \ref{tab:regret-bds} we compare the upper bound on expected loss incurred by the various algorithms. The terms $H_1, H_2$, $H_{CSAR,2}, H_{\sigma,1}$ and $H_{\sigma,2}$ represent various problem complexities, and are as defined in Section~\ref{results}. From Section~\ref{results} we note that, for all $K\ge8$, we have
+\begin{align*}
+\log\left(K\log K\right) H_{\sigma,2} > \log(2K) H_{\sigma,2} \ge H_{\sigma,1}.
+\end{align*}
+%; relation between these quantities are also given in Section~\ref{results} 
+%The term containing $H_{\sigma,2}$ is comparable to the similar terms (containing $H_{\sigma,1}$) for the error probability of GapE-V \cite{gabillon2011multi} algorithm which we modify to perform in the TBP problem and name it as UCBEV.
+Thus, we find that the upper bound for AugUCB is weaker than that for UCBEV.
+ %The error probability of UCBEV for single bandit multi-armed case is given in Table \ref{tab:regret-bds}. We see that $\log(\frac{3}{16} K\log K) H_2^{\sigma} > \log(2K) H_2^{\sigma} \ge H_1^{\sigma}$ and hence our algorithm is weaker with respect to UCBEV for single  multi-armed bandit scenario.
+ However, UCBEV algorithm requires  the complexity factor $H_{\sigma,1}$ as input, which is not realistic in practice. In contrast, our AugUCB requires no such complexity factor as input. 
 %Theoretically, we can compare the first term (containing $H_2$) of our expected loss and see that for all $K\geq 4$, $ H_2 \log(\frac{3}{16} K\log K) > (\log K)H_{CSAR,2}\geq H_1 $ and hence our result is weaker than CSAR and APT.
 
-\begin{table}[h]
-\caption{Expected Loss for different bandit algorithms}
+\begin{table}[b]
+\caption{AugUCB vs.\ State of the art}
 \label{tab:regret-bds}
 \begin{center}
-\begin{tabular}{|p{1.3cm}|p{6.33cm}|}
-\toprule
+\begin{tabular}{|p{1.3cm}|p{6.35cm}|}
+% \toprule
+\hline
 Algorithm  & Upper Bound on Expected Loss \\
-\midrule
-APT         &$\exp(-\frac{T}{64 H_1}+2\log((\log(T)+1)K))$ \\\midrule
-CSAR		&$K^2\exp(-\frac{T-K}{72\log(K)H_{CSAR,2}})$ \\\midrule
-UCBEV		&$\exp\left(-\frac{1}{512}\frac{T-2K}{H_1^{\sigma}} + \log\left(6KT\right)\right)$ \\\midrule
-AugUCB      &$ \exp\left(- \frac{T}{4096 H_{2}^{\sigma} a} + \log\left(2KT\right) \right) $\newline
- where $a=\log(\frac{3}{16} K\log K)$
-\\\bottomrule
+% \midrule
+\hline
+\hline
+APT         &$\exp\left(-\dfrac{T}{64 H_1}+2\log((\log(T)+1)K)\right)$ \\
+% \midrule
+\hline
+\hline
+CSAR		&$K^2\exp\left(-\dfrac{T-K}{72\log(K)H_{CSAR,2}}\right)$ \\
+%\midrule
+\hline
+\hline
+UCBEV		&$\exp\left(-\dfrac{1}{512}\dfrac{T-2K}{H_1^{\sigma}} + \log\left(6KT\right)\right)$ \\
+%\midrule
+\hline
+\hline
+AugUCB      &$ \exp\left(- \dfrac{T}{4096 \log(K\log K)H_{2}^{\sigma}} + \log\left(2KT\right) \right) $ \\
+\hline
+%\bottomrule
 \end{tabular}
 \end{center}
 \end{table}
