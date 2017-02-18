@@ -367,12 +367,12 @@ Note that, on $\xi$ each arm $i\in \mathcal{A}$  is eliminated correctly in the 
 &\overset{(c)}{\le} 4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\Delta_{i}^{2}\log ( \frac{3}{16} K\log K)}{4096 (\sigma_{i} + \sqrt{\sigma_{i}^{2} + (16/3)\Delta_{i}}) a^2} \bigg) \\
 & \overset{(d)}{\le} 4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \tilde{\Delta}_i^{-2} a^2} \bigg) \\
 & \overset{(e)}{\le}4T \sum_{i\in\mathcal{A}} \exp\bigg(- \frac{T\log ( \frac{3}{16} K\log K)}{4096 \max_{j}(j\tilde{\Delta}_{(j)}^{-2}) (\log(\frac{3}{16} K\log K))^{2}} \bigg) \\
-& \overset{(f)}{\le}4KT \exp\bigg(- \frac{T}{4096 H_{\sigma,2} (\log(K\log K))}\bigg).
+& \overset{(f)}{\le}4KT \exp\bigg(- \frac{T}{4096 \log(K\log K)H_{\sigma,2}}\bigg).
 \end{align*}
 The justification for the above simplifications are as follows:
 \begin{itemize}
 \item $(a)$ is obtained by noting that in round $m_i$ we have 
-\begin{align*}\frac{\Delta_i}{4}\leq\sqrt{\epsilon_{m_{i}}\rho}<\frac{\Delta_i}{2}.\end{align*}
+\begin{align*}\frac{\Delta_i}{4}\leq\sqrt{\rho\epsilon_{m_{i}}}<\frac{\Delta_i}{2}.\end{align*}
 \item For $(b)$, we note that the function $x\mapsto x\exp(-Cx^2)$, where $x\in[0,1]$, is  decreasing on $[1/\sqrt{2C},1]$ for any $C>0$ (see \cite{bubeck2011pure,auer2010ucb}). Thus, using $C=\lfloor \sqrt{e/T}\rfloor$ and $\min_{j\in \mathcal{A}}\Delta_j =\Delta =\sqrt{\frac{K\log K}{T}} > \sqrt{\frac{e}{T}}$,
 %\forall i\in \mathcal{A}$ 
 we obtain (b).
@@ -383,7 +383,8 @@ we obtain (b).
 \tilde{\Delta}_i^{-2}\le i\tilde{\Delta}_i^{-2} \le \max_{j\in\mathcal{A}}j\Delta_{(j)}^{-2}=H_{\sigma,2}.
 \end{align*}
 \end{itemize}
-\noindent
+\end{proof}
+
 %Again  summing the above expressions, the probability that an arm ${i}$ is not eliminated on or before $g_{i}$-th round based on the (\ref{eq:armelim-var-casea}) and (\ref{eq:armelim-var-caseb}) elimination condition is  $4\exp\left(- \frac{3T\rho_v\epsilon_{g_{i}}}{256 a^2 } \left(\frac{\sigma_{i}^{2}+\sqrt{\rho_{v}\epsilon_{g_{i}}}+1}{3\sigma_{i}^{2}+\sqrt{\rho_v \epsilon_{g_{i}}}}\right) \log( T\epsilon_{g_{i}}) \right)$. 
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -518,7 +519,7 @@ we obtain (b).
 %& + 2\exp\bigg(- \frac{T}{4096 H_{2}^{\sigma} (\log(\frac{3}{16} K\log K))} \bigg)\bigg\rbrace\\
 %\end{align*}
 %\end{small}
-\end{proof}
+
 
 %	Next we specialize the result of Theorem \ref{Result:Theorem:1} in Corollary \ref{Result:Corollary:1}.
 %
