@@ -1,14 +1,19 @@
 
 In this section, we empirical compare the  performance of AugUCB against APT, UCBE, UCBEV, CSAR and the uniform-allocation (UA) algorithms. A brief note about these algorithms are as follows:
-\begin{itemize}
-\item APT: This algorithm is from \cite{locatelli2016optimal}; we set $\epsilon=0.05$, which is the precision with which APT suggests the set of good arms.
-\item AugUCB: This is the Augmented-UCB algorithm proposed in this paper; as in Theorem \ref{Result:Theorem:1} we set $\rho=\frac{1}{3}$.
-\item UCBE: This is a modification of the algorithm in \cite{audibert2009exploration} (as it was originally proposed for the best arm identification problem); here, we set $a=\frac{T-K}{H_1}$, and at each time-step an arm $i\in\argmin\left\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \right\rbrace$ is pulled.
-\item UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$.  For theoretical reasons, we show the performance achievable by UCBEV. As mentioned earlier, note that UCBEV's implementation would not be possible in real scenario, as it requires computing the problem complexity $H_{\sigma,1}$.
+%\begin{itemize}
 
-\item CSAR:  Modification of the successive-reject algorithm in \cite{chen2014combinatorial}; here, we reject the arm farthest from $\tau$ after each round. 
-\item UA: The naive strategy where at each time-step an arm is uniformly sampled from $\mathcal{A}$ (the set of all arms); however, UA is known to be optimal if all arms are equally difficult to classify. 
-\end{itemize}
+$\bullet$ APT: This algorithm is from \cite{locatelli2016optimal}; we set $\epsilon=0.05$, which is the precision with which APT suggests the set of good arms.
+
+$\bullet$ AugUCB: This is the Augmented-UCB algorithm proposed in this paper; as in Theorem \ref{Result:Theorem:1} we set $\rho=\frac{1}{3}$.
+
+$\bullet$ UCBE: This is a modification of the algorithm in \cite{audibert2009exploration} (as it was originally proposed for the best arm identification problem); here, we set $a=\frac{T-K}{H_1}$, and at each time-step an arm $i\in\argmin\left\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \right\rbrace$ is pulled.
+
+$\bullet$ UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$.  For theoretical reasons, we show the performance achievable by UCBEV. As mentioned earlier, note that UCBEV's implementation would not be possible in real scenario, as it requires computing the problem complexity $H_{\sigma,1}$.
+
+$\bullet$ CSAR:  Modification of the successive-reject algorithm in \cite{chen2014combinatorial}; here, we reject the arm farthest from $\tau$ after each round. 
+
+$\bullet$ UA: The naive strategy where at each time-step an arm is uniformly sampled from $\mathcal{A}$ (the set of all arms); however, UA is known to be optimal if all arms are equally difficult to classify. 
+%\end{itemize}
 
 %We also implement the uniform-allocation (labeled UA) strategy,  CSAR is modified for the TBP setting such that it behaves as a Successive Reject algorithm whereby it rejects the arm farthest from $\tau$ after each round.
 %Similarly we modify the UCBE \cite{audibert2009exploration} and UCBEV \cite{gabillon2011multi} algorithms  (originally proposed for single best arm and TopM identification problems, respectively) to suit the TBP setting. 
