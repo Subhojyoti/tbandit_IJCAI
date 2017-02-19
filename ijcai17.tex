@@ -26,7 +26,15 @@
 \maketitle
 
 \begin{abstract}
-In this paper we propose the Augmented UCB (AugUCB) algorithm for the fixed-budget setting of a specific combinatorial, pure-exploration, stochastic multi-armed bandit setup called the thresholding bandit problem. Our algorithm is based on arm elimination, employing both mean and variance estimates and to our knowledge this is the first algorithm to employ such an approach in this setting. Through  simulation experiments we establish that our algorithm, owing to its utilization of variance estimates in arm elimination, performs significantly better than the state-of-the-art APT and CSAR algorithms, particularly when a large number of arms with different means and variances are involved. Theoretically, our algorithm is not comparable with APT or CSAR which use just mean estimation. AugUCB provides a weaker guarantee (in terms of an upper bound on the expected loss) than UCBEV, a variant of GapE-V \cite{gabillon2011multi} algorithm, modified for thresholding bandit problem. However, UCBEV requires access to the problem complexity (which is not realistic), while AugUCB requires no such complexity parameters as input. 
+In this paper we propose the Augmented-UCB (AugUCB) algorithm for a specific version of the thresholding bandit problem (TBP), where the objective is to identify a set of arms whose quality is above a threshold. A key feature of AugUCB is that it uses both mean and variance estimates to eliminate arms that have been sufficiently explored; to the best of our knowledge this is the first algorithm to employ such an approach for the considered TBP.  Theoretically, we obtain an upper bound on the loss (probability of mis-classification) incurred by AugUCB. Although UCBEV in literature provides a better guarantee, it is important to emphasize that UCBEV has access to problem complexity (whose computation requires arms' mean and variances), and hence is not realistic in practice; this is in contrast to AugUCB whose implementation does not require any such complexity inputs. We conduct extensive simulation experiments to validate the performance of AugUCB. Through our simulation work, we establish that AugUCB, owing to its utilization of variance estimates, performs significantly better than the state-of-the-art APT and CSAR algorithms (which are not variance-based).
+
+
+%%%%%%%
+%In this paper we propose the Augmented-UCB (AugUCB) algorithm for the fixed-budget setting of a specific combinatorial, pure-exploration, stochastic multi-armed bandit setup called the thresholding bandit problem. Our algorithm is based on arm elimination, employing both mean and variance estimates and to our knowledge this is the first algorithm to employ such an approach in this setting. Through  simulation experiments we establish that our algorithm, owing to its utilization of variance estimates in arm elimination, performs significantly better than the state-of-the-art APT and CSAR algorithms, particularly when a large number of arms with different means and variances are involved. Theoretically, our algorithm is not comparable with APT or CSAR which use just mean estimation. AugUCB provides a weaker guarantee (in terms of an upper bound on the expected loss) than UCBEV, a variant of GapE-V \cite{gabillon2011multi} algorithm, modified for thresholding bandit problem. However, UCBEV requires access to the problem complexity (which is not realistic), while AugUCB requires no such complexity parameters as input. 
+%%%%%%%%%%%
+
+
+
 %is an anytime arm elimination variance-aware algorithm, and is the first of its kind which employs arm elimination 
 %In earlier works, it was seen that algorithms using variance estimates outperform other competing algorithms.
 
@@ -70,7 +78,7 @@ In this paper we propose the Augmented UCB (AugUCB) algorithm for the fixed-budg
 \label{expt}
 \input{expt}
 
-
+\vspace{-2mm}
 \section{Conclusion}
 \label{conclusion}
 \input{conclusion}

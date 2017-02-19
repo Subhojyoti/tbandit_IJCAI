@@ -4,7 +4,8 @@ In this section, we empirical compare the  performance of AugUCB against APT, UC
 \item APT: This algorithm is from \cite{locatelli2016optimal}; we set $\epsilon=0.05$, which is the precision with which APT suggests the set of good arms.
 \item AugUCB: This is the Augmented-UCB algorithm proposed in this paper; as in Theorem \ref{Result:Theorem:1} we set $\rho=\frac{1}{3}$.
 \item UCBE: This is a modification of the algorithm in \cite{audibert2009exploration} (as it was originally proposed for the best arm identification problem); here, we set $a=\frac{T-K}{H_1}$, and at each time-step an arm $i\in\argmin\left\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \right\rbrace$ is pulled.
-\item UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$.
+\item UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$.  For theoretical reasons, we show the performance achievable by UCBEV. As mentioned earlier, note that UCBEV's implementation would not be possible in real scenario, as it requires computing the problem complexity $H_{\sigma,1}$.
+
 \item CSAR:  Modification of the successive-reject algorithm in \cite{chen2014combinatorial}; here, we reject the arm farthest from $\tau$ after each round. 
 \item UA: The naive strategy where at each time-step an arm is uniformly sampled from $\mathcal{A}$ (the set of all arms); however, UA is known to be optimal if all arms are equally difficult to classify. 
 \end{itemize}
@@ -18,7 +19,8 @@ In this section, we empirical compare the  performance of AugUCB against APT, UC
 %Again, for UCBEV, following \cite{gabillon2011multi}, we modify it such that the exploration parameter $a = \frac{T-2K}{H_{\sigma,1}}$. Then for each timestep $t=1,2,..,T$ we pull the arm that minimizes $\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \rbrace$, where $n_{i}$ is the number of times the arm $i$ is pulled till $t-1$ timestep and $a$ is set as mentioned above for UCBE and UCBEV respectively. Also, APT is run with $\epsilon=0.05$, which denotes the precision with which the algorithm suggests the best set of arms and we modify CSAR as per \cite{locatelli2016optimal} such that it behaves as a Successive Reject algorithm whereby it rejects the arm farthest from $\tau$ after each phase. For AugUCB we take $\rho_{\mu}=\frac{1}{8}$ and $\rho_v=\frac{1}{3}$ as in Theorem \ref{Result:Theorem:1}. In all the testbeds AugUCB, APT, CSAR, Uniform Allocation, UCBE and UCBEV are run with the same settings as mentioned above.
 
 \noindent
-We consider six different experimental scenarios that are obtained by varying the arm means and variances. 
+Motivated by the settings considered in \cite{locatelli2016optimal}, 
+we design six different experimental scenarios that are obtained by varying the arm means and variances. 
 %We conduct a set of six experiments with different reward means and variances. 
 However, all experiments consists of $K=100$  arms (indexed $i=1,2,\cdots,100$) of which ${S}_\tau=\{6,7,\cdots,10\}$, where we have fixed $\tau=0.5$.
 %in all the experiments, the threshold $\tau$ is set to $0.5$. %for all experiments. 
@@ -36,7 +38,9 @@ In all the experiments, each algorithm is run independently for $10000$ time-ste
 
 %	The first experiment is conducted on a testbed of $100$ arms involving 
 	
-\textbf{Experiment-1:} The reward distributions are Gaussian with  means  $r_{1:4}=0.2+(0:3)\cdot0.05$, $r_{5}=0.45$, $r_{6}=0.55$, $r_{7:10}=0.65+(0:3)\cdot0.05$ and $r_{11:100}=0.4$. Thus, the means of the first $10$ arms follow an arithmetic progression. The corresponding variances are $\sigma_{1:5}^{2}=0.5$ and $\sigma_{6:10}^{2}=0.6$, while $\sigma_{11:100}^{2}$ is chosen independently and uniform in the  interval $[0.38,0.42]$;
+\textbf{Experiment-1:} The reward distributions are Gaussian with  means  $r_{1:4}=0.2+(0:3)\cdot0.05$, $r_{5}=0.45$, $r_{6}=0.55$, $r_{7:10}=0.65+(0:3)\cdot0.05$ and $r_{11:100}=0.4$. Thus, the means of the first $10$ arms follow an arithmetic progression. The remaining arms have identical means; this setting is chosen because now a significant budget is required in exploring these arms, thus increasing the problem complexity.
+
+ The corresponding variances are $\sigma_{1:5}^{2}=0.5$ and $\sigma_{6:10}^{2}=0.6$, while $\sigma_{11:100}^{2}$ is chosen independently and uniform in the  interval $[0.38,0.42]$;
 % Then $\sigma_{11:100}^{2}$ is chosen uniform randomly between $0.38-0.42$.
 note that, the variances of the arms in $S_\tau$ are higher than those of the other arms.
 % The means in the testbed are chosen in such a way that any algorithm has to spend a significant amount of budget to explore all the arms and variance is chosen in such a way that the arms above $\tau$ have high variance whereas arms below $\tau$ have lower variance. 
