@@ -1,17 +1,9 @@
 \textbf{Notation and assumptions:} $\mathcal{A}$ denotes the set of arms, and $|\mathcal{A}|=K$ is the number of arms in $\mathcal{A}$. 
 %Arms generic arm is indexed by $i,j\in\mathcal{A}$. 
 For arm $i\in\mathcal{A}$, we use $r_{i}$ to denote the true mean of the distribution from which the rewards are sampled, while $\hat{r}_{i}(t)$ denotes the estimated mean at time $t$. Formally, using $n_i(t)$ to denote the number of times arm $i$ has been pulled until time $t$, we have $\hat{r}_{i}(t)=\frac{1}{n_{i}(t)}\sum_{z=1}^{n_i(t)} X_{i,z}$, where $X_{i,z}$ is the reward sample received when arm $i$ is pulled for the $z$-th time. %
-Similarly, we use $\sigma_{i}^{2}$ to denote the true variance of the reward distribution corresponding to arm $i$, while $\hat{v}_{i}(t)$ is the estimated variance, i.e., $\hat{v}_{i}(t)=\frac{1}{n_i(t)}\sum_{z=1}^{n_{i}(t)}(X_{i,z}-\hat{r}_{i})^{2}$. Whenever there is no ambiguity about the underlaying  time index $t$, for simplicity we neglect $t$ from the notations and simply use  $\hat{r}_i, \hat{v}_i,$ and $n_i, $ to denote the respective quantities.  Let  $\Delta_{i}=|\tau-r_{i}|$ denote the distance of the true mean from the threshold $\tau$.
-
-
-
-%The average estimated payoff for any arm is denoted by  whereas the true mean of the distribution  is denoted by . The optimal arm is denoted by $*$. The '*' superscript is used to denote anything related to optimal arm. 
-
- % $n_{i}$ denotes the number of times the arm $i$ has been pulled. $\psi $ denotes the exploration regulatory factor and $\rho_\mu ,\rho_v$ as arm elimination parameters. $\hat{V}_{i}=\frac{1}{n_i}\sum_{t=1}^{n_{i}}(x_{i,t}-r_{i})^{2}$ denotes the empirical variance and $x_{i,t}$ is the reward obtained at timestep t for arm $i$. Also   denotes the true variance of the arm $i$. 
- 
-Finally, we assume that all the reward distributions 
+Similarly, we use $\sigma_{i}^{2}$ to denote the true variance of the reward distribution corresponding to arm $i$, while $\hat{v}_{i}(t)$ is the estimated variance, i.e., $\hat{v}_{i}(t)=\frac{1}{n_i(t)}\sum_{z=1}^{n_{i}(t)}(X_{i,z}-\hat{r}_{i})^{2}$. Whenever there is no ambiguity about the underlaying  time index $t$, for simplicity we neglect $t$ from the notations and simply use  $\hat{r}_i, \hat{v}_i,$ and $n_i, $ to denote the respective quantities.  Let  $\Delta_{i}=|\tau-r_{i}|$ denote the distance of the true mean from the threshold $\tau$. Like \cite{locatelli2016optimal} we assume that all the reward distributions 
 %from which rewards are sampled are identical and independent 
-are $1$-sub-Gaussian (note that,  $1$-sub-Gaussian includes Gaussian distributions with variance less than $1$, distributions supported on an interval of length less than 2, etc). Further, the rewards are assumed to take values in the interval $[0,1]$.
+are $1$-sub-Gaussian (note that,  $1$-sub-Gaussian includes Gaussian distributions with variance less than $1$, distributions supported on an interval of length less than 2, etc). Also, the rewards are assumed to take values in the interval $[0,1]$.
 %. In our case, we  assume that all rewards are .
 
 %Also we define $\Delta_{i}=r^{*} - r_{i}$ and $\hat{\Delta}_{i}=\hat{r}^{*} - \hat{r}_{i}$. In all cases $\min_{i\in A}{\Delta_{i}}$ is denoted by $\Delta$.
