@@ -41,7 +41,7 @@ In all the experiments, each algorithm is run independently for $10000$ time-ste
 note that, the variances of the arms in $S_\tau$ are higher than those of the other arms.
 % The means in the testbed are chosen in such a way that any algorithm has to spend a significant amount of budget to explore all the arms and variance is chosen in such a way that the arms above $\tau$ have high variance whereas arms below $\tau$ have lower variance. 
  The corresponding  results are shown in Figure \ref{Fig:budgetExpt1},
- from where we see that UCBEV, which has access to the problem complexity while being variance-aware, outperforms all other algorithm (including UCBE which also has access to the problem complexity but does not take into account the variances of the arms).  Interesting, the performance of our AugUCB (without requiring any complexity input) is comparable with UCBEV, while it 
+ from where we see that UCBEV, which has access to the problem complexity while being variance-aware, outperforms all other algorithm (including UCBE which also has access to the problem complexity but does not take into account the variances of the arms).  Interestingly, the performance of our AugUCB (without requiring any complexity input) is comparable with UCBEV, while it 
    % with the said parameters 
  outperforms UCBE, APT and the other non variance-aware algorithms that we have considered. 	
 %AugUCBM with just mean estimation performs worse than AugUCB or AugUCBV, which have a matching performance in this setup.
@@ -278,7 +278,7 @@ Hence, we see that UCBEV performs very well in comparison with the other algorit
 % Because of such large difference in the variances between the arms below and above $\tau$, APT, UCBE and CSAR performs very badly. 
 
 
-Finally, note that in all the experiments although CSAR performs well initially, but it quickly exhausts its budget and always saturates at a higher error percentage. This is because it pulls all arms equally in each round, with the round lengths being non-adaptive.
+Finally, note that in all the above experiments, the CSAR algorithm, although performs well initially, quickly exhausts its budget and saturates at a higher error percentage. This is because it pulls all arms equally in each round, with the round lengths being non-adaptive.
 
 
 
