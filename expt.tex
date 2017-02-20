@@ -8,7 +8,7 @@ $\bullet$ AugUCB: This is the Augmented-UCB algorithm proposed in this paper; as
 
 $\bullet$ UCBE: This is a modification of the algorithm in \cite{audibert2009exploration} (as it was originally proposed for the best arm identification problem); here, we set $a=\frac{T-K}{H_1}$, and at each time-step an arm $i\in\argmin\left\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \right\rbrace$ is pulled.
 
-$\bullet$ UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$.  For theoretical reasons, we show the performance achievable by UCBEV. As mentioned earlier, note that UCBEV's implementation would not be possible in real scenario, as it requires computing the problem complexity $H_{\sigma,1}$.
+$\bullet$ UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$. As mentioned earlier, note that UCBEV's implementation would not be possible in real scenarios, as it requires computing the problem complexity $H_{\sigma,1}$. However, for theoretical reasons we show the performance achievable by UCBEV.
 
 $\bullet$ CSAR:  Modification of the successive-reject algorithm in \cite{chen2014combinatorial}; here, we reject the arm farthest from $\tau$ after each round. 
 
