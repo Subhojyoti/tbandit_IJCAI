@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  20 FEB 2017 13:30
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  20 FEB 2017 13:38
 entering extended mode
  %&-line parsing enabled.
 **ijcai17.tex
@@ -854,17 +854,10 @@ PGFPlots: reading {results/budgetTestGR4/UCBEM1_comp_subsampled.txt}
 PGFPlots: reading {results/budgetTestGR4/UCBEMV1_comp_subsampled.txt}
 PGFPlots: reading {results/budgetTestGR4/SR1_comp_subsampled.txt}
 PGFPlots: reading {results/budgetTestGR4/UA1_comp_subsampled.txt}
-PGFPlots: reading {results/budgetTestGR3/testUCBEMV1_0.06_comp_subsampled.txt}
-PGFPlots: reading {results/budgetTestGR3/AugUCB1_comp_subsampled.txt}
 PGFPlots: reading {results/budgetTestGR3/testUCBEMV1_0.25_comp_subsampled.txt}
+PGFPlots: reading {results/budgetTestGR3/AugUCB1_comp_subsampled.txt}
 PGFPlots: reading {results/budgetTestGR3/UCBEMV1_comp_subsampled.txt}
-PGFPlots: reading {results/budgetTestGR3/testUCBEMV1_64_comp_subsampled.txt}
 PGFPlots: reading {results/budgetTestGR3/testUCBEMV1_256_comp_subsampled.txt}
-
-Overfull \hbox (4.23624pt too wide) in paragraph at lines 60--284
- [][] 
- []
-
 
 Underfull \vbox (badness 1997) has occurred while \output is active []
 
@@ -878,10 +871,10 @@ Underfull \hbox (badness 2189) in paragraph at lines 76--81
 
 ] (./ijcai17.aux) ) 
 Here is how much of TeX's memory you used:
- 19082 strings out of 493848
- 410186 string characters out of 1152823
- 648780 words of memory out of 3000000
- 21862 multiletter control sequences out of 15000+50000
+ 19076 strings out of 493848
+ 409916 string characters out of 1152823
+ 640233 words of memory out of 3000000
+ 21860 multiletter control sequences out of 15000+50000
  36477 words of font info for 94 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  63i,27n,75p,1257b,1733s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -904,7 +897,7 @@ e1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8
 a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/te
 xmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ijcai17.pdf (7 pages, 305038 bytes).
+Output written on ijcai17.pdf (7 pages, 304380 bytes).
 PDF statistics:
  114 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
