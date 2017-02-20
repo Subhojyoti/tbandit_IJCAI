@@ -1,5 +1,5 @@
 
-In this section, we empirical compare the  performance of AugUCB against APT, UCBE, UCBEV, CSAR and the uniform-allocation (UA) algorithms. A brief note about these algorithms are as follows:
+In this section, we empirically compare the  performance of AugUCB against APT, UCBE, UCBEV, CSAR and the uniform-allocation (UA) algorithms. A brief note about these algorithms are as follows:
 %\begin{itemize}
 
 $\bullet$ APT: This algorithm is from \cite{locatelli2016optimal}; we set $\epsilon=0.05$, which is the precision with which APT suggests the set of good arms.
@@ -27,7 +27,7 @@ $\bullet$ UA: The naive strategy where at each time-step an arm is uniformly sam
 Motivated by the settings considered in \cite{locatelli2016optimal}, 
 we design six different experimental scenarios that are obtained by varying the arm means and variances. 
 %We conduct a set of six experiments with different reward means and variances. 
-However, all experiments consists of $K=100$  arms (indexed $i=1,2,\cdots,100$) of which ${S}_\tau=\{6,7,\cdots,10\}$, where we have fixed $\tau=0.5$.
+Across all experiments consists of $K=100$  arms (indexed $i=1,2,\cdots,100$) of which ${S}_\tau=\{6,7,\cdots,10\}$, where we have fixed $\tau=0.5$.
 %in all the experiments, the threshold $\tau$ is set to $0.5$. %for all experiments. 
 %Also, the number of arms in each experiment is $K=100$ , of which $\lbrace 6,7,8,9,10 \rbrace$ arms have their reward means above $\tau$. 
 In all the experiments, each algorithm is run independently for $10000$ time-steps. At every time-step, the output set,  $\hat{S}_\tau$, suggested by each algorithm is recorded; the output is counted as an error if $\hat{S}_\tau\ne S_\tau$. In Figure~1, for each experiment, we have reported the percentage of error incurred by the different algorithms as a function of time; Error percentage is obtained by repeating each experiment independently  for $500$ iterations, and then respectively computing the fraction of errors. The details of the considered experiments are as follows.
