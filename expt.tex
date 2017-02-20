@@ -8,7 +8,7 @@ $\bullet$ AugUCB: This is the Augmented-UCB algorithm proposed in this paper; as
 
 $\bullet$ UCBE: This is a modification of the algorithm in \cite{audibert2009exploration} (as it was originally proposed for the best arm identification problem); here, we set $a=\frac{T-K}{H_1}$, and at each time-step an arm $i\in\argmin\left\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \right\rbrace$ is pulled.
 
-$\bullet$ UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$ (for the first five experiments). As mentioned earlier, note that UCBEV's implementation would not be possible in real scenarios, as it requires computing the problem complexity $H_{\sigma,1}$. However, for theoretical reasons we show the performance achievable by UCBEV.
+$\bullet$ UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$. As mentioned earlier, note that UCBEV's implementation would not be possible in real scenarios, as it requires computing the problem complexity $H_{\sigma,1}$. However, for theoretical reasons we show the best performance achievable by UCBEV. In experiment 6 we perform further explorations of UCBEV with alternate settings of $a$.
 
 $\bullet$ CSAR:  Modification of the successive-reject algorithm in \cite{chen2014combinatorial}; here, we reject the arm farthest from $\tau$ after each round. 
 
@@ -295,7 +295,7 @@ Formally, the reward means are $r_{1:4}=0.4-(0.2)^{1:4}$, $r_{5}=0.45$, $r_{6}=0
 	
 %The third experiment is conducted on a testbed of $100$ arms with the means of first 
 \textbf{Experiment-3:} Here, the first
-$10$ arms are partitioned into three groups, with all arms in a group being assigned the same mean; the reward distributions are again Gaussian. Specifically, the reward means are $r_{1:3}=0.1$, $r_{4:7}=\lbrace 0.35, 0.45, 0.55, 0.65\rbrace$ and $r_{8:10}=0.9$; as before,  $r_{11:100}=0.4$ and all the variances are as in Experiment-$1$. The results for this scenario are presented in Figure \ref{Fig:budgetExpt3}. The observations are inline with the observations made in the previous experiments.
+$10$ arms are partitioned into three groups, with all arms in a group being assigned the same mean; the reward distributions are again Gaussian. Specifically, the reward means are $r_{1:3}=0.1$, $r_{4:7}=\lbrace 0.35, 0.45, 0.55, 0.65\rbrace$ and $r_{8:10}=0.9$; as before,  $r_{11:100}=0.4$ and all the variances are as in Experiment-$1$. The results for this scenario are presented in Figure \ref{Fig:budgetExpt3}. The observations are inline with with those made in the previous experiments. 
 
 %Here, also we see that AugUCB beats APT, UCBE and all the non-variance aware algorithms with only UCBEV beating AugUCB. 
 	
@@ -320,7 +320,7 @@ here the chosen variance values are such that only  variance-aware algorithms wi
 Hence, we see that UCBEV performs very well in comparison with the other algorithms. However,  it is interesting to note that the performance of  AugUCB catches-up with UCBEV as the time-step increases, while significantly outperforming the other non-variance aware algorithms.
 % Because of such large difference in the variances between the arms below and above $\tau$, APT, UCBE and CSAR performs very badly. 
 
-\textbf{Experiment-6:} This is again the two group setting involving Gaussian reward distribution similar to Experiment-5. The corresponding results are shown in Figure \ref{Fig:budgetExpt6}. In this experiment, as in \cite{locatelli2016optimal}, we run UCBEV for different values of exploration parameter $a$ such that $ a_{i} = 4^{i} \frac{T-2K}{H_{\sigma,1}}, i \in \lbrace -1,0,4 \rbrace$. Here, $a_{i=0}$ represents UCBEV($1$) with the optimal choice of $H_{\sigma ,1}$, and for any other choice  UCBEV performs poorly and is outperformed by AugUCB. 
+\textbf{Experiment-6:} Here we use the same setting as Experiment-5, but conduct more explorations of UCBEV with different values of the exploration parameter $a$. The corresponding results are shown in Figure \ref{Fig:budgetExpt6}. As studied in \cite{locatelli2016optimal}, we run UCBEV for $ a_{i} = 4^{i} \frac{T-2K}{H_{\sigma,1}}, i \in \lbrace -1,0,4 \rbrace$. Here, $a_{i=0}$ represents UCBEV($1$) with the optimal choice of $H_{\sigma ,1}$, and for any other choice  UCBEV performs poorly and is outperformed by AugUCB. 
 	
 Finally, note that in all the above experiments, the CSAR algorithm, although performs well initially, quickly exhausts its budget and saturates at a higher error percentage. This is because it pulls all arms equally in each round, with the round lengths being non-adaptive.
 

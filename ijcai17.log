@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  20 FEB 2017 15:08
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  20 FEB 2017 15:41
 entering extended mode
  %&-line parsing enabled.
 **ijcai17.tex
@@ -1002,8 +1002,13 @@ Overfull \hbox (0.96956pt too wide) in paragraph at lines 60--285
 
 Underfull \vbox (badness 1997) has occurred while \output is active []
 
-)
-(./conclusion.tex) [6] (./ijcai17.bbl
+
+Underfull \hbox (badness 4096) in paragraph at lines 323--324
+[]\OT1/ptm/b/n/10 Experiment-6: \OT1/ptm/m/n/10 Here we use the same set-ting a
+s
+ []
+
+) (./conclusion.tex) [6] (./ijcai17.bbl
 Underfull \hbox (badness 2189) in paragraph at lines 76--81
 []\OT1/ptm/m/n/10 Victor Gabil-lon, Mo-ham-mad Ghavamzadeh, Alessan-dro
  []
@@ -1014,7 +1019,7 @@ Underfull \hbox (badness 2189) in paragraph at lines 76--81
 Here is how much of TeX's memory you used:
  22212 strings out of 493848
  457960 string characters out of 1152823
- 746210 words of memory out of 3000000
+ 745116 words of memory out of 3000000
  24869 multiletter control sequences out of 15000+50000
  36477 words of font info for 94 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
@@ -1038,7 +1043,7 @@ e1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/am
 sfonts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8
 a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/te
 xmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ijcai17.pdf (7 pages, 338041 bytes).
+Output written on ijcai17.pdf (7 pages, 338160 bytes).
 PDF statistics:
  339 PDF objects out of 1000 (max. 8388607)
  53 named destinations out of 1000 (max. 500000)
