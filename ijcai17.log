@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.18)  20 FEB 2017 22:36
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (MiKTeX 2.9) (preloaded format=pdflatex 2015.2.18)  20 FEB 2017 22:44
 entering extended mode
 **ijcai17.tex
 (C:\Users\Subhojyoti\Desktop\github\tbandit_IJCAI\ijcai17.tex
@@ -1146,7 +1146,7 @@ Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 105.
 Here is how much of TeX's memory you used:
  30851 strings out of 493921
  737106 string characters out of 3144861
- 1057150 words of memory out of 3000000
+ 1056150 words of memory out of 3000000
  33486 multiletter control sequences out of 15000+200000
  36477 words of font info for 94 fonts, out of 3000000 for 9000
  841 hyphenation exceptions out of 8191
@@ -1172,7 +1172,7 @@ ic/amsfonts/cm/cmsy10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/public
 sfonts/symbols/msbm10.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/ti
 mes/utmb8a.pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.
 pfb><C:/Program Files (x86)/MiKTeX 2.9/fonts/type1/urw/times/utmri8a.pfb>
-Output written on ijcai17.pdf (7 pages, 338411 bytes).
+Output written on ijcai17.pdf (7 pages, 338356 bytes).
 PDF statistics:
  341 PDF objects out of 1000 (max. 8388607)
  53 named destinations out of 1000 (max. 500000)
