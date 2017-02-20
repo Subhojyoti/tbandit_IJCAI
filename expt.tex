@@ -8,7 +8,7 @@ $\bullet$ AugUCB: This is the Augmented-UCB algorithm proposed in this paper; as
 
 $\bullet$ UCBE: This is a modification of the algorithm in \cite{audibert2009exploration} (as it was originally proposed for the best arm identification problem); here, we set $a=\frac{T-K}{H_1}$, and at each time-step an arm $i\in\argmin\left\lbrace |\hat{r}_{i} -\tau|-\sqrt{\frac{a}{n_{i}}} \right\rbrace$ is pulled.
 
-$\bullet$ UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$. As mentioned earlier, note that UCBEV's implementation would not be possible in real scenarios, as it requires computing the problem complexity $H_{\sigma,1}$. However, for theoretical reasons we show the performance achievable by UCBEV.
+$\bullet$ UCBEV: This is a modification of the algorithm in \cite{gabillon2011multi} (proposed for the TopM problem); its implementation is identical to UCBE, but with $a = \frac{T-2K}{H_{\sigma,1}}$ (for the first five experiments). As mentioned earlier, note that UCBEV's implementation would not be possible in real scenarios, as it requires computing the problem complexity $H_{\sigma,1}$. However, for theoretical reasons we show the performance achievable by UCBEV.
 
 $\bullet$ CSAR:  Modification of the successive-reject algorithm in \cite{chen2014combinatorial}; here, we reject the arm farthest from $\tau$ after each round. 
 
@@ -231,17 +231,17 @@ note that, the variances of the arms in $S_\tau$ are higher than those of the ot
 		clip=true,
   		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
         % UCB
-		\addplot table{results/budgetTestGR3/testUCBEMV1_0.6_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/testUCBEMV1_0.06_comp_subsampled.txt};
 		\addplot table{results/budgetTestGR3/AugUCB1_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBV_1_13_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR3/testUCBEMV1_0.8_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/testUCBEMV1_0.25_comp_subsampled.txt};
 		\addplot table{results/budgetTestGR3/UCBEMV1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR3/testUCBEMV1_1.4_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR3/testUCBEMV1_1.8_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/testUCBEMV1_64_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/testUCBEMV1_256_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
 		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
-        \legend{UCBEV($0.6$),AUgUCB,UCBEV($0.8$),UCBEV($1$),UCBEV($1.4$),UCBEV($1.8$)}
+        \legend{UCBEV($0.06$),AUgUCB,UCBEV($0.25$),UCBEV($1$),UCBEV($64$),UCBEV($256$)}
         %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
       	\end{axis}
       	\label{Fig:budgetExpt6}
@@ -319,12 +319,7 @@ here the chosen variance values are such that only  variance-aware algorithms wi
 Hence, we see that UCBEV performs very well in comparison with the other algorithms. However,  it is interesting to note that the performance of  AugUCB catches-up with UCBEV as the time-step increases, while significantly outperforming the other non-variance aware algorithms.
 % Because of such large difference in the variances between the arms below and above $\tau$, APT, UCBE and CSAR performs very badly. 
 
-\textbf{Experiment-6:} This is again the two group setting involving Gaussian reward distribution similar to in Experiment-6. The corresponding results are shown in Figure \ref{Fig:budgetExpt6}. In this experiment we run UCBEV for different values of $H_{\sigma,1}$.
-
-
-
-
-Finally, note that in all the above experiments, the CSAR algorithm, although performs well initially, quickly exhausts its budget and saturates at a higher error percentage. This is because it pulls all arms equally in each round, with the round lengths being non-adaptive.
+\textbf{Experiment-6:} This is again the two group setting involving Gaussian reward distribution similar to Experiment-6. The corresponding results are shown in Figure \ref{Fig:budgetExpt6}. In this experiment, as in \cite{locatelli2016optimal}, we run UCBEV for different values of exploration parameter $a$ such that $ a_{i} = 4^{i} \frac{T-2K}{H_{\sigma,1}}, i \in \lbrace -2,-1,0,3,4 \rbrace$. Here, $a_{i=0}$ represents UCBEV($1$) with the optimal choice of $H_{\sigma ,1}$, and for any other choice we see that UCBEV performs very badly and is outperformed by AugUCB. Finally, note that in all the above experiments, the CSAR algorithm, although performs well initially, quickly exhausts its budget and saturates at a higher error percentage. This is because it pulls all arms equally in each round, with the round lengths being non-adaptive.
 
 
 
