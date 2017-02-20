@@ -187,40 +187,7 @@ note that, the variances of the arms in $S_\tau$ are higher than those of the ot
         \end{tikzpicture}
     }
     \\
-    \subfigure[0.32\textwidth][Expt-$5$: Two Group Setting (Bernoulli) ]
-    {
-    	\pgfplotsset{
-		tick label style={font=\Huge},
-		label style={font=\Huge},
-		legend style={font=\Large},
-		}
-        \begin{tikzpicture}[scale=0.4]
-        \begin{axis}[
-		xlabel={Time-step},
-		ylabel={Error Percentage},
-        %clip mode=individual,grid,grid style={gray!30},
-		grid=major,
-		clip=true,
-  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
-        % UCB
-		\addplot table{results/budgetTestGR3/APT1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR3/AugUCB1_comp_subsampled.txt};
-		%\addplot table{results/budgetTestGP/AugUCBV_1_13_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR3/UCBEM1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR3/UCBEMV1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR3/SR1_comp_subsampled.txt};
-		\addplot table{results/budgetTestGR3/UA1_comp_subsampled.txt};
-		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
-		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
-        %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
-        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,UA}
-        %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
-      	\end{axis}
-      	\label{Fig:budgetExpt5}
-        \end{tikzpicture}
-    }
-    &
-    \subfigure[0.32\textwidth][Expt-$6$: Two Group Setting (Advance) ]
+    \subfigure[0.32\textwidth][Expt-$5$: Two Group Setting (Advance) ]
     {
     	\pgfplotsset{
 		tick label style={font=\Huge},
@@ -244,9 +211,75 @@ note that, the variances of the arms in $S_\tau$ are higher than those of the ot
 		\addplot table{results/budgetTestGR4/UA1_comp_subsampled.txt};
         \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,UA}
       	\end{axis}
+      	\label{Fig:budgetExpt5}
+        \end{tikzpicture}
+    }
+    &
+    \subfigure[0.32\textwidth][Expt-$6$: Two Group Setting (Advance) ]
+    {
+    	\pgfplotsset{
+		tick label style={font=\Huge},
+		label style={font=\Huge},
+		legend style={font=\Large},
+		}
+        \begin{tikzpicture}[scale=0.4]
+        \begin{axis}[
+		xlabel={Time-step},
+		ylabel={Error Percentage},
+        %clip mode=individual,grid,grid style={gray!30},
+		grid=major,
+		clip=true,
+  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
+        % UCB
+		\addplot table{results/budgetTestGR3/testUCBEMV1_0.6_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/AugUCB1_comp_subsampled.txt};
+		%\addplot table{results/budgetTestGP/AugUCBV_1_13_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/testUCBEMV1_0.8_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/UCBEMV1_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/testUCBEMV1_1.4_comp_subsampled.txt};
+		\addplot table{results/budgetTestGR3/testUCBEMV1_1.8_comp_subsampled.txt};
+		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
+		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
+        %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
+        \legend{UCBEV($0.6$),AUgUCB,UCBEV($0.8$),UCBEV($1$),UCBEV($1.4$),UCBEV($1.8$)}
+        %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+      	\end{axis}
       	\label{Fig:budgetExpt6}
         \end{tikzpicture}
     }
+%    \subfigure[0.32\textwidth][Expt-$5$: Two Group Setting (Advanced) ]
+%    {
+%    	\pgfplotsset{
+%		tick label style={font=\Huge},
+%		label style={font=\Huge},
+%		legend style={font=\Large},
+%		}
+%        \begin{tikzpicture}[scale=0.4]
+%        \begin{axis}[
+%		xlabel={Time-step},
+%		ylabel={Error Percentage},
+%        %clip mode=individual,grid,grid style={gray!30},
+%		grid=major,
+%		clip=true,
+%  		legend style={at={(0.5,1.2)},anchor=north, legend columns=3} ]
+%        % UCB
+%		\addplot table{results/budgetTestGR3/APT1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR3/AugUCB1_comp_subsampled.txt};
+%		%\addplot table{results/budgetTestGP/AugUCBV_1_13_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR3/UCBEM1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR3/UCBEMV1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR3/SR1_comp_subsampled.txt};
+%		\addplot table{results/budgetTestGR3/UA1_comp_subsampled.txt};
+%		%\addplot table{results/budgetTestGP/AugUCBM12_comp_subsampled.txt};
+%		%\addplot table{results/budgetTestGP/AugUCBV1_comp_subsampled.txt};
+%        %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc,AugUCBM,AugUCBV}
+%        \legend{APT,AUgUCB,UCBE,UCBEV,CSAR,UA}
+%        %\legend{APT,AugUCB,UCBE,UCBEV,CSAR,Unif Alloc}
+%      	\end{axis}
+%      	\label{Fig:budgetExpt5}
+%        \end{tikzpicture}
+%    }
+%    &
     \end{tabular}
     \caption{Performances of the various TBP algorithms in terms of error percentage vs. time-step, for  six different experimental scenarios.}
     \label{fig:budgetExpt}
@@ -271,20 +304,24 @@ $10$ arms are partitioned into three groups, with all arms in a group being assi
 The corresponding results are shown in Figure \ref{Fig:budgetExpt4}, from where the good performance of AugUCB is again validated.
 
 	
-\textbf{Experiment-5:} 
-%The fifth experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set  in two groups.  
-This is similar to the two group setting considered in Experiment-4, but with the reward distributions being Bernoulli instead of Gaussian.  
-%The testbed is same as the previous experiment but involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:5}=0.45$ and $r_{6:10}=0.55$. 
-The results for this case are shown in Figure \ref{Fig:budgetExpt5}. We observe that UCBE and UCBEV outperforms AugUCB, while the performance of  AugUCB is comparable with that achieved by APT.
+%\textbf{Experiment-5:} 
+%%The fifth experiment is conducted on a testbed of $100$ arms with the means of first $10$ arms set  in two groups.  
+%This is similar to the two group setting considered in Experiment-4, but with the reward distributions being Bernoulli instead of Gaussian.  
+%%The testbed is same as the previous experiment but involves Bernoulli reward distribution with expected rewards of the arms as $r_{1:5}=0.45$ and $r_{6:10}=0.55$. 
+%The results for this case are shown in Figure \ref{Fig:budgetExpt5}. We observe that UCBE and UCBEV outperforms AugUCB, while the performance of  AugUCB is comparable with that achieved by APT.
 	
-\textbf{Experiment-6:} This is again the two group setting involving Gaussian reward distributions. The reward means are as in Experiment-4, while the 
+\textbf{Experiment-5:} This is again the two group setting involving Gaussian reward distributions. The reward means are as in Experiment-4, while the 
 %The sixth experiment is conducted on a testbed of $100$ arms involving Gaussian reward distributions with the mean of first $10$ arms set  in two groups with with expected rewards of the arms as $r_{1:5}=0.45$, $r_{6:10}=0.55$ and $r_{11:100}=0.4$. 
-variances are  $\sigma_{1:5}^{2}=0.3$ and $\sigma_{6:10}^{2}=0.8$;  $\sigma_{11:100}^{2}$ are independently and uniformly chosen in the interval $[0.2,0.3]$.  The corresponding results are shown in Figure \ref{Fig:budgetExpt6}.
+variances are  $\sigma_{1:5}^{2}=0.3$ and $\sigma_{6:10}^{2}=0.8$;  $\sigma_{11:100}^{2}$ are independently and uniformly chosen in the interval $[0.2,0.3]$.  The corresponding results are shown in Figure \ref{Fig:budgetExpt5}.
  We refer to this setup as \emph{Advanced} because 
 here the chosen variance values are such that only  variance-aware algorithms will perform well.
 % well and non variance aware will perform poorly. 
 Hence, we see that UCBEV performs very well in comparison with the other algorithms. However,  it is interesting to note that the performance of  AugUCB catches-up with UCBEV as the time-step increases, while significantly outperforming the other non-variance aware algorithms.
 % Because of such large difference in the variances between the arms below and above $\tau$, APT, UCBE and CSAR performs very badly. 
+
+\textbf{Experiment-6:} This is again the two group setting involving Gaussian reward distribution similar to in Experiment-6. The corresponding results are shown in Figure \ref{Fig:budgetExpt6}. In this experiment we run UCBEV for different values of $H_{\sigma,1}$.
+
+
 
 
 Finally, note that in all the above experiments, the CSAR algorithm, although performs well initially, quickly exhausts its budget and saturates at a higher error percentage. This is because it pulls all arms equally in each round, with the round lengths being non-adaptive.
