@@ -109,7 +109,7 @@ comes directly from \cite{audibert2010best} and \cite{bubeck2011pure} where it i
 \begin{small}
 \begin{align*}
 M&=\left\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\right\rfloor; 
-\hspace{2mm}\psi_{0}=\frac{T\epsilon_{0}}{\Big(\log(\frac{3}{16}K\log K)\Big)^2}; \\
+\hspace{2mm}\psi_{0}=\frac{T\epsilon_{0}}{128\Big(\log(\frac{3}{16}K\log K)\Big)^2}; \\
 \ell_{0}&=\left\lceil \frac{2\psi_0\log( T\epsilon_{0})}{\epsilon_{0}} \right\rceil;
 \hspace{2mm}N_{0}=K\ell_{0}
 \end{align*}
@@ -153,7 +153,7 @@ M&=\left\lfloor \frac{1}{2}\log_{2} \frac{T}{e}\right\rfloor;
 \State \textbf{Reset Parameters}
 \State $\epsilon_{m+1}\leftarrow\frac{\epsilon_{m}}{2}$
 \State $B_{m+1} \leftarrow B_{m}$
-\State $\psi_{m+1}\leftarrow \frac{T\epsilon_{m+1}}{(\log(\frac{3}{16}K\log K))^{2}}$
+\State $\psi_{m+1}\leftarrow \frac{T\epsilon_{m+1}}{128(\log(\frac{3}{16}K\log K))^{2}}$
 \State $\ell_{m+1}\leftarrow\left\lceil \frac{2\psi_{m+1}\log( T\epsilon_{m+1})}{\epsilon_{m+1}} \right\rceil$
 \State $N_{m+1} \leftarrow t + |B_{m+1}|\ell_{m+1}$
 \State $m \leftarrow m+1$
