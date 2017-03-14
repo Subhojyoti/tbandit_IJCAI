@@ -41,8 +41,8 @@ The regret $R_T$ for AugUCB satisfies
 \begin{align*}
 &\E [R_{T}]\\
 & \leq \sum\limits_{i\in A:\Delta_{i} > b}\bigg\lbrace \dfrac{T\Delta_{i}}{( \frac{3}{2} T\Delta_i^{2})^{\psi_{m_i}}}
-  + \left( \Delta_i +\dfrac{32\Delta_i\psi_{m_i}\log( \frac{3}{2} T\Delta_i^2)}{\frac{3}{2} \Delta_i^2}\right)\\
-  & \bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}+\frac{3}{2}}}{\Delta_{i}^{\psi_{m_i}-\frac{1}{2}}} \bigg)\bigg \rbrace +\sum_{i\in A: 0 < \Delta_{i} \leq b}\bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}+\frac{3}{2}}}{b^{\psi_{m_i}-\frac{1}{2}}} \bigg) \\
+  + \left( \Delta_i +\dfrac{22\Delta_i\psi_{m_i}\log( \frac{3}{2} T\Delta_i^2)}{ \Delta_i}\right)\\
+  & \bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}-\frac{1}{2}}}{\Delta_{i}^{\psi_{m_i}-\frac{1}{2}}} \bigg)\bigg \rbrace +\sum_{i\in A: 0 < \Delta_{i} \leq b}\bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}-\frac{1}{2}}}{b^{\psi_{m_i}-\frac{1}{2}}} \bigg) \\
   & + \max_{\substack{i\in A: \\ \Delta_{i}\leq b}}\Delta_{i}T, \text{  for all $b\geq\sqrt{\frac{e}{T}}$}. 
 \end{align*} 
 \end{theorem}
@@ -85,7 +85,7 @@ A sub-optimal arm is in $B_{m_i}$ and hence pulled no more than,
 Hence, the total contribution to the expected regret is,
 \begin{align*}
 &\sum_{i\in A^{'}} \left\lceil \dfrac{32\Delta_i\psi_{m_i}\log( \frac{3}{2} T\Delta_i^2)}{\frac{3}{2} \Delta_i^2}\right\rceil\\
-&\leq \sum_{i\in A^{'}} \left( \Delta_i +\dfrac{32\Delta_i\psi_{m_i}\log( \frac{3}{2} T\Delta_i^2)}{\frac{3}{2} \Delta_i^2}\right)
+&\leq \sum_{i\in A^{'}} \left( \Delta_i +\dfrac{22\Delta_i\psi_{m_i}\log( \frac{3}{2} T\Delta_i^2)}{ \Delta_i}\right)
 \end{align*}
 
 \textbf{\textit{Case b2: Optimal arm ${*}$ is eliminated by a sub-optimal arm}}
@@ -98,7 +98,7 @@ Hence, the total contribution to the expected regret is,
 &\leq\sum_{i\in A^{''}:m_{i}>m_{*}}\sum_{m_{*}=0}^{\min{\lbrace m_{i},m_{b}\rbrace}}\bigg(\dfrac{4T^{1-\psi_{m_i}}}{2^{-(\psi_{m_i}-\frac{1}{2})m_{*}}} \bigg)\\
 &\leq\sum_{i\in A^{'}}\bigg(\dfrac{4T^{1-\psi_{m_i}}}{2^{-(\psi_{m_i}-\frac{1}{2})m_{*}}} \bigg)+\sum_{i\in A^{''}\setminus A^{'}}\bigg(\dfrac{4T^{1-\psi_{m_i}}}{2^{-(\psi_{m_i}-\frac{1}{2})m_{b}}} \bigg)\\
 &\leq\sum_{i\in A^{'}}\bigg(\dfrac{4T^{1-\psi_{m_i}}*2^{\psi_{m_i}-\frac{1}{2}}}{\Delta_{i}^{\psi_{m_i}-\frac{1}{2}}} \bigg)+\sum_{i\in A^{''}\setminus A^{'}}\bigg(\dfrac{4T^{1-\psi_{m_i}}*2^{\psi_{m_i}-\frac{1}{2}}}{b^{\psi_{m_i}-\frac{1}{2}}} \bigg)\\
-&\leq\sum_{i\in A^{'}}\bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}+\frac{3}{2}}}{\Delta_{i}^{\psi_{m_i}-\frac{1}{2}}} \bigg)+\sum_{i\in A^{''}\setminus A^{'}}\bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}+\frac{3}{2}}}{b^{\psi_{m_i}-\frac{1}{2}}} \bigg)\\
+&\leq\sum_{i\in A^{'}}\bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}-\frac{1}{2}}}{\Delta_{i}^{\psi_{m_i}-\frac{1}{2}}} \bigg)+\sum_{i\in A^{''}\setminus A^{'}}\bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}-\frac{1}{2}}}{b^{\psi_{m_i}-\frac{1}{2}}} \bigg)\\
 %& = \sum_{i\in A^{'}}\bigg(\dfrac{ C_{2}(\rho_{a}) T^{1-\rho_{a}}}{\Delta_{i}^{4\rho_{a}-1}} \bigg)+\sum_{i\in A^{''}\setminus A^{'}}\bigg(\dfrac{C_{2(\rho_{a})}T^{1-\rho_{a}}}{b^{4\rho_{a}-1}} \bigg) \text{, where } C_2(x) = \frac{2^{2x+\frac{3}{2}}x^{2x}}{\psi^{x}}
 \end{align*}
 
@@ -108,8 +108,8 @@ Hence, the total contribution to the expected regret is,
 Summing up \textbf{Case a} and \textbf{Case b}, the total expected regret is given by,
 \begin{align*}
  &\sum\limits_{i\in A:\Delta_{i} > b}\bigg\lbrace \dfrac{T\Delta_{i}}{( \frac{3}{2} T\Delta_i^{2})^{\psi_{m_i}}}
-  + \left( \Delta_i +\dfrac{32\Delta_i\psi_{m_i}\log( \frac{3}{2} T\Delta_i^2)}{\frac{3}{2} \Delta_i^2}\right)\\
-  & \bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}+\frac{3}{2}}}{\Delta_{i}^{\psi_{m_i}-\frac{1}{2}}} \bigg)\bigg \rbrace +\sum_{i\in A: 0 < \Delta_{i} \leq b}\bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}+\frac{3}{2}}}{b^{\psi_{m_i}-\frac{1}{2}}} \bigg)
+  + \left( \Delta_i +\dfrac{22\Delta_i\psi_{m_i}\log( \frac{3}{2} T\Delta_i^2)}{ \Delta_i}\right)\\
+  & \bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}-\frac{1}{2}}}{\Delta_{i}^{\psi_{m_i}-\frac{1}{2}}} \bigg)\bigg \rbrace +\sum_{i\in A: 0 < \Delta_{i} \leq b}\bigg(\dfrac{4T^{1-\psi_{m_i}}2^{\psi_{m_i}-\frac{1}{2}}}{b^{\psi_{m_i}-\frac{1}{2}}} \bigg)
 \end{align*}
 
 % R_{T} \leq &\sum\limits_{i\in A:\Delta_{i}\geq b}\bigg\lbrace\bigg(\dfrac{2^{1+4\rho_{a}}\rho_{a}^{2\rho_{a}}T^{1-\rho_{a}}}{\psi^{\rho_{a}}\Delta_{i}^{4\rho_{a}-1}}\bigg) + \bigg(\Delta_{i}+\dfrac{32\rho_{a}\log{(\psi  T\dfrac{\Delta_{i}^{4}}{16\rho_{a}^{2}})}}{\Delta_{i}}\bigg)\\
