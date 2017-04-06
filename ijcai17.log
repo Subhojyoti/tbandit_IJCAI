@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  15 MAR 2017 03:48
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  6 APR 2017 11:21
 entering extended mode
  %&-line parsing enabled.
 **ijcai17.tex
@@ -1005,39 +1005,13 @@ Underfull \hbox (badness 2189) in paragraph at lines 76--81
 
 ) [7
 
-] (./appendix.tex
-Overfull \hbox (7.77348pt too wide) in paragraph at lines 47--47
-[] 
- []
-
-LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 52.
-
-Underfull \hbox (badness 1303) in paragraph at lines 61--62
-\OML/cmm/m/it/10 i \OMS/cmsy/m/n/10 2 A$\OT1/ptm/m/n/10 , the prob-a-bil-ity th
-at it is not cor-rectly elim-i-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
-[]\OT1/ptm/m/n/10 In the above for-mu-la-tion, $\OT1/cmr/m/n/10 (\OML/cmm/m/it/
-10 a\OT1/cmr/m/n/10 )$ \OT1/ptm/m/n/10 hap-pens be-cause
- []
-
-
-Overfull \hbox (29.94757pt too wide) in paragraph at lines 103--103
-[] 
- []
-
-) [8
-
 ] (./ijcai17.aux) ) 
 Here is how much of TeX's memory you used:
- 22232 strings out of 493848
- 458219 string characters out of 1152823
- 746430 words of memory out of 3000000
- 24879 multiletter control sequences out of 15000+50000
- 39202 words of font info for 98 fonts, out of 3000000 for 9000
+ 22212 strings out of 493848
+ 457960 string characters out of 1152823
+ 746248 words of memory out of 3000000
+ 24869 multiletter control sequences out of 15000+50000
+ 36477 words of font info for 94 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  63i,27n,75p,1257b,1756s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/
@@ -1055,15 +1029,13 @@ ts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pf
 b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share
 /texmf-texlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texliv
 e/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/typ
-e1/public/amsfonts/cm/cmsy5.pfb></usr/share/texmf-texlive/fonts/type1/public/am
-sfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbo
-ls/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/
-share/texmf-texlive/fonts/type1/urw/times/utmbi8a.pfb></usr/share/texmf-texlive
-/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/urw/tim
-es/utmri8a.pfb>
-Output written on ijcai17.pdf (8 pages, 371222 bytes).
+e1/public/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/symbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8
+a.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/te
+xmf-texlive/fonts/type1/urw/times/utmri8a.pfb>
+Output written on ijcai17.pdf (7 pages, 339029 bytes).
 PDF statistics:
- 366 PDF objects out of 1000 (max. 8388607)
- 59 named destinations out of 1000 (max. 500000)
- 85 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 341 PDF objects out of 1000 (max. 8388607)
+ 53 named destinations out of 1000 (max. 500000)
+ 69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
