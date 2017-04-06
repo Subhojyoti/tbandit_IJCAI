@@ -1,17 +1,10 @@
 \textbf{Notation and assumptions:} $\mathcal{A}$ denotes the set of arms, and $|\mathcal{A}|=K$ is the number of arms in $\mathcal{A}$. 
 %Arms generic arm is indexed by $i,j\in\mathcal{A}$. 
 For arm $i\in\mathcal{A}$, we use $r_{i}$ to denote the true mean of the distribution from which the rewards are sampled, while $\hat{r}_{i}(t)$ denotes the estimated mean at time $t$. Formally, using $n_i(t)$ to denote the number of times arm $i$ has been pulled until time $t$, we have $\hat{r}_{i}(t)=\frac{1}{n_{i}(t)}\sum_{z=1}^{n_i(t)} X_{i,z}$, where $X_{i,z}$ is the reward sample received when arm $i$ is pulled for the $z$-th time. %
-Similarly, we use $\sigma_{i}^{2}$ to denote the true variance of the reward distribution corresponding to arm $i$, while $\hat{v}_{i}(t)$ is the estimated variance, i.e., $\hat{v}_{i}(t)=\frac{1}{n_i(t)}\sum_{z=1}^{n_{i}(t)}(X_{i,z}-\hat{r}_{i})^{2}$. Whenever there is no ambiguity about the underlaying  time index $t$, for simplicity we neglect $t$ from the notations and simply use  $\hat{r}_i, \hat{v}_i,$ and $n_i, $ to denote the respective quantities.  Let  $\Delta_{i}=|\tau-r_{i}|$ denote the distance of the true mean from the threshold $\tau$. Along the lines of \cite{locatelli2016optimal} we assume that all the reward distributions 
-%from which rewards are sampled are identical and independent 
-are $1$-sub-Gaussian (note that,  $1$-sub-Gaussian includes Gaussian distributions with variance less than $1$, distributions supported on an interval of length less than 2, etc). Also, the rewards are assumed to take values in $[0,1]$.
-%. In our case, we  assume that all rewards are .
+Similarly, we use $\sigma_{i}^{2}$ to denote the true variance of the reward distribution corresponding to arm $i$, while $\hat{v}_{i}(t)$ is the estimated variance, i.e., $\hat{v}_{i}(t)=\frac{1}{n_i(t)}\sum_{z=1}^{n_{i}(t)}(X_{i,z}-\hat{r}_{i})^{2}$. Whenever there is no ambiguity about the underlaying  time index $t$, for simplicity we neglect $t$ from the notations and simply use  $\hat{r}_i, \hat{v}_i,$ and $n_i, $ to denote the respective quantities.  Let  $\Delta_{i}=|\tau-r_{i}|$ denote the distance of the true mean from the threshold $\tau$. Also, the rewards are assumed to take values in $[0,1]$.
 
-%Also we define $\Delta_{i}=r^{*} - r_{i}$ and $\hat{\Delta}_{i}=\hat{r}^{*} - \hat{r}_{i}$. In all cases $\min_{i\in A}{\Delta_{i}}$ is denoted by $\Delta$.
-%and the optimal arm is denoted by $*$. The '*' superscript is used to denote anything related to optimal arm
-%\paragraph*{}It is assumed that the distribution from which rewards are sampled are identical and independent sub-Gaussian distributions. Throughout the paper, we assume that the distributions $v_{i}$ are sub-Gaussian that is $\int e^{\lambda(x - r)} v_{i} (dx) ≤ e^{\lambda /2}, \forall \lambda \in \mathbb{R}$. Note that these include Gaussian distributions with variance less than 1 and distributions supported on an interval of length less than 2. All the experiments are also conducted with sub-Gaussians having variance as 1. Together with a Chernoff-Hoeffding bound, the sub-Gaussian assumption implies the following concentration inequality, valid for any
-%$u > 0$,
-%\newline
-%\hspace*{8em}$\mathbb{P}\lbrace \hat{r}_{i} - r^{*} > u\rbrace \leq exp(-\dfrac{su^{2}}{2}) $
-%\newline
-%where s is the number of pulls of $a_{i}$. T is the horizon over which this entire algorithm runs.  $A^{'}$ at any round $m$ denotes the arms still not eliminated.
-%\paragraph*{}The paper is organized as follows. We first present the algorithm in section 6. We then provide the proofs of Phase1 which includes regret-bound calculation and arm deletion conditions in section 7. In section 8, we provide proofs for Phase2 along with early stopping conditions. Section 9 deals with regret bound and then we provide error probability and error bounds in section 10. Experimental results are provided in section 11, and we conclude in section 12.
+%%%%%%%%%%
+%1-sub-gaussian assumption removed
+%%%%%%%%%%
+%Along the lines of \cite{locatelli2016optimal} we assume that all the reward distributions are $1$-sub-Gaussian (note that,  $1$-sub-Gaussian includes Gaussian distributions with variance less than $1$, distributions supported on an interval of length less than 2, etc).
+
