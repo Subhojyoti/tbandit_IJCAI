@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  6 APR 2017 14:15
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  9 MAY 2017 21:08
 entering extended mode
  %&-line parsing enabled.
 **ijcai17.tex
@@ -998,45 +998,43 @@ PGFPlots: reading {results/budgetTestGR4/UCBEMV1_comp_subsampled.txt}
 Underfull \vbox (badness 4899) has occurred while \output is active []
 
 )
-(./conclusion.tex) [6] (./ijcai17.bbl
+(./conclusion.tex [6]) (./ijcai17.bbl
 Underfull \hbox (badness 2189) in paragraph at lines 76--81
 []\OT1/ptm/m/n/10 Victor Gabil-lon, Mo-ham-mad Ghavamzadeh, Alessan-dro
  []
 
-) [7
-
-] (./ijcai17.aux) ) 
+) [7] (./ijcai17.aux) ) 
 Here is how much of TeX's memory you used:
- 22212 strings out of 493848
- 457960 string characters out of 1152823
- 746248 words of memory out of 3000000
+ 22213 strings out of 493848
+ 457970 string characters out of 1152823
+ 746580 words of memory out of 3000000
  24869 multiletter control sequences out of 15000+50000
  36477 words of font info for 94 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  63i,27n,75p,1257b,1756s stack positions out of 5000i,500n,10000p,200000b,50000s
-{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</usr/
-share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texmf
--texlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts/typ
-e1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/public/a
-msfonts/cm/cmmi5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/c
-mmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb></u
-sr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share/tex
-mf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texlive/f
-onts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/type1/p
-ublic/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfon
-ts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr6.pf
-b></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share
-/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-texliv
-e/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/type1
-/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public/ams
-fonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbol
-s/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/s
-hare/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/f
-onts/type1/urw/times/utmri8a.pfb>
-Output written on ijcai17.pdf (7 pages, 348239 bytes).
+{/usr/share/texmf-texlive/fonts/enc/dvips/base/8r.enc}</
+usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/t
+exmf-texlive/fonts/type1/public/amsfonts/cmextra/cmex9.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texmf-texlive/fonts
+/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texmf-texlive/fonts/type1/publ
+ic/amsfonts/cm/cmmi5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/
+cm/cmmi6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi7.pfb
+></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmmi9.pfb></usr/share
+/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texmf-texli
+ve/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texmf-texlive/fonts/typ
+e1/public/amsfonts/cm/cmr17.pfb></usr/share/texmf-texlive/fonts/type1/public/am
+sfonts/cm/cmr5.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr
+6.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/s
+hare/texmf-texlive/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texmf-te
+xlive/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/share/texmf-texlive/fonts/t
+ype1/public/amsfonts/cm/cmsy10.pfb></usr/share/texmf-texlive/fonts/type1/public
+/amsfonts/cm/cmsy7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/sy
+mbols/msbm10.pfb></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></u
+sr/share/texmf-texlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texli
+ve/fonts/type1/urw/times/utmri8a.pfb>
+Output written on ijcai17.pdf (7 pages, 348543 bytes).
 PDF statistics:
- 343 PDF objects out of 1000 (max. 8388607)
- 53 named destinations out of 1000 (max. 500000)
+ 344 PDF objects out of 1000 (max. 8388607)
+ 54 named destinations out of 1000 (max. 500000)
  69 words of extra memory for PDF output out of 10000 (max. 10000000)
 
