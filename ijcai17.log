@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  24 MAY 2017 14:43
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2016.9.30)  24 MAY 2017 15:14
 entering extended mode
  %&-line parsing enabled.
 **ijcai17.tex
@@ -1031,7 +1031,7 @@ y7.pfb></usr/share/texmf-texlive/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 ></usr/share/texmf-texlive/fonts/type1/urw/times/utmb8a.pfb></usr/share/texmf-t
 exlive/fonts/type1/urw/times/utmr8a.pfb></usr/share/texmf-texlive/fonts/type1/u
 rw/times/utmri8a.pfb>
-Output written on ijcai17.pdf (7 pages, 356805 bytes).
+Output written on ijcai17.pdf (7 pages, 356799 bytes).
 PDF statistics:
  349 PDF objects out of 1000 (max. 8388607)
  54 named destinations out of 1000 (max. 500000)
