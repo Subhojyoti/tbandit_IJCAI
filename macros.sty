@@ -48,3 +48,11 @@
 \usepackage{makecell}
 \newcommand{\tabl}[2]{\begin{tabular}{#1} #2 \end{tabular}}
 %\newcommand{\ith}[2][th]{$#2^{\text{#1}}$}
+
+
+\newcommand\blfootnote[1]{
+  \begingroup
+  \renewcommand\thefootnote{}\footnote{#1}%
+  \addtocounter{footnote}{-1}
+  \endgroup
+}
